@@ -87,14 +87,15 @@ WHERE (JOB_CODE, SALARY) IN
 (SELECT JOB_CODE, AVG(SALARY) FROM EMPLOYEE GROUP BY JOB_CODE);
 --7-2 직급별 급여 평균과 같은 직급, 급여를 가진 직원을 조회하시오(ORACLE)
 
---9강사님답 
+--8. 강사님답 
+--부서별 급여 합계가 전체 급여 총 합의 20%보다 많은 부서의 부서명과, 부서별 급여 합계
 SELECT DEPT_TITLE, SUM(SALARY) FROM EMPLOYEE E
 JOIN DEPARTMENT D  ON(E.DEPT_CODE= D.DEPT_ID)
 GROUP BY DEPT_TITLE
 HAVING SUM(SALARY) > (SELECT SUM(SALARY) FROM EMPLOYEE)*0.2;
 
 
---9-1. 부서별 급여 합계가 전체 급여 총 합의 20%보다 많은 부서의 부서명과, 부서별 급여 합계
+--8-1. 부서별 급여 합계가 전체 급여 총 합의 20%보다 많은 부서의 부서명과, 부서별 급여 합계
 SELECT E.DEPT_CODE, E.SALARY FROM EMPLOYEE E
 INNER JOIN DEPARTMENT D ON (E.DEPT_CODE = D.DEPT_ID)
 GROUP BY E.DEPT_CODE, E.SALARY;
