@@ -1,0 +1,45 @@
+package com.kh.c_collection.silsub2.controller;
+
+import java.util.HashMap;
+
+import com.kh.c_collection.silsub2.model.vo.Book;
+
+public class BookManager {
+
+	public BookManager() {
+		
+	}
+	
+	public void addBook(Book book) {
+		
+	}
+	
+	public Book deleteBook(String key) {
+		return new Book();
+	}
+	
+	public String searchBook(String title) {
+		return " ";		
+	}
+	
+	public Book selectBook(String key) {
+		return new Book();
+	}
+	
+	public HashMap<String, Book> selectAll(){
+		return new HashMap<String, Book>();
+	}
+	
+	public Book[] sortedBookList() {
+		Book[1] booklist = new Book[1];
+		return 
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+}

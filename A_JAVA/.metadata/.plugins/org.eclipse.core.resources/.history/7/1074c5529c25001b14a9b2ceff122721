@@ -1,0 +1,50 @@
+package com.kh.c_collection.silsub2.controller;
+
+import java.util.HashMap;
+
+import com.kh.c_collection.silsub2.model.vo.Book;
+
+public class BookManager {
+
+	public BookManager() {
+		
+	}
+	
+	public void addBook(Book book) {
+		
+	}
+	
+	public Book deleteBook(String key) {
+		return new Book();
+	}
+	
+	public String searchBook(String title) {
+		return " ";		
+	}
+	
+	public Book selectBook(String key) {
+		return new Book();
+	}
+	
+	public HashMap<String, Book> selectAll(){
+		return new HashMap<String, Book>();
+	}
+	
+	public Book[] sortedBookList() {	
+		//BookDao의 sortedBookList() 메소드를 통해 전달 받은 정렬된
+		// 도서 전체를 for문을 통해 Book[] 배열에 넣고 리턴
+		Book[] BookList = null;		
+		return BookList;
+	}
+	
+	public void printBookList(Book[] br) {
+
+	}
+	
+	
+	
+	
+	
+	
+	
+}

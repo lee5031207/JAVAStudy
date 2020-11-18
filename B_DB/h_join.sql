@@ -1,0 +1,74 @@
+-- *** JOIN
+-- 하나 이상의 테이블에서 테이블을 조회하기 위해 사용
+-- 수행결과는 하나의 RESULT SET으로 나온다
+-- 관계형 데이터베이스에서는 데이터의 중복을 최소화 하기 위해 
+-- 최소한의 데이터를 테이블에 저장해드고, 필요할 때 테이블 간의 관계를 통해
+-- 데이터를 조합해서 추출한다.
+
+--1.직원번호 ,직원명, 부서코드, 부서명을 조회
+
+--1-1.서브쿼리를 사용하는 방법 (비효율적)
+SELECT EMP_ID, EMP_NAME, DEPT_CODE,
+(SELECT DEPT_TITLE FROM DEPARTMENT WHERE DEPT_ID = E.DEPT_CODE) AS 부서명
+FROM EMPLOYEE E;
+
+--1-2. JOIN연산 활용
+SELECT *--EMP_ID, EMP_NAME, DEPT_CODE, DEPT_TITLE
+FROM EMPLOYEE E JOIN DEPARTMENT D
+ON(E.DEPT_CODE = D.DEPT_ID);
+
+
+-- JOIN의 종류
+-- CROSS JOIN, INNER JOIN, OUTER JOIN(LEFT JOIN, RIGHT JOIN)
+
+
+-- 0. CROSS JOIN(안씀)
+-- CARTEEN 곱이 발생해 사용하지 않는다
+-- 한 쪽 테이블의 모든 행과 다른 테이블의 모든 행을 JOIN
+-- EMPLOYEE 테이블의 ROW수 * DEPARTMENT 테이블의 ROW수 만큼의 ROW 생성
+-- EX. 3만개 상품데이터와 5만개의 주문데이터를 CROSS JOIN하면 15억개의 ROW가 반환
+-- 쥰내 비효율적 쓰지말자
+SELECT * 
+FROM EMPLOYEE CROSS JOIN DEPARTMENT
+ORDER BY EMP_ID DESC, DEPT_ID ASC; 
+
+-- 1. INNER JOIN(등가 조인(EQUALS JOIN))
+-- JOIN 조건절 작성해서 조합하는 ROW들만 JOIN수행
+-- ON() 안에 JOIN 조건절 작성
+-- 만약에 조건절에서 사용할 두 테이블의 컬럼명이 같다면 USING(컬럼명) 사용 가능
+
+--ANSI 표준 구문(미국 국립 표준 협회)
+--ANSI 표준 쿼리는 모든 DBMS에서 공통적으로 사용하는 쿼리
+SELECT *
+FROM EMPLOYEE E  INNER JOIN JOB J ON (E.JOB_CODE = J.JOB_CODE);
+--USING 사용
+SELECT *
+FROM EMPLOYEE E  JOIN JOB J USING(JOB_CODE);
+--ORACLE 구문
+SELECT *
+FROM EMPLOYEE, JOB
+WHERE EMPLOYEE.JOB_CODE = JOB.JOB_CODE;
+
+
+--여러 테이블 JOIN해보기(ANSI)
+-- EMPLOYEE, DEPARTMENT, LOCATION
+SELECT * FROM EMPLOYEE E
+INNER JOIN DEPARTMENT D ON(E.DEPT_CODE = D.DEPT_ID)
+INNER JOIN LOCATION L ON (D.LOCATION_ID = L.LOCAL_CODE);
+
+--여러 테이블 JOIN해보기(ORACLE)
+-- EMPLOYEE, DEPARTMENT, LOCATION
+SELECT * FROM EMPLOYEE E, DEPARTMENT D, LOCATION L
+WHERE E.DEPT_CODE = D.DEPT_ID
+AND D.LOCATION_ID = L.LOCAL_CODE;
+
+--부서 테이블에서 부서별 지역명을 조회하세요(ANSI)
+SELECT DEPT_ID, DEPT_TITLE, LOCAL_NAME FROM DEPARTMENT D
+INNER JOIN LOCATION L ON (D.LOCATION_ID = L.LOCAL_CODE);
+--부서 테이블에서 부서별 지역명을 조회하세요(ORACLE)
+SELECT DEPT_TITLE, LOCAL_NAME
+FROM DEPARTMENT D, LOCATION L
+WHERE d.location_id = l.local_code;
+
+
+

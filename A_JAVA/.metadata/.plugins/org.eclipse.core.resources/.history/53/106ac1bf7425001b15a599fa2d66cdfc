@@ -1,0 +1,30 @@
+package com.kh.c_collection.silsub2.controller;
+
+import com.kh.c_collection.silsub2.model.vo.Book;
+
+public class BookManager {
+
+	public BookManager() {
+		
+	}
+	
+	public void addBook(Book book) {
+		
+	}
+	
+	public Book deleteBook(String key) {
+		return new Book();
+	}
+	
+	public String searchBook(String title) {
+		return " ";		
+	}
+	
+	public Book selectBook(String key) {
+		
+	}
+	
+	
+	
+	
+}

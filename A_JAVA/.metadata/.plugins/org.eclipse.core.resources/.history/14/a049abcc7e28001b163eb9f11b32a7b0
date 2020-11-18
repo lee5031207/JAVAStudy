@@ -1,0 +1,29 @@
+package com.kh.prac7.run;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Run {
+	public static void main(String[] args) {
+		
+		try {
+			DataOutputStream dos = new DataOutputStream(new FileOutputStream("score.dat"));
+			dos.writeInt(56);
+			dos.writeInt(23);
+			dos.writeInt(76);
+			DataInputStream dis = new DataInputStream(new FileInputStream("score.dat"));
+			System.out.println(dis.readInt());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+}

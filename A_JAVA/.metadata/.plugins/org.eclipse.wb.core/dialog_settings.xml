@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.wb.internal.core.editor.palette.dialogs.CategoryAddDialog">
+		<item key="x" value="653"/>
+		<item key="y" value="275"/>
+		<item key="width" value="613"/>
+		<item key="height" value="480"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.editor.palette.dialogs.ImportArchiveDialog">
+		<item key="x" value="653"/>
+		<item key="y" value="262"/>
+		<item key="width" value="613"/>
+		<item key="height" value="505"/>
+		<list key="HISTORY_JAR_LIST">
+		</list>
+	</section>
+	<section name="org.eclipse.wb.internal.core.editor.palette.dialogs.ComponentAddDialog">
+		<item key="x" value="596"/>
+		<item key="y" value="286"/>
+		<item key="width" value="727"/>
+		<item key="height" value="457"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.model.property.editor.string.StringPropertyDialog">
+		<item key="x" value="652"/>
+		<item key="y" value="295"/>
+		<item key="width" value="615"/>
+		<item key="height" value="440"/>
+	</section>
+</section>

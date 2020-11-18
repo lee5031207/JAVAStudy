@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="qrBtnClick"/>
+		<list key="findhistory">
+			<item value="QRbtnCLick"/>
+			<item value="QRbtn"/>
+			<item value="plus"/>
+			<item value="커피냉장고"/>
+			<item value="간장냉장고"/>
+			<item value="간장 냉장고"/>
+			<item value="커피 냉장고에 넣는다"/>
+			<item value="간장마신다"/>
+			<item value="커피마신다"/>
+			<item value="커피 마신다"/>
+			<item value="마신"/>
+			<item value="간장 마신"/>
+			<item value="간장"/>
+			<item value="Serial"/>
+			<item value="seril"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1290"/>
+		<item key="DIALOG_Y_ORIGIN" value="187"/>
+		<item key="DIALOG_WIDTH" value="340"/>
+		<item key="DIALOG_HEIGHT" value="454"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="413"/>
+		<item key="DIALOG_Y_ORIGIN" value="362"/>
+	</section>
+</section>

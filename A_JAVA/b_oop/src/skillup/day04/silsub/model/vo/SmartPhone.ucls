@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="skillup.day04.silsub.model.vo.Camera" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/model/vo/Camera.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="444" y="92"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="skillup.day04.silsub.model.vo.CellPhone" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/model/vo/CellPhone.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="138" y="253"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" name="skillup.day04.silsub.model.vo.Phone" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/model/vo/Phone.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="136" y="100"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="skillup.day04.silsub.model.vo.TouchDisplay" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/model/vo/TouchDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="437" y="250"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="skillup.day04.silsub.model.vo.SmartPhone" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/model/vo/SmartPhone.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="297" y="435"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="skillup.day04.silsub.model.vo.V40" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/model/vo/V40.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="721" y="466"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="skillup.day04.silsub.model.vo.GalaxyNote9" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/model/vo/GalaxyNote9.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="722" y="217"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="skillup.day04.silsub.run.Run" project="b_oop" 
+    file="/b_oop/src/skillup/day04/silsub/run/Run.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1021" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="12">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <realization id="13">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <generalization id="14">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
