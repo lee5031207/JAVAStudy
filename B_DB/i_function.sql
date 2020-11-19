@@ -24,6 +24,7 @@ SELECT INSTR('AABAACAABBAA','B',-1,3) FROM DUAL;  --3번째 B의 위치
 -- POSITION : 문자열을 자를 위치, 양수면 시작 방향, 음수면 끝방향 부터 COUNT
 SELECT SUBSTR('PCLASS',2) FROM DUAL;
 SELECT SUBSTR('PCLASS',2,1) FROM DUAL;
+SELECT SUBSTR('PCLASS',-1) FROM DUAL;
 
 --EMPLOYEE 테이블에서 남자인 직원들을 조회
 SELECT EMP_NAME FROM EMPLOYEE 
@@ -62,7 +63,6 @@ SELECT TRIM(BOTH 'Z' FROM 'ZZZKHZZZ') FROM DUAL;
 --문자열 결합 함수
 SELECT CONCAT(EMP_NAME,EMP_ID) FROM EMPLOYEE;
 
-
 -- *** REPLACE ***
 --문자열 REPLACE 하는 함수
 SELECT REPLACE('서울시 강남구 역삼동','역삼동') FROM DUAL;
@@ -98,6 +98,7 @@ SELECT FLOOR(32.5454) FROM DUAL;
 SELECT TRUNC(32.5454) FROM DUAL;
 SELECT TRUNC(32.5454,1) FROM DUAL;
 SELECT TRUNC(32.5454,-1) FROM DUAL;
+SELECT TRUNC(2975,-2) FROM DUAL;
 
 --***CEIL*** : 올림처리 하는 함수
 SELECT CEIL(123.111) FROM DUAL;
@@ -138,7 +139,8 @@ EXTRACT(YEAR FROM HIRE_DATE) AS "입사한 년도",
 EXTRACT(MONTH FROM HIRE_DATE) AS "입사한 달",
 EXTRACT(DAY FROM HIRE_DATE) AS "입사한 날",
 --EXTRACT 함수 안에서는 TIMEZONE이 적용되지 않아 그리니치 표준시로 시간이 표현
-EXTRACT(HOUR FROM systimestamp)+9 AS "현재 시간"
+EXTRACT(HOUR FROM systimestamp)+9 AS "현재 시간",
+EXTRACT(YEAR FROM systimestamp) AS "현재 년도"
 --EXTRACT(DAY FROM DATE '2020-11-18') AS "오늘날짜"
 FROM EMPLOYEE;
 
@@ -177,5 +179,52 @@ SELECT EMP_NAME, BONUS, NVL2(BONUS,'보너스NULL아님','보너스NULL') FROM EMPLOYEE;
 --***NULLIF*** : ?
 SELECT NULLIF('1234','1234') FROM DUAL;
 SELECT NULLIF('1234','123') FROM DUAL;
+
+----------------------------------------------------------------------------------------------------------
+--5. 선택 함수 
+--DECODE, CASE WHEN, 
+
+--DECODE  : SWITCH CASE문 같은 조건 함수
+--주민번호 8번째 자리가 짝수면 '여', 홀수라면'남으로' 표시하여 
+--직원들의 이름, 주민번호, 성별을 조회하시오
+SELECT EMP_NAME, EMP_NO
+, DECODE(MOD(SUBSTR(EMP_NO,8,1),2),1,'남',0,'여')
+FROM EMPLOYEE;
+--직원의 급여를 인상하고자 한다.
+--직급코드가 J7인 직원은 급여의 10%를 인상하고
+--직급코드가 J8인 직원은 급여의 15%를 인상하고
+--직급코드가 J5인 직원은 급여의 20%를 인상하며
+-- 나머지 직원의 급여는 5%만 인상한다
+-- 인상된 급여를 직원명, 직급코드, 급여와 함께 조회
+SELECT EMP_NAME, JOB_CODE, SALARY AS 인상전급여,
+DECODE(JOB_CODE,'J7',SALARY*1.1,'J8',SALARY*1.15,'J5',SALARY*1.2,SALARY*1.05) AS 인상후급여
+FROM EMPLOYEE;
+
+--CASE WHEN 조건식 THEN 결과값
+--        WHEN 조건식 THEN 결과값
+--        ELSE 결과값
+--주민번호 8번째 자리가 짝수면 '여', 홀수라면'남으로' 표시하여 
+--직원들의 이름, 주민번호, 성별을 조회하시오
+SELECT EMP_NAME, EMP_NO,
+CASE WHEN MOD(SUBSTR(EMP_NO,8,1),2) = 1 THEN '남'
+        --WHEN MOD(SUBSTR(EMP_NO,8,1),2) = 0 THEN '여'
+        ELSE '여'
+        END AS 성별
+FROM EMPLOYEE;
+
+--직원의 급여를 인상하고자 한다.
+--직급코드가 J7인 직원은 급여의 10%를 인상하고
+--직급코드가 J8인 직원은 급여의 15%를 인상하고
+--직급코드가 J5인 직원은 급여의 20%를 인상하며
+-- 나머지 직원의 급여는 5%만 인상한다
+-- 인상된 급여를 직원명, 직급코드, 급여와 함께 조회
+SELECT EMP_NAME, JOB_CODE, SALARY AS 인상전급여,
+CASE WHEN JOB_CODE = 'J7' THEN SALARY*1.1
+        WHEN JOB_CODE = 'J8' THEN SALARY*1.15
+        WHEN JOB_CODE = 'J5' THEN SALARY*1.2
+        ELSE SALARY*1.05
+        END AS 인상후급여
+FROM EMPLOYEE;
+
 
 
