@@ -51,5 +51,7 @@ CREATE TABLE TB_TYPE(
     
     );
     
+    COMMIT;
+    
     
     
