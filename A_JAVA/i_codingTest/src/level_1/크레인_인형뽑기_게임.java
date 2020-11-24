@@ -14,16 +14,7 @@ public class 크레인_인형뽑기_게임 {
 		board[3][0] = 4;board[3][1] = 2;board[3][2] = 4;board[3][3] = 4;board[3][4] = 2;
 		board[4][0] = 3;board[4][1] = 5;board[4][2] = 1;board[4][3] = 3;board[4][4] = 1;
 		
-		int[] moves = new int[8];
-		moves[0] = 1;
-		moves[1] = 5;
-		moves[2] = 3;
-		moves[3] = 5;
-		moves[4] = 1;
-		moves[5] = 2;
-		moves[6] = 1;
-		moves[7] = 4;
-
+		int[] moves = {1,5,3,5,1,2,1,4};
 		int answer = solution(board, moves);
 		System.out.println(answer);
 		
