@@ -202,3 +202,185 @@ BEGIN
 END;
 /
 
+
+--실습
+--1. 사번을 입력 받아 해당사원의 사번, 이름, 부서명, national_code를 출력
+--TEAM변수를 하나 만들어, 만약 사원의 NATIONAL_CODE가 'KO'이면 '국내팀'으로초기화
+--NATIONAL_CODE가 'KO'가 아닌 경우 '해외팀'으로 초기화 해 
+--사번, 이름, 부서명, NATIONAL_CODE 와 함께 출력
+
+DECLARE
+    V_EMP_ID EMPLOYEE.EMP_ID%TYPE;
+    V_EMP_NAME EMPLOYEE.EMP_NAME%TYPE;
+    V_DEPT_TITLE DEPARTMENT.DEPT_TITLE%TYPE;
+    V_NATIONAL_CODE LOCATION.NATIONAL_CODE%TYPE;
+    TEAM VARCHAR(30);
+BEGIN
+    SELECT EMP_ID, EMP_NAME, DEPT_TITLE, NATIONAL_CODE
+    INTO V_EMP_ID, V_EMP_NAME, V_DEPT_TITLE, V_NATIONAL_CODE
+    FROM EMPLOYEE E
+    INNER JOIN DEPARTMENT D ON(E.DEPT_CODE = D.DEPT_ID)
+    INNER JOIN LOCATION L ON(D.LOCATION_ID =L.LOCAL_CODE)
+    WHERE E.EMP_ID = '&사번';
+    
+    IF V_NATIONAL_CODE = 'KO'
+    THEN 
+    TEAM := '국내팀';
+    ELSE
+    TEAM := '해외팀';
+    END IF;
+    DBMS_OUTPUT.PUT_LINE('사번 : ' || V_EMP_ID);
+    DBMS_OUTPUT.PUT_LINE('이름 : ' || V_EMP_NAME);
+    DBMS_OUTPUT.PUT_LINE('부서 : ' || V_DEPT_TITLE);
+    DBMS_OUTPUT.PUT_LINE('국가코드 : ' || V_NATIONAL_CODE);
+    DBMS_OUTPUT.PUT_LINE('국내팀여부 : ' || TEAM);
+END;
+/
+    
+--2. 점수를 입력받아 SCORE 변수에 저장하고
+-- 90점 이상은 'A'
+-- 80점 이상은 'B'
+-- 70점 이상은 'C'
+-- 70점 미만은 'D'
+
+DECLARE
+    SCORE NUMBER;
+    GRADE VARCHAR2(10);
+BEGIN
+    SCORE := '&점수';
+    IF SCORE >= 90
+        THEN GRADE := 'A';
+    ELSIF SCORE >= 80
+        THEN GRADE := 'B';
+    ELSIF SCORE >= 70
+        THEN GRADE := 'C';
+    ELSE GRADE := 'D';
+    END IF;    
+
+    DBMS_OUTPUT.PUT_LINE('당신의 점수는 '|| SCORE|| '점이고 학점은 ' || GRADE || ' 입니다');
+END;
+/
+    
+--CASE WHEN 구문 사용 가능
+DECLARE 
+    SCORE NUMBER;
+    GRADE CHAR(1);
+BEGIN
+    SCORE := '&SCORE';
+    GRADE := CASE TRUNC(SCORE/10)
+                   WHEN 10 THEN 'A'
+                   WHEN 8 THEN 'B'
+                   WHEN 7 THEN 'C'
+                   WHEN 6 THEN 'D'
+                   ELSE 'F'
+                   END;
+    DBMS_OUTPUT.PUT_LINE('당신의 점수는 '|| SCORE || '점이고 학점은 ' || GRADE || ' 입니다');     
+END;
+/
+
+--반복문(FOR-IN)
+
+
+--다섯번 반복하는 반복문
+BEGIN 
+    FOR I IN REVERSE 1..5
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(I);
+    END LOOP;
+END;
+/
+
+
+
+--구구단 출력하기
+--구구단 짝수단을 출력해주세요.
+--HINT : PL/SQL 반복문 안에 반복문 작성 가능! 
+DECLARE 
+    RESULT NUMBER;
+BEGIN
+    FOR DAN IN 2..9
+    LOOP
+        IF MOD(DAN,2) = 0
+        THEN
+            FOR SU IN 1..9
+            LOOP
+                RESULT := DAN * SU;
+                DBMS_OUTPUT.PUT_LINE(DAN||'*'||SU||'='||RESULT);
+            END LOOP;
+        DBMS_OUTPUT.PUT_LINE('');
+        END IF;        
+    END LOOP;
+END;
+/
+
+--EMPLOYEE 테이블에서 모든 사원의 주민번호, 이름, 직급코드를 출력해보기    
+BEGIN
+    FOR N IN (SELECT * FROM EMPLOYEE WHERE DEPT_CODE = 'D9')
+        LOOP
+            DBMS_OUTPUT.PUT_LINE(N.EMP_NO||'/'||N.EMP_NAME||'/'||N.JOB_CODE);
+        END LOOP;
+END;
+/
+
+--------------------------------------------------------------------------
+--WHILE문
+--WHILE 조건
+--LOOP
+--  처리문
+--END LOOP;
+
+--1~5까지 순차적으로 출력하는 WHILE문
+DECLARE
+    N NUMBER;
+BEGIN
+    N := 1;
+    WHILE N < 6
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(N);
+        N := N+1;
+    END LOOP;
+END;
+/
+
+--WHILE문을 활용해 구구단 홀수단을 출력하세요.
+DECLARE
+    DAN NUMBER;
+    SU NUMBER;
+BEGIN
+    DAN := 2;
+    WHILE DAN < 10
+    LOOP
+        IF MOD(DAN,2) = 1
+        THEN
+            SU := 1;
+            WHILE SU < 10
+            LOOP
+                DBMS_OUTPUT.PUT_LINE(DAN||'*'||SU||'='|| DAN*SU);
+                SU := SU +1;
+            END LOOP;
+        DBMS_OUTPUT.PUT_LINE('');
+        END IF;
+        DAN := DAN+1;
+    END LOOP;
+END;
+/
+
+--BASIC LOOP
+--LOOP
+-- 처리문
+-- 탈출조건
+--END LOOP;
+
+--1~5까지 순차적으로 출력
+DECLARE
+    N NUMBER;
+BEGIN
+    N := 1;
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(N);
+        N := N+1;
+        --탈출조건을 작성
+        EXIT WHEN N > 5;
+    END LOOP;
+END;
+/
