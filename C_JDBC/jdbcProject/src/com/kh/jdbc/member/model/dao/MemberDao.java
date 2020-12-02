@@ -158,6 +158,7 @@ public class MemberDao {
 			stmt = conn.createStatement(); //쿼리용  Statement 생성
 			String query = "select * from TB_MEMBER where REG_DATE between '"+beginDate+"' and '"+endDate+"'";
 			rset = stmt.executeQuery(query);
+			memberList = new ArrayList<Member>();
 			while(rset.next()) {
 				Member member = new Member();
 				member.setUserId(rset.getString("USER_ID"));
@@ -166,7 +167,7 @@ public class MemberDao {
 				member.setTell(rset.getString("TELL"));
 				member.setRegDate(rset.getDate("REG_DATE"));
 				member.setEmail(rset.getString("EMAIL"));
-				member.setRentableDate(rset.getDate("RENTABLE_DATE"));		
+				member.setRentableDate(rset.getDate("RENTABLE_DATE"));				
 				memberList.add(member);
 			}
 			
