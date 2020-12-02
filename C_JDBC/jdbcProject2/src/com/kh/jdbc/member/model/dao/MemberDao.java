@@ -6,6 +6,7 @@ import oracle.net.ns.ConnectPacket;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,8 +29,8 @@ public class MemberDao {
 		//transaction(Commit,Rollback) 관리
 		Connection conn = null;
 		
-		//Statement객체 : 쿼리 실행용 객체
-		Statement stmt = null;
+		//PreparedStatement객체 : 쿼리 실행용 객체 
+		PreparedStatement pstm = null;
 		
 		//Select 쿼리의 결과로 반환된 데이터를 저장하는 객체
 		ResultSet rset = null;
@@ -51,15 +52,17 @@ public class MemberDao {
 					"user11");
 			
 			//3. 쿼리 실행용 객체 생성
-			stmt = conn.createStatement();
+			String query = "select * from tb_member where user_id = ? and password = ?";
+			pstm = conn.prepareStatement(query);
 			
 			//4. 쿼리 작성
-			String query = "select * from tb_member where user_id = '"
-			+userId+"' and password ='" + password + "'";
-			System.out.println(query);
+			
+			
+			pstm.setString(1, userId);
+			pstm.setString(2, password);
 			
 			//5. 쿼리 실행하고 resultSet 받기
-			rset = stmt.executeQuery(query);
+			rset = pstm.executeQuery();
 			
 			//6. resultSet에 저장된 데이터를 VO객체로 옮겨 닮기
 			//next() : 현재 위치에서 다음 row에 데이터가 있는지 확인하고
@@ -83,7 +86,7 @@ public class MemberDao {
 			try {
 				//닫아주어야 한다.			
 				rset.close();
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -96,14 +99,16 @@ public class MemberDao {
 	public Member selectMemberById(String userId) {
 		Member member = null;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstm = null;
 		ResultSet rset = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bookmanager", "user11");
-			stmt = conn.createStatement(); //쿼리용  Statement 생성
-			String query = "select * from TB_MEMBER where USER_ID = '"+userId+"'";
-			rset = stmt.executeQuery(query);
+			String query = "select * from TB_MEMBER where USER_ID = ? ";
+			pstm.setString(1, userId);
+			pstm = conn.prepareStatement(query); //쿼리용  Statement 생성
+			
+			rset = pstm.executeQuery();
 			if(rset.next()) {
 				member = new Member();
 				member.setUserId(rset.getString("USER_ID"));
@@ -121,7 +126,7 @@ public class MemberDao {
 		} finally {
 			try {
 				rset.close();
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -135,15 +140,15 @@ public class MemberDao {
 	public ArrayList<Member> selectMemberList(){
 		ArrayList<Member> memberList = null;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstm = null;
 		ResultSet rset = null;
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bookmanager", "user11");
-			stmt = conn.createStatement(); //쿼리용  Statement 생성
 			String query = "select * from TB_MEMBER";
-			rset = stmt.executeQuery(query);
+			pstm = conn.prepareStatement(query); //쿼리용  Statement 생성			
+			rset = pstm.executeQuery();
 			memberList = new ArrayList<Member>();
 			while(rset.next()) {
 				Member member = new Member();
@@ -162,7 +167,7 @@ public class MemberDao {
 		} finally {
 			try {
 				rset.close();
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -176,24 +181,23 @@ public class MemberDao {
 	public int insertMember(Member member) {
 		int res = 0;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstm = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bookmanager", "user11");
-			stmt = conn.createStatement(); //쿼리용  Statement 생성
-			String query = "INSERT INTO TB_MEMBER (USER_ID, PASSWORD, EMAIL, TELL)"
-					+ "VALUES ('"+member.getUserId()
-					+"','"+member.getPassword()
-					+"','"+member.getEmail()
-					+"','"+member.getTell()+"')";
-			
-			res = stmt.executeUpdate(query);
+			String query = "INSERT INTO TB_MEMBER (USER_ID, PASSWORD, EMAIL, TELL) VALUES (?,?,?,?) ";
+			pstm = conn.prepareStatement(query); //쿼리용  Statement 생성
+			pstm.setString(1, member.getUserId());
+			pstm.setString(2, member.getPassword());
+			pstm.setString(3, member.getEmail());
+			pstm.setString(4, member.getTell());			
+			res = pstm.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -206,19 +210,21 @@ public class MemberDao {
 	public int updateMember(Member member) {
 		int res = 0;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstm = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bookmanager", "user11");
-			stmt = conn.createStatement(); //쿼리용  Statement 생성
-			String query = "UPDATE TB_MEMBER SET PASSWORD = '"+member.getPassword()+"' WHERE USER_ID = '"+member.getUserId()+"'";
-			res = stmt.executeUpdate(query);
+			String query = "UPDATE TB_MEMBER SET PASSWORD = ? WHERE USER_ID =?";
+			pstm = conn.prepareStatement(query); //쿼리용  Statement 생성
+			pstm.setString(1, member.getPassword());
+			pstm.setString(2, member.getUserId());
+			res = pstm.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -231,19 +237,20 @@ public class MemberDao {
 	public int deleteMember(String userId) {
 		int res = 0;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstm = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bookmanager", "user11");
-			stmt = conn.createStatement(); //쿼리용  Statement 생성
-			String query = "DELETE FROM TB_MEMBER WHERE USER_ID = '"+userId+"'";
-			res = stmt.executeUpdate(query);
+			String query = "DELETE FROM TB_MEMBER WHERE USER_ID = ? ";
+			pstm = conn.prepareStatement(query); //쿼리용  Statement 생성
+			pstm.setString(1, userId);
+			res = pstm.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -256,15 +263,18 @@ public class MemberDao {
 	public List<Member> selectMemberByRegdate(Date beginDate, Date endDate){
 		List<Member> memberList = null;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstm = null;
 		ResultSet rset = null;
 		
 		try {
 			getClass().forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bookmanager", "user11");
-			stmt = conn.createStatement(); //쿼리용  Statement 생성
-			String query = "select * from TB_MEMBER where REG_DATE between '"+beginDate+"' and '"+endDate+"'";
-			rset = stmt.executeQuery(query);
+			String query = "select * from TB_MEMBER where REG_DATE between ? AND ? ";			
+			pstm = conn.prepareStatement(query); //쿼리용  Statement 생성
+			pstm.setDate(1, (java.sql.Date) beginDate);
+			pstm.setDate(2, (java.sql.Date) endDate);
+						
+			rset = pstm.executeQuery();
 			memberList = new ArrayList<Member>();
 			while(rset.next()) {
 				Member member = new Member();
@@ -284,7 +294,7 @@ public class MemberDao {
 		} finally {
 			try {
 				rset.close();
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -298,19 +308,20 @@ public class MemberDao {
 	public int UpdateMemberToLeave(String userId) {
 		int res = 0;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstm = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bookmanager", "user11");
-			stmt = conn.createStatement(); //쿼리용  Statement 생성
-			String query = "UPDATE TB_MEMBER SET IS_LEAVE = 1 WHERE USER_ID = '"+userId+"'";
-			res = stmt.executeUpdate(query);
+			String query = "UPDATE TB_MEMBER SET IS_LEAVE = 1 WHERE USER_ID = ?";
+			pstm = conn.prepareStatement(query); //쿼리용  Statement 생성
+			pstm.setString(1, userId);
+			res = pstm.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
