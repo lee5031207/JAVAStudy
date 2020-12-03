@@ -14,6 +14,7 @@ public class 체육복_탐욕법 {
 
 		int answer= solution(n, lost, reserve);
 		System.out.println("정답 : "+answer);
+
 	}
 	public static int solution(int n, int[] lost, int[] reserve) {
 		// int n : 전체학생수

@@ -124,6 +124,12 @@ SELECT ROWNUM AS 입사꼴등들,
 EMP_NAME, HIRE_DATE FROM (SELECT * FROM EMPLOYEE ORDER BY HIRE_DATE DESC)
 WHERE ROWNUM < 6;
 
+--RANK() OVER / DENSE_RANK() OVER
+-- RANK() OVER : 순위를 계산하는 함수 /
+SELECT
+EMP_NAME, SALARY, RANK() OVER (ORDER BY SALARY DESC) AS RANK
+FROM EMPLOYEE;
+
 -- *** WITH
 -- 쿼리에 이름을 붙여 이름으로 해당 쿼리의 결과를 호출
 -- 쿼리의 결과를 메모리에 저장해 두었다가, 이름으로 호출 할 때 불러오는 방식
