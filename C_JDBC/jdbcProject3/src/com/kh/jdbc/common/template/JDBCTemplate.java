@@ -1,4 +1,4 @@
-package com.kh.jdbc.common;
+package com.kh.jdbc.common.template;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCTemplate {
-
-	public JDBCTemplate() {		
+	
+	//Singleton 패턴
+	//클래스의 인스턴스가 하나만 생성되어야 할 때 사용하는 디자인 패턴
+	
+	private static JDBCTemplate instance;
+	
+	//생성자를 private으로 바꿔서 외부에서 JDBCTemplate의 생성을 차단
+	private JDBCTemplate() {
 		//1. OracleDriver를 jvm에 등록
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -18,23 +24,37 @@ public class JDBCTemplate {
 		}
 	}
 	
+	//외부에서 JDBCTemplate의 인스턴스를 반환받기 위한 메서드
+	public static JDBCTemplate getInstance() {
+		if(instance == null) {
+			instance = new JDBCTemplate();
+		}
+		
+		return instance;
+	}
+	
 	public Connection getConnection() {
+		
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "bookmanager";
-		String password ="user11";		
-		Connection conn = null;		
+		String password = "user11";
+		
+		Connection conn = null;
+		
 		try {
-			conn = DriverManager.getConnection(url, user, password);
-			//Transaction관리를 개발자가 하기 위해 AutoCommit 설정 끄기
+			conn = DriverManager.getConnection(url,user,password);
+			
+			//Transaction 관리를 개발자가 하기 위해 AutoCommit 설정 끄기
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
+		
 		return conn;
 	}
 	
-	//COMMIT 메서드
+	//commit 메서드
 	public void commit(Connection conn) {
 		try {
 			conn.commit();
@@ -43,7 +63,8 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 	}
-	//ROLLBACK 메서드
+	
+	//rollback 메서드
 	public void rollback(Connection conn) {
 		try {
 			conn.rollback();
@@ -56,9 +77,8 @@ public class JDBCTemplate {
 	public void close(ResultSet rset) {
 		try {
 			if(rset != null && !rset.isClosed()) {
-				//예외 처리 rset은 null도 아니고 닫히지도 않았어야지 닫힌다
 				rset.close();
-			}			
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,17 +100,11 @@ public class JDBCTemplate {
 		try {
 			if(conn != null && !conn.isClosed()) {
 				conn.close();
-			}			
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public void close(ResultSet rset, Statement stmt, Connection conn) {
-		close(rset);
-		close(stmt);
-		close(conn);
 	}
 	
 	public void close(ResultSet rset, Statement stmt) {
@@ -99,6 +113,12 @@ public class JDBCTemplate {
 	}
 	
 	public void close(Statement stmt, Connection conn) {
+		close(stmt);
+		close(conn);
+	}
+	
+	public void close(ResultSet rset, Statement stmt, Connection conn) {
+		close(rset);
 		close(stmt);
 		close(conn);
 	}

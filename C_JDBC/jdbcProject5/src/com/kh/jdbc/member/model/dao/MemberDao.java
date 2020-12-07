@@ -1,5 +1,7 @@
 package com.kh.jdbc.member.model.dao;
 
+import com.kh.jdbc.common.code.ErrorCode;
+import com.kh.jdbc.common.code.MemberGrade;
 import com.kh.jdbc.common.exception.DataAccessException;
 import com.kh.jdbc.common.template.JDBCTemplate;
 import com.kh.jdbc.member.model.vo.Member;
@@ -74,6 +76,11 @@ public class MemberDao {
 				member.setUserId(rset.getString("USER_ID"));
 				member.setPassword(rset.getString("PASSWORD"));
 				member.setGrade(rset.getString("GRADE"));
+				//enum ValueOF()메서드를 사용해 원하는 문자열을 매개변수로 입력하면
+				//그 문자열과 같은 변수명을 가진 Enum인스턴스를 반환
+				//member.setGrade(MemberGrade.valueOf(rset.getString("GRADE")).desc());
+				
+				
 				member.setTell(rset.getString("TELL"));
 				member.setRegDate(rset.getDate("REG_DATE"));
 				member.setEmail(rset.getString("EMAIL"));
@@ -85,7 +92,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// SQLException : DB와 통신중에 발생하는 모든 예외를 담당하는 exception
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(), ErrorCode.SM01.errMsg());
 		} finally {
 			jdt.close(rset, pstm);
 		}
@@ -119,7 +126,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(),ErrorCode.SM01.errMsg());
 		} finally {
 			jdt.close(rset, pstm);
 		}		
@@ -151,7 +158,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(),ErrorCode.SM01.errMsg());
 		} finally {
 			jdt.close(rset, pstm);
 		}		
@@ -173,7 +180,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(),ErrorCode.IM01.errMsg());
 		} finally {
 			jdt.close(pstm);
 		}	
@@ -192,7 +199,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(),ErrorCode.UM01.errMsg());
 		} finally {
 			jdt.close(pstm);
 		}	
@@ -210,7 +217,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(),ErrorCode.DM01.errMsg());
 		} finally {
 			jdt.close(pstm);
 		}	
@@ -246,7 +253,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(),ErrorCode.SM01.errMsg());
 		} finally {
 			jdt.close(rset, pstm);
 		}
@@ -266,7 +273,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage());
+			throw new DataAccessException(e.getMessage(),ErrorCode.UM01.errMsg());
 		} finally {
 			jdt.close(pstm);
 		}	
