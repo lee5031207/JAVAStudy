@@ -14,11 +14,11 @@ public class RentController {
 	public RentController() {
 		
 	}
-	public List<Rent> searchRentList(String title){
-		return null;		
+	public List<Rent> searchRentList(String userId){	
+		return rentService.selectRentList(userId);		
 	}
-	public List<RentBook> searchRentBookList(String title){
-		return null;		
+	public List<RentBook> searchRentBookList(int rmIdx){
+		return rentService.selectRentBookList(rmIdx);		
 	}
 	
 	public String registRent(List<Book> bookList, String userId) {
@@ -42,7 +42,7 @@ public class RentController {
 	}
 	
 	public boolean extendBook(int rbIdx) {
-		return true;
+		return rentService.updateExtendRentState(rbIdx);		
 	}
 	
 	

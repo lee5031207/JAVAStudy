@@ -20,12 +20,32 @@ public class RentService {
 		
 	}
 	
-	public List<Rent> selectRentList(String title){
-		return null;		
+	public List<Rent> selectRentList(String userId){
+		Connection conn = jdt.getConnection();
+		List<Rent> rentList = null;
+		try {
+			rentList = rentDao.selectRentList(conn, userId);
+			jdt.commit(conn);
+		}catch (DataAccessException e) {
+			jdt.rollback(conn);
+		} finally {
+			jdt.close(conn);
+		}
+		return rentList;		
 	}
 	
-	public List<RentBook> selectRentBookList(String title){
-		return null;		
+	public List<RentBook> selectRentBookList(int rmIdx){
+		Connection conn = jdt.getConnection();
+		List<RentBook> rentBookList = null;
+		try {
+			rentBookList = rentDao.selectRentBookList(conn, rmIdx);
+			jdt.commit(conn);
+		} catch (DataAccessException e) {
+			jdt.rollback(conn);
+		} finally {
+			jdt.close(conn);
+		}
+		return rentBookList;		
 	}
 	
 	//도서 대출 처리
@@ -60,8 +80,18 @@ public class RentService {
 			jdt.close(conn);
 		}
 	}
-	public boolean updateExtendRentState(int no) {
-		return true;	
+	public boolean updateExtendRentState(int rbIdx) {
+		Connection conn = jdt.getConnection();
+		try {
+			rentDao.updateExtendRentState(conn, rbIdx);
+			jdt.commit(conn);
+			return true;
+		}catch (DataAccessException e) {
+			jdt.rollback(conn);
+			return false;
+		}finally {
+			jdt.close(conn);
+		}		
 	}
 	public boolean updateExtendRentBook(int no) {
 		return true;	
