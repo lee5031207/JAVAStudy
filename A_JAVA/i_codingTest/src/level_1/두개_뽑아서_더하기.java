@@ -16,7 +16,7 @@ public class 두개_뽑아서_더하기 {
 		numbers[3] = 4;
 		numbers[4] = 1;
 		numbers = solution(numbers);
-		System.out.println(numbers);
+		//System.out.println(numbers);
 		for(int i=0; i<numbers.length; i++) {
 			System.out.println(numbers[i]);
 		}
