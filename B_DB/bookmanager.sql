@@ -166,6 +166,9 @@ BEGIN
     UPDATE TB_RENT_HISTORY SET STATE = 'RE01' WHERE RB_IDX = V_RB_IDX;
 END;
 /
+
+
+
     
     
     
