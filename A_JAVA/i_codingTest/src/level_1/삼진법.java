@@ -15,13 +15,13 @@ public class 삼진법 {
 	
 	
 	public static int solution(int n) {
-        int answer = 0, rest = 0, count = 0;
+        int answer = 0, count = 0;
         int a = 1;
 		while(true) {
 			if(n/a == 0) {
 				break;
 			}else {
-				a *=3;
+				a *= 3;
 				count++;
 			}
 		}
