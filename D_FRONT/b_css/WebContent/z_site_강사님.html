@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			min-width: 800px;
+		}
+		
+		h1{
+			text-align: center;
+		}
+	
+		.header{
+			height:13vh;
+			overflow: hidden;
+		}
+		
+		.header>*{
+			float: left;
+			width:30%;
+			margin:0 1.5% 0 1.5%;
+		}
+		
+		#logo{
+			width: 80px;
+			height:80px;
+		}
+		
+		#login{
+			margin-right:0;
+			float:right;
+		}
+		
+		#login>label{
+			display: inline-block;
+			width: 70%;
+			font-size: 1vw;
+		}
+		
+		#login span{
+			display: inline-block;
+			width:30%;
+			text-align: right;
+		}
+		
+		#login input{
+			display: inline-block;
+			width:60%;
+		}
+		
+		#login>button{
+			display: inline-block;
+			width: 25%;
+		}
+		
+		
+		li{
+			list-style: none;
+		}
+		
+		ul{
+			margin: 0;
+			padding: 0;
+		
+		}
+		
+		.nav{
+			height:5vh;
+			background-color: black;
+			color:white;
+		}
+		
+		.nav>ul{
+			position:relative;
+			width:80%;
+			left:10%;
+		}
+		
+		.nav>ul:after{
+			content: "";
+			display:block;
+			clear:both;
+		}
+		
+		.nav>ul>li{
+			position:relative;
+			float: left;		
+			width: 16.6%;
+			height:5vh;
+			text-align: center;
+		}
+		
+		.nav>ul>li:hover{
+			background-color: gray;
+		}
+		
+		#gal>ul{
+			position:relative;
+			line-height: 0;
+			opacity: 0;
+		}
+		
+		#gal:hover ul{
+			transition-duration:0.5s;
+			line-height: 2;
+			opacity: 1;
+			background-color: red;
+		}
+		
+		#gal>ul>li:hover{
+			background-color: blue;
+		}
+		
+		.section{
+			min-height:67vh;
+			background-color: grey;
+		}
+		
+		.footer{
+			height:15vh;
+			background-color: skyblue;
+		}
+	
+	</style>
+</head>
+<body>
+	<!-- 
+		semantic(의미의) tag : 의미론적 태그
+				컨텐츠의 의미를 브라우저와 개발자 모두에게 설명하는 태그
+		non-semantic tag : 기능은 있지만 의미는 없는 태그
+				ex) div : div 구역을 나누는 기능이 있지만, 해당 구역의 컨텐츠에 대해 아무런 설명도 하지 않는다.
+	
+		
+		* semanctic tag를 사용하는 이유
+		1. 웹페이지들의 표준을 맞추기 위해서.
+		2. 검색엔진이 페이지를 해석하기 쉬워진다. 페이지 검색 랭킹에 영향을 받게 된다.
+		3. 개발자 입장에서도 의미가 없는 div 태그로만 만들어진 HTML소스코드를 읽는 것 보다
+		   태그마다 의미가 있는 semantic 태그를 읽는 것이 가독성이 더 좋다.
+	 -->
+
+	<header class="header">
+		<div><img id="logo"></div>
+		<h1>MYMain</h1>
+		<div id="login">
+			<label><span>아이디:</span><input></label>
+			<label><span>password:</span><input type="password"></label>
+			<button>로그인</button>
+		</div>
+	</header>
+	<nav class="nav">
+		<ul>
+			<li>메인</li>
+			<li>공지사항</li>		
+			<li>자유게시판</li>
+			<li id="gal">갤러리
+				<ul>
+					<li>회원사진</li>
+					<li>동물사진</li>
+					<li>PClass사진</li>
+				</ul>
+			</li>		
+			<li>회원관리</li>		
+			<li>채팅하기</li>						
+		</ul>
+	</nav>
+	<section class="section">
+	content 내용<br>
+	</section>
+	<footer class="footer">
+	이 문서는 HTML5를 기준으로 작성되었습니다.<br>
+	Copyright © 1998-2020 KH Information Educational Institute All Right Reserved
+	</footer>
+</body>
+</html>
