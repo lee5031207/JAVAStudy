@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문제1</title>
+<style type="text/css">
+	body{
+			margin: 0;
+			padding: 0;
+	}
+	#logo{
+		width: 100px;
+		height:100px;
+	}
+	.login{
+		float : right;
+		text-align: right;
+	}
+	.login>*{
+		margin-top:8px;
+	}
+	.header{
+		height:13vh;
+		overflow: visible;
+	}
+	.nav{
+		text-align: center;
+	}
+	.nav>a{
+		font-size: 30px;
+		margin-left: 40px;
+	}
+	#content{
+		height : 400px;
+		background-color: gray;
+	}
+	footer{
+		height: 80px;
+		background-color: skyblue;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<header class="header">
+	<span><img id="logo" src="resources/images/logo.gif"></span>
+	<span class="login">
+		<label><span>아이디:</span><input></label><br>
+		<label><span>password:</span><input type="password"></label><br>
+		<button type="submit">로그인</button>
+		<button>회원가입</button>
+	</span>
+	<div class="menu">
+		<nav class="nav">
+			<a>메인</a>
+			<a>공지사항</a>
+			<a>자유게시판</a>
+			<a>갤러리</a>
+			<a>회원관리</a>
+			<a>채팅하기</a>
+		</nav>
+	</div>
+	</header><br><br>
+	<section id="content">
+	</section>
+	<footer>
+		<a>"Copyright © 1998-2019 KH Information Educational Institute All Right Reserved"</a>
+	</footer>
+</body>
+</html>

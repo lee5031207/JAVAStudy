@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문제3</title>
+<style type="text/css">
+	header{
+		border: 1px solid black;
+		margin: 10px;
+		width: 30%;
+	}
+	section{
+		border: 1px solid black;
+		margin: 10px;
+		width: 30%;
+	}
+	footer{
+		border: 1px solid black;
+		margin: 10px;
+		width: 30%;
+	}
+	
+	li{
+		list-style: none;
+	}
+	ul{
+			margin: 0;
+			padding: 0;
+	}
+	
+	/*hover메뉴 CSS*/
+		.nav{
+			background-color: #BB0000;
+			color:white;
+			height: 30px;
+		}
+		.nav>ul{
+			position:relative;
+			width:80%;
+			left:10%;
+		}
+		.nav>ul:after{
+			content: "";
+			display:block;
+			clear:both;
+		}
+		.nav>ul>li{
+			position:relative;
+			float: left;		
+			width: 25%;
+			height:5vh;
+			text-align: center;
+		}
+		.nav>ul>li:hover{
+			background-color: #BB0000;
+		}
+		.sub>ul{
+			position:relative;
+			line-height: 0;
+			opacity: 0;
+		}
+		.sub:hover ul{
+			transition-duration:0.5s;
+			line-height: 2;
+			opacity: 1;
+			background-color: #FFDAB9;
+		}
+		.sub>ul>li:hover{
+			background-color: #DC143C;
+			
+		}
+		a{
+			color : white;
+			text-decoration:none;
+		}
+		.sub>ul>li>a{
+			color :  #BB0000;
+		}
+		.sub>ul>li>a:hover{
+			color :  yellow;
+		}
+</style>
+</head>
+<body>
+	<header>
+		<h2>
+			서브 메뉴가 펼쳐지는 네비게이션 만들기
+		</h2><hr>
+		<nav class="nav">
+			<ul id="navi">
+				<li><a href="">Home</a></li>
+				<li class="sub"><a href="">웹개발</a>
+					<ul>
+						<li><a href="">웹디자인</a></li>
+						<li><a href="">HTML5 + CSS3</a></li>
+						<li><a href="">JQUERY</a></li>
+						<li><a href="">웹 + 모바일</a></li>
+					</ul>
+				</li>
+				<li class="sub"><a href="">게시판</a>
+					<ul>
+						<li><a href="">Q & A</a></li>
+						<li><a href="">방명록</a></li>
+					</ul>
+				</li>
+				<li><a href="views/test/productForm.html">상품주문서</a></li>
+			</ul>
+		</nav>
+		<h1>
+		HTML5&CSS3
+		</h1>
+		<nav>
+		<ul>
+			<li>HTML5</li>
+			<li>CSS3</li>
+			<li>JAVASCRIPT</li>
+			<li>JQUERY</li>
+			<li>HTML5 API</li>
+		</ul>
+	</nav>
+	</header>
+	<section>
+		<a>이 영역은 소제목과 내용으로 구성되는 영역입니다.</a>
+		<article>
+			<img alt="꽃" src="resource/image/flower2.png" width="100%"><br>
+			<a>section 안에 article안에 img태그를 사용하였습니다.</a>
+		</article>
+	</section>
+	<footer>
+		<a>이 문서는 HTML 5를 기준으로 작성되었습니다.</a><br>
+		<a>이 영역 FOOTER 영역입니다.</a>
+	</footer>
+	
+
+</body>
+</html>
