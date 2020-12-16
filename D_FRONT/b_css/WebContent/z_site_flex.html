@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>z_site_flex</title>
+<style type="text/css">
+	body{
+		margin : 0;
+		padding: 0;
+	}
+	.body-flex{
+		display:flex;
+	}
+	header{
+/* 		border : 1px solid black; */
+		height: 100px;
+		display : flex;
+		justify-content: space-between;
+	}
+	.logo_box{
+		width : 15%;
+/* 		background-color: red; */
+		display: flex;
+	}
+	#logo{
+		width : 100px;
+		height : 100px;
+		margin: auto;
+		border : 1px solid black;
+	}
+	.title_box{
+		width : 30%;
+		/* background-color: blue; */
+		display: flex;
+	}
+	.login_box{
+		width : 15%;
+		/* background-color: yellow; */
+		display: flex;
+		flex-wrap:wrap;
+		 align-content:space-around;
+		justify-content : flex-end;
+	}
+	nav{
+/* 		border : 1px solid black; */
+		height: 50px;
+		display : flex;
+		justify-content : space-around;
+		background-color: black;
+	}
+	h2,h1{
+		margin : auto;
+	}
+	.nav_box>h2{
+		color: white;
+	}
+	.nav_box{
+		display : flex;
+		width : 7%;
+/* 		background-color: gray; */
+	/* 	justify-content : center ; */
+	}
+	.nav_blank_box{
+		width : 20%;
+/* 		background-color: skyblue; */
+	}
+	
+	section{
+/* 		border : 1px solid black; */
+		height: 600px;
+		background-color: gray;
+	}
+	footer{
+/* 		border : 1px solid black; */
+		height: 180px;
+		background-color: skyblue;
+	}
+</style>
+</head>
+<body>
+	<div class="body_flex">
+		<header>
+			<div class="logo_box"><img alt="로고" src="" id="logo"></div>
+			<div class="title_box"><h1>My First Site</h1></div>
+			<div class="login_box">
+				<div><label><span>아이디:</span><input type="text"></label></div>
+				<div><label><span>password:</span><input type="password"></label></div>
+				<div><button>로그인</button></div>
+			</div>
+		</header>
+		<nav>
+			<div class="nav_blank_box"></div>
+			<div class="nav_box"><h2>메인</h2></div>
+			<div class="nav_box"><h2>공지사항</h2></div>
+			<div class="nav_box"><h2>자유게시판</h2></div>
+			<div class="nav_box"><h2>갤러리</h2></div>
+			<div class="nav_box"><h2>회원관리</h2></div>
+			<div class="nav_box"><h2>채팅하기</h2></div>
+			<div class="nav_blank_box"></div>
+		</nav>
+		<section>
+			content 내용<br>
+		</section>
+		<footer>
+			이 문서는 HTML5를 기준으로 작성되었습니다.<br>
+			Copyright © 1998-2020 KH Information Educational Institute All Right Reserved	
+		</footer>
+	</div>
+</body>
+</html>
