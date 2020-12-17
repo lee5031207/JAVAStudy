@@ -33,6 +33,9 @@
 		/* background-color: blue; */
 		display: flex;
 	}
+	h1{
+		margin : auto;
+	}
 	.login_box{
 		width : 15%;
 		/* background-color: yellow; */
@@ -41,37 +44,39 @@
 		 align-content:space-around;
 		justify-content : flex-end;
 	}
-	nav{
-/* 		border : 1px solid black; */
+	.gnb{
 		height: 50px;
-		display : flex;
-		justify-content : space-around;
 		background-color: black;
 	}
-	h2,h1{
-		margin : auto;
+	.blank{
+		height: 30%;
 	}
-	.nav_box>h2{
-		color: white;
-	}
-	.nav_box{
+	.gnb_menu{
 		display : flex;
-		width : 7%;
-/* 		background-color: gray; */
-	/* 	justify-content : center ; */
+		justify-content: space-around;
+		/* background-color: black; */
+		color: white;
+		/* height : 100%; */
+		cursor: pointer;
 	}
-	.nav_blank_box{
-		width : 20%;
-/* 		background-color: skyblue; */
+	.gnb_menu>*:hover{
+		background-color: black;
+		border-radius: 10%;
 	}
-	
+	.snb_gal{
+		line-height: 0; /* 안보이게하는거 */
+		opacity: 0;
+	}
+	.wrap_gal:hover .snb_gal{
+		transition : 0.5s;
+		line-height : 2;
+		opacity : 1;
+	}
 	section{
-/* 		border : 1px solid black; */
 		height: 600px;
 		background-color: gray;
 	}
 	footer{
-/* 		border : 1px solid black; */
 		height: 180px;
 		background-color: skyblue;
 	}
@@ -88,16 +93,23 @@
 				<div><button>로그인</button></div>
 			</div>
 		</header>
-		<nav>
-			<div class="nav_blank_box"></div>
-			<div class="nav_box"><h2>메인</h2></div>
-			<div class="nav_box"><h2>공지사항</h2></div>
-			<div class="nav_box"><h2>자유게시판</h2></div>
-			<div class="nav_box"><h2>갤러리</h2></div>
-			<div class="nav_box"><h2>회원관리</h2></div>
-			<div class="nav_box"><h2>채팅하기</h2></div>
-			<div class="nav_blank_box"></div>
-		</nav>
+		<div class="gnb">
+			<div class="blank"></div>
+			<div class="gnb_menu">
+				<div>메인</div>
+				<div>공지사항</div>
+				<div>자유게시판</div>
+				<div class="wrap_gal">갤러리
+					<div id="gal">
+						<div class="snb_gal">회원사진</div>
+						<div class="snb_gal">동물사진</div>
+					</div>
+				</div>
+				<div>회원관리</div>
+				<div>채팅하기</div>
+			</div>
+			<div class="blank"></div>
+		</div>
 		<section>
 			content 내용<br>
 		</section>

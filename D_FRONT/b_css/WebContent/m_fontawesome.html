@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FontAwesome</title>
+<link href="resource/css/all.css" rel="stylesheet">
+<link href="resource/css/reset.css" rel="stylesheet">
+<style type="text/css">
+	ul{
+		display: flex;
+		justify-content: space-around;
+		padding: 10px;
+	}
+	.icon_1>li>i{
+		font-size: 3vw;
+	}
+	.icon_2>li>i{
+		font-size: 3vw;
+	}
+	.icon_3>li>i{
+		font-size: 3vw;
+	}
+</style>
+</head>
+<body>
+	<h1>FontAwesome 사용</h1>
+	<i class="fas fa-user"></i> <!-- uses solid style -->
+  	<i class="far fa-user"></i> <!-- uses regular style -->
+  	<!--brand icon-->
+  	<i class="fab fa-github-square"></i> <!-- uses brands style -->
+  	
+  	
+	<div id = s>
+		<ul class="icon_1">
+			<li><i class="fab fa-github-square"></i></li>
+			<li><i class="far fa-user"></i></li>
+			<li><i class="fas fa-user"></i></li>
+		</ul>
+		<ul class="icon_2">
+			<li><i class="fab fa-html5" style="color:orange;"></i></i></li>
+			<li><i class="fab fa-css3-alt" style="color:skyblue"></i></i></li>
+			<li><i class="fab fa-js" style="color:gold"></i></i></li>
+		</ul>
+		<ul class="icon_3">
+			<li><i class="fab fa-apple"></i></li>
+			<li><i class="fab fa-android" style="color:green;"></i></li>
+			<li><i class="fab fa-windows"  style="color:skyblue"></i></li>
+		</ul>
+	</div>
+	
+	<label>
+		<span>검색 :</span>
+		<input type="text">
+		<button><i class="fab fa-sistrix"></i></button>
+	</label>
+	
+	<a>a태그</a>
+</body>
+</html>
