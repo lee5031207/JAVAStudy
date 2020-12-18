@@ -2,13 +2,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 /*=================================header============================  */
-*{
+*, div{
 	font-family: 'Noto Sans KR', sans-serif;
 }
 .header{
 	position : fixed;
 	height: 5vh;
-	border : thin solid black;
 	display: flex;
 	width: 100%;
 	/* background-color: white; */
@@ -43,6 +42,7 @@
 	border-left: none;
 	border-right: none;
 	border-bottom: 2px solid black;
+	opacity : 0.5;
 	width: 100%;
 }
 .search_box>button>i{
@@ -79,7 +79,6 @@
 /*=================================content1============================  */
 .content1{
 	height: 70vh;
-	border : thin solid black;
 	background-image: url("../image/background2.jpg");
 	background-position: center;
 	background-size: 100%;
@@ -125,12 +124,12 @@
 .search>.inputbox{
 	width: 60%;
 	height :100%;
-	background-color: red;
 }
 .search>.inputbox>input{
 	width : 100%;
 	border : 0px;
 	height : 100%;
+	font-size : 1.3em;
 }
 .search>button{
 	margin : auto;
@@ -140,17 +139,61 @@
 .content1>.bot{
 	height : 30%;
 	display: flex;
-	background-color: red;
 }
-
-
-
+.bot>div{
+	cursor : pointer;
+	width:25%;
+	text-align: center;
+	margin : auto;
+	font-size : 2em;
+}
 /*=================================content2============================  */
 .content2{
-	height: 120vh;
-	border : thin solid black;
+	height: 150vh;
+	display: flex;
 }
+.side{
+	width : 15%;
+	height: 100%;
+}
+.mid{
+	width : 70%;
+	height: 100%;
+}
+.mid>div{
+	width:100%;
+	height:25%;
+}
+.name_list{
+	height : 20%;
+	font-size : 1.7em;
+}
+.book_list{
+	display : flex;
+	height : 70%;
+	/* justify-content : space-around; */
+}
+.book_list>div{
+	width : 25%;	
+	text-align: center;
+}
+.book_list>div>img{
+	width : 40%;
+	height : 80%;
+	box-shadow: 4px 5px 9px #000;
+	cursor : pointer;
+}
+.hr{
+	width:30%;
+	border : thin solid black;
+	text-align: left;
+	margin-left:0px;
+}
+
+/*=================================footer============================  */
 .footer{
 	height: 10vh;
-	border : thin solid black;
+	text-align: center;
+	background-image: url("../image/background1.jpg");
+	background-size: 100%;
 }

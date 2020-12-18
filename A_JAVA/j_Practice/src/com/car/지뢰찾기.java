@@ -3,13 +3,7 @@ package com.car;
 public class 지뢰찾기 {
 
 	public static void main(String[] args) {
-		//Character[][] resultmap = map();
-		System.out.println(Math.random()*10);
-		System.out.println(Math.random()*10);
-		System.out.println(Math.random()*10);
-		System.out.println(Math.random()*10);
-		System.out.println(Math.random()*10);
-		System.out.println(Math.random()*10);
+		Character[][] resultmap = map();
 	}
 	
 	
@@ -90,7 +84,7 @@ public class 지뢰찾기 {
 	}
 	
 	public static boolean isNumberic(Character ch) { //숫자 판별 함수
-		String s=Character.toString(ch);
+		String s = Character.toString(ch);
 		try {
 	     	Double.parseDouble(s);
 	    	return true;
