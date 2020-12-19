@@ -2,7 +2,7 @@ package 지뢰찾기;
 
 public class Around {
 
-	//좌표를 입력하면 그 좌표의 주변 좌표 8개를 int[][] 배열로 리턴
+	//좌표의 주변 좌표 8개를 int[][] 배열로 리턴하는 함수
 	public int[][] returnAround(int x, int y){
 		int[][] result = new int[8][2];
 		result[0][0] = x-1; result[0][1] = y-1;
