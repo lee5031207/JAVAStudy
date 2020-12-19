@@ -6,6 +6,7 @@ public class Game {
 
 	Map map = new Map();
 	Scanner sc = new Scanner(System.in);
+	Check check = new Check();
 	
 	public void gameStart() {
 		System.out.println("Game Start");
@@ -15,19 +16,23 @@ public class Game {
 		Character[][] answerMap = map.answerMap();
 		Character[][] answerSheetMap = map.answerSheetMap();
 		int x,y = 0;
+		map.printMap(answerSheetMap);
 		while(true) {
-			map.printMap(answerSheetMap);
 			System.out.print("x,y 좌표를 입력하시오(1~10) >>");
 			x = sc.nextInt();
 			y = sc.nextInt();
 			System.out.println("("+x+","+y+")를 입력하셨습니다");
-			if(answerMap[x][y] == '0') {
+			if(answerMap[x][y] == '0') { //0이라면 aroundCheck() 시작
 				answerSheetMap[x][y] = '0';
-				map.printMap(answerMap);
-				map.printMap(answerSheetMap);
-			}else {
+				answerSheetMap = check.aroundCheck(x, y, answerMap, answerSheetMap);
+			}else if(answerMap[x][y] == 'X'){  //X 라면 지뢰 고른것
+				System.out.println("지뢰입니다!");
+				break;
+			}else { //0,X  가아니면 1,2등 숫자만 오픈해줌
 				answerSheetMap[x][y] = answerMap[x][y];
 			}
+			map.printMap(answerMap);
+			map.printMap(answerSheetMap);
 		}
 		
 		
