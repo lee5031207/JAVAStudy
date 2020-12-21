@@ -1,6 +1,12 @@
 @charset "UTF-8";
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+@media (min-aspect-ration:5/4){
+}
+@media (max-aspect-ration:5/4){
+}
+
 /*=================================header============================  */
 *, div{
 	font-family: 'Noto Sans KR', sans-serif;
@@ -197,3 +203,6 @@
 	background-image: url("../image/background1.jpg");
 	background-size: 100%;
 }
+
+
+
