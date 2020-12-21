@@ -24,7 +24,7 @@ public class Check {
 		}
 		
 		if(board[x][y].equals(board[x+1][y-1]) || board[x][y].equals(board[x-1][y+1])) {
-			//우상단으로 올라가는 대각선 확인
+			//우상단에서 내려가는 대각선 확인
 		}
 		return flag;
 	}
@@ -105,7 +105,7 @@ public class Check {
 			return true;
 		}
 	}
-	//========================좌상단에서 부터 연속된 돌을 확인하는 함수========================
+	//========================좌상단->우하단 연속된 돌을 확인하는 함수========================
 	public boolean leftDownDiagonal(int x,int y, char stone, Character[][] board) {
 		int[] leftTop = new int[2];
 		int[] rightBottom = new int[2];
@@ -118,38 +118,41 @@ public class Check {
 				if(board[i][j] == stone) {
 					leftTop[0] = i;
 					leftTop[1] = j;
-				}else {
-					flag = false;
 				}
 				i--;j--;
+			}else {
+				flag = false;
 			}
 		}
+		System.out.println("leftTop : ["+leftTop[0]+","+leftTop[1]+"]");
 		i=x; j=y; flag = true;
 		while (flag) {
 			if(i<=19 && j<=19) {
 				if(board[i][j] == stone) {
 					rightBottom[0] = i;
 					rightBottom[1] = j;
-				}else {
-					flag = false;
 				}
 				i++; j++;
-			}
-		}
-		int count = 0;
-		i = leftTop[0]; i=leftTop[1]; flag = true;
-		while(flag) {
-			if(rightBottom[0] >= i && rightBottom[1] >= j) {
-				if(board[i][j] == stone) {
-					count++;
-				}else if (board[i][j] != stone) {
-					count = 0;
-				}
 			}else {
 				flag = false;
 			}
-			i++;j++;
 		}
+		System.out.println("rightBottom : ["+rightBottom[0]+","+rightBottom[1]+"]");
+		int count = 0;
+		i = leftTop[0]; j=leftTop[1]; flag = true;
+		while(flag) {
+			if(i <= rightBottom[0] && j <= rightBottom[1]) {
+				if(board[i][j].equals(stone)) {
+					count++;
+				}else if (!board[i][j].equals(stone)) {
+					count = 0;
+				}
+				i++;j++;
+			}else {
+				flag = false;
+			}
+		}
+		System.out.println("while문 밖 count :"+count);
 		//5개의 연속된 돌이 있으면 false반환
 		if(count==5) {
 			return false;
