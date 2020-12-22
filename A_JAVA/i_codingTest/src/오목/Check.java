@@ -25,6 +25,7 @@ public class Check {
 		
 		if(board[x][y].equals(board[x+1][y-1]) || board[x][y].equals(board[x-1][y+1])) {
 			//우상단에서 내려가는 대각선 확인
+			flag = leftUpDiagonal(x, y, stone, board);
 		}
 		return flag;
 	}
@@ -124,7 +125,6 @@ public class Check {
 				flag = false;
 			}
 		}
-		System.out.println("leftTop : ["+leftTop[0]+","+leftTop[1]+"]");
 		i=x; j=y; flag = true;
 		while (flag) {
 			if(i<=19 && j<=19) {
@@ -137,7 +137,6 @@ public class Check {
 				flag = false;
 			}
 		}
-		System.out.println("rightBottom : ["+rightBottom[0]+","+rightBottom[1]+"]");
 		int count = 0;
 		i = leftTop[0]; j=leftTop[1]; flag = true;
 		while(flag) {
@@ -152,7 +151,6 @@ public class Check {
 				flag = false;
 			}
 		}
-		System.out.println("while문 밖 count :"+count);
 		//5개의 연속된 돌이 있으면 false반환
 		if(count==5) {
 			return false;
@@ -160,4 +158,60 @@ public class Check {
 			return true;
 		}
 	}
+	
+	
+	//========================좌하단->우상단 연속된 돌을 확인하는 함수========================
+		public boolean leftUpDiagonal(int x, int y, char stone, Character[][] board) {
+			int[] leftBottom = new int[2];
+			int[] rightTop = new int[2];
+			int i=x;
+			int j=y;
+			boolean flag = true;
+			while (flag) {
+				if(i <= 19 && j >= 1) {
+					if(board[i][j].equals(stone)) {
+						leftBottom[0] = i;
+						leftBottom[1] = j;
+					}
+					i++; j--;
+				}else {
+					flag = false;
+				}	
+			}
+			
+			//여기부터 해야댐
+			i=x; j=y; flag = true;
+			while (flag) {
+				if(i >= 1 && j <= 19) {
+					if(board[i][j].equals(stone)) {
+						rightTop[0] = i;
+						rightTop[1] = j;
+					}
+					i--; j++;
+				}else {
+					flag = false;
+				}
+			}
+
+			int count = 0;
+			i = leftBottom[0]; j =leftBottom[1]; flag = true;
+			while(flag) {
+				if (i >= rightTop[0] && j <= rightTop[1]) {
+					if(board[i][j].equals(stone)) {
+						count++;
+					}else if(!board[i][j].equals(stone)) {
+						count = 0;
+					}
+					i--; j++;
+				}else {
+					flag = false;
+				}
+			}
+			
+			if(count==5) {
+				return false;
+			}else {
+				return true;
+			}	
+		}
 }
