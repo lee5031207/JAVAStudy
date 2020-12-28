@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>02_Type</title>
+<style type="text/css">
+	.note{
+		border: 1px solid;
+		min-height:300px;
+	}
+</style>
+</head>
+<body>
+	<h1>type</h1>
+	<pre>
+		primitive type : String(문자열), Number(숫자), Boolean, Null, Undefined
+				데이터를 복사할 때 깊은 복사(값이 복사)가 되는 타입
+			
+		reference type : Object
+				데이터를 복사할 때 얕은 복사(주소값 복사)가 되는 타입
+	</pre>
+	
+	<div id='type-note' class='note' onclick='typeTest()'></div>
+	<script type="text/javascript">
+		function typeTest(){
+			let name = '하명도';  //String
+			let age = 13;  //Number
+			let isSuccess = true; //Boolean
+			let empty = null; //null => 개발자가 명시적으로 해당 변수가 비었음을 나타내기 위해 사용하는 값
+			let undefinedVal; //undefined => 정의되지 않은, 변수를 선언하고 값을 초기화하지 않았을 때 
+							  //			자바스크립트 엔진이 자동으로 할당하주는 값
+			let obj = {
+					name:'하명도',
+					age:13,
+					isHealthy:false,
+					toString:function(){
+						return `이름:${하명도},나이:${age},건강?:${isHealthy}`
+					}
+			}; //Object
+			
+			let add = function(num1,num2){
+				return num1 + num2;
+			} //function
+			
+			let hobby = ['축구','농구','야구']; // Object
+			
+			/* typeof() : 변수에 담겨있는 값의 type을 반환해주는 연산자 */
+			/* document.querySelector(css선택자) */
+			
+			let typeNote = document.querySelector('#type-note');
+			
+			//background-color => backgroundColor
+			typeNote.style.backgroundColor = 'red';
+			typeNote.style.color = 'white';
+			typeNote.style.minHeight = '50px';
+			typeNote.style.transitionDuration = '3s';
+			typeNote.style.transform='skew(3600deg,3600deg)';
+			
+			typeNote.innerHTML += '<b>name : </b>' + typeof(name) + '<br>';
+			typeNote.innerHTML += '<b>age : </b>' + typeof(age) + '<br>';
+			typeNote.innerHTML += '<b>isSuccess : </b>' + typeof(isSuccess) + '<br>';
+			typeNote.innerHTML += '<b>empty : </b>' + typeof(empty) + '<br>';
+			typeNote.innerHTML += '<b>undefinedVal : </b>' + typeof(undefinedVal) + '<br>';
+			typeNote.innerHTML += '<b>obj : </b>' + typeof(obj) + '<br>';
+			typeNote.innerHTML += '<b>add : </b>' + typeof(add) + '<br>';
+			typeNote.innerHTML += '<b>hobby : </b>' + typeof(hobby) + '<br>';
+		}
+	</script>
+
+	
+</body>
+</html>
