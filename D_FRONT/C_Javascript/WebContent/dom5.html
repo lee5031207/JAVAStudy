@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom5</title>
+<style>
+    span{
+        display: inline-block;
+        width: 100px;
+    }
+    tr{
+        height: 30px;
+    }
+    td{
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+    <script>
+        function $(selector,text){
+			if(text){
+				document.querySelector(selector).innerHTML += `${text}<br>`;
+			}
+			return document.querySelector(selector);
+		}
+    </script>
+
+    <div>
+        <label for=""><span>아이디 :</span><input type="text"></label><br>
+        <label for=""><span>비밀번호 :</span><input type="password"></label><br>
+        <label for=""><span>주소 :</span><input type="text"></label><br>
+        <label for=""><span>전화번호 :</span><input type="text"></label><br>
+        <button id="btn_add">추가</button>
+        <button id="btn_del">전체삭제</button>
+    </div>
+    <div>
+        <table border=1>
+            <thead>
+                <tr>
+                    <th width="100px">아이디</th>
+                    <th width="100px">비밀번호</th>
+                    <th width="300px">주소</th>
+                    <th width="300px">전화 번호</th>
+                    <th width="100px">삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        //1.추가 버튼을 클릭시
+        $("#btn_add").addEventListener("click", (e)=>{
+
+        })
+        //2.삭제 버튼을 클릭시
+        $("#btn_add").addEventListener("click", (e)=>{
+
+        })  
+    </script>
+</body>
+</html>

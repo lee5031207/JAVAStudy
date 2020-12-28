@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom1</title>
+<style type="text/css">
+	.note{
+		border : thin solid black;
+		min-height: 100px;
+	}
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function $(selector,text){
+			if(text){
+				document.querySelector(selector).innerHTML += `${text}<br>`;
+			}
+			return document.querySelector(selector);
+		}
+	</script>
+
+	<h1>DOM(Document Object Model)</h1>
+	<h2>텍스트 노드가 있는 Node를 생성</h2>
+	<div id="node-note" class="note"></div>
+	<script type="text/javascript">
+		$("#node-note").addEventListener('click',(e)=>{
+			//element 생성
+			//createElement("tagName") : 해당 태그의 요소를 생성
+			let title = document.createElement('h3');
+			let subTitle = document.createElement('h4');
+
+			//text-node 생성
+			let titText = document.createTextNode("createTextNode로 만들어진 titText");
+			let subText = document.createTextNode("createTextNode로 만들어진 subText");
+
+			//노드 연결 (appendChild : 자식요소로 추가)
+			title.appendChild(titText);
+			subTitle.appendChild(subText);
+
+			$("#node-note").appendChild(title);
+			$("#node-note").appendChild(subTitle);
+
+			//e.target.appendChild(title);
+			//e.target.appendChild(subTitle);
+		})
+	</script>
+
+	<h2>텍스트 노드가 없는 Node 생성</h2>
+	<div id="node-note2" class="note"></div>
+	<script>
+		$("#node-note2").addEventListener("click",(e)=>{
+			//img태그 생성
+			let imgElement = document.createElement("img");
+			//속성 지정
+			imgElement.src = "img.jpg";
+			imgElement.style.width = "300px";
+			imgElement.style.height = "200px";
+			imgElement.setAttribute("myProperty","123");
+			$("#node-note2").appendChild(imgElement);
+		})
+	</script>
+
+	<h2>노드 삭제</h2>
+	<div id="del-node" class="note"></div>
+	<button id="btn_add">노드 추가</button>
+	<button id="btn_del">노드 삭제</button>
+	<script>
+		$("#btn_add").addEventListener("click",(e)=>{
+			//img태그 생성
+			let imgElement = document.createElement("img");
+			//속성 지정
+			imgElement.src = "img.jpg";
+			imgElement.style.width = "300px";
+			imgElement.style.height = "200px";
+			imgElement.setAttribute("myProperty","123");
+			$("#del-node").appendChild(imgElement);
+		})
+
+		$("#btn_del").addEventListener("click",(e)=>{
+			//del-node 아래의 이미지 요소를 마지막 추가한 것 부터 하나씩 삭제
+			//querySelectorAll : css선택자로 선택된 요소들을  NodeList(배열형태)로 반환
+
+			//방법1
+			//let imgList = document.querySelectorAll("#del-node>img");
+			//imgList.item(imgList.length-1).remove();
+
+			//방법2 
+			//$("#del-node").lastChild.remove();
+
+			//방법3 : CSS선택자로 지정하기 
+			//ex. :last-child, first-child, nth-child(n) 등등
+			$("#del-node>img:last-child").remove();
+
+		})
+		
+	</script>
+
+
+
+</body>
+</html>

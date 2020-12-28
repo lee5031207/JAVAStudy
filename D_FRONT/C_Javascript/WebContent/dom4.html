@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom4</title>
+<style>
+    img,#imgView{
+        width: 300px;
+        height: 300px;
+    }
+    div{
+        background-color: black;
+    }
+</style>
+</head>
+<body>
+    <script>
+        function $(selector,text){
+			if(text){
+				document.querySelector(selector).innerHTML += `${text}<br>`;
+			}
+			return document.querySelector(selector);
+		}
+    </script>
+    <label for=""><input type="radio" name="candidate" data-img="1.jpg" class="candidate">1번 후보</label><br>
+    <label for=""><input type="radio" name="candidate" data-img="2.jpg" class="candidate">2번 후보</label><br>
+    <label for=""><input type="radio" name="candidate" data-img="3.jpg" class="candidate">3번 후보</label><br>
+    
+    <button id="btn_create">이미지 생성</button>
+    <button id="btn_delete">이미지 삭제하기</button>
+
+    <div id="imgView">
+        
+    </div>
+
+    <script>
+        //1. 이미지 생성을 누를시
+        $("#btn_create").addEventListener("click",(e)=>{
+            if(document.querySelectorAll("#img").length == 0){
+                //img를 추가해주자
+                let img = document.createElement("img");
+                img.id = "img";
+                img.alt = "cat";
+                $("#imgView").append(img);
+            }
+            document.querySelectorAll(".candidate").forEach((e)=>{
+                if(e.checked){ //라디오 버튼이 체크되어 있을시    
+                    $("#img").src = "./resources/image/" + e.dataset.img;
+                }
+            })
+        })
+        //2. 이미지 삭제를 누를시
+        $("#btn_delete").addEventListener("click",(e)=>{
+            $("#img").remove();
+        })
+
+    </script>
+</body>
+</html>
