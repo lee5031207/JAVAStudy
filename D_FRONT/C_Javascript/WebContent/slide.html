@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slide</title>
+<link rel="stylesheet" href="resources/css/all.css">
+<link rel="stylesheet" href="resources/css/reset.css">
+<link rel="stylesheet" href="resources/css/slide.css">
+<style>
+    
+</style>
+<script>
+    function $(selector,text){
+        if(text){
+            document.querySelector(selector).innerHTML += `${text}<br>`;
+        }
+        return document.querySelector(selector);
+    }
+</script>
+</head>
+<body>
+    <div class="wrap_slide">
+        <div class="arrow">
+            <i class="fas fa-chevron-left"></i>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <ul class="slide-contents">
+            <li><img src="resources/image/photo1.jpg" alt=""></li>
+            <li><img src="resources/image/photo2.jpg" alt=""></li>
+            <li><img src="resources/image/photo3.jpg" alt=""></li>
+            <li><img src="resources/image/photo4.jpg" alt=""></li>
+        </ul>
+        <div class="wrap_btn">
+            <button id="idx0" class="btn_nav" data-slide-idx = "0"></button>
+            <button id="idx1" class="btn_nav" data-slide-idx = "1"></button>
+            <button id="idx2" class="btn_nav" data-slide-idx = "2"></button>
+            <button id="idx3" class="btn_nav" data-slide-idx = "3"></button>
+        </div>
+    </div>
+</body>
+<script src="resources/js/slide.js"></script>
+</html>

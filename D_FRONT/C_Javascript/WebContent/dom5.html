@@ -27,10 +27,10 @@
     </script>
 
     <div>
-        <label for=""><span>아이디 :</span><input type="text"></label><br>
-        <label for=""><span>비밀번호 :</span><input type="password"></label><br>
-        <label for=""><span>주소 :</span><input type="text"></label><br>
-        <label for=""><span>전화번호 :</span><input type="text"></label><br>
+        <label for=""><span>아이디 :</span><input type="text" data-name="id"></label><br>
+        <label for=""><span>비밀번호 :</span><input type="password" data-name="password"></label><br>
+        <label for=""><span>주소 :</span><input type="text" data-name="address"></label><br>
+        <label for=""><span>전화번호 :</span><input type="text" data-name="phone"></label><br>
         <button id="btn_add">추가</button>
         <button id="btn_del">전체삭제</button>
     </div>
@@ -45,7 +45,7 @@
                     <th width="100px">삭제</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="tbody">
 
             </tbody>
         </table>
@@ -53,12 +53,34 @@
     <script>
         //1.추가 버튼을 클릭시
         $("#btn_add").addEventListener("click", (e)=>{
-
+            let tr = document.createElement("tr");
+            tr.className = "make";
+            document.querySelectorAll("div>label>input").forEach((e)=>{
+                let td = document.createElement("td");
+                td.append(e.value);
+                tr.append(td);
+            })
+            let deleteTd = document.createElement("td");
+            deleteTd.append("삭제");
+            deleteTd.style.cursor = "pointer";
+            //3. 삭제버튼 클릭시 부모 tr전체 삭제
+            deleteTd.addEventListener("click",(e)=>{
+                //deleteTd.parentElement.remove();
+                e.target.parentElement.remove();
+                //e의 이미는 이벤트, e.target해야 이벤트가 발생한 객체
+            })
+            tr.append(deleteTd);
+            $(".tbody").append(tr);
         })
-        //2.삭제 버튼을 클릭시
-        $("#btn_add").addEventListener("click", (e)=>{
-
-        })  
+        //2.전체 삭제 버튼을 클릭시
+        $("#btn_del").addEventListener("click", (e)=>{
+            document.querySelectorAll(".make").forEach((e)=>{
+                e.remove();
+            })
+            document.querySelectorAll("div>label>input").forEach((e)=>{
+                e.value = "";
+            })
+        })
     </script>
 </body>
 </html>
