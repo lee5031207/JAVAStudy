@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>a_Jquery</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>제이쿼리 개요</h1>
+    <h2>Jquery란?</h2>
+    <pre>
+        존 레식에 의해 개발된 경량 자바스크립트 라이브러리로, 족잡한 자바스크립트 코드를 손쉽게 구현
+        *Jquery의 장점
+        1. DOM과 관련된 처리르 손쉽게 구현 가능
+        2. Ajax 통신, 이벤트 처리 등을 폭넓게 지원한다
+        3. 별도의 플러그인을 통해 차트,슬라이드를 간단히 구현할 수 있다
+    </pre>
+    <h2>Jquery연결</h2>
+    <pre id="jquery-note">
+        1.Jquery 홈페이지에서 JS파일을 다운로드 받아 외부스크립트로 연결
+        2.CDN(Content Delivery Network)를 통해 연결
+    </pre>
+    <hr>
+    <script>
+        /*
+            jquery의 대부분의 메서드 들은 jquery 객체를 반환하게끔 작성되어있다.
+            따라서 메서드를 체인형태로 사용할 수 있다.
+        */
+       //1-1 제이쿼리로 배경빨강,글자 흰색
+        $("#jquery-note").css("background-color","red").css("color","white");
+       //1-2 자바스크립트로
+       document.querySelector("#jquery-note").style.backgroundColor = "red";
+       document.querySelector("#jquery-note").style.color = "white";
+    </script>
+
+    <h2>$(document).ready()</h2>
+    <p id="onload-note">페이지를 모두 로드한 후 ready 메서드의 콜백함수를 실행</p>
+    <script>
+        //2-1 제이쿼리로
+        $(document).ready(()=>{
+            $("#onload-note").css("background-color","skyblue");    
+        })
+        //2-2 자바스크립트
+        document.addEventListener("DOMContentLoaded",()=>{
+            $("#onload-note").css("background-color","skyblue");    
+        })
+        //2-3 wondow.onload
+        window.onload = () =>{
+            $("#onload-note").css("background-color","skyblue");    
+        }
+    </script>
+
+</body>
+
+</html>

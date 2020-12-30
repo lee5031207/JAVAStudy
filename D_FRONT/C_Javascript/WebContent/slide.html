@@ -6,6 +6,15 @@
 <link rel="stylesheet" href="resources/css/all.css">
 <link rel="stylesheet" href="resources/css/reset.css">
 <link rel="stylesheet" href="resources/css/slide.css">
+<!-- 외부 JS파일 추가 -->
+<!-- script 태그의 defer(지연), async 속성
+     defer : 페이지가 모두 로드 된 후에 외부스크립트를 실행하는 속성
+     async : 외부스크립트의 다운로드와 페이지로드를 동시에 실행
+             외부 스크립트를 실행시키기 위한 html요소가 모두 로드된 후에 외부스크립트 실행
+
+    앵간하면 그냥 아래에 넣자!(관습)
+-->
+<script defer src="resources/js/slide.js"></script>
 <style>
     
 </style>
@@ -38,5 +47,5 @@
         </div>
     </div>
 </body>
-<script src="resources/js/slide.js"></script>
+<script defer src="resources/js/slide.js"></script>
 </html>

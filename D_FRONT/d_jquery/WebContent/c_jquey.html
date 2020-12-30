@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>c_Jquery</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>필터 선택자</h1>
+    <table border=1>
+        <tr>
+            <th>이름</th>
+            <th>혈액형</th>
+            <th>지역</th>
+        </tr>
+        <tr>
+            <td>하명도</td>
+            <td>A</td>
+            <td>관악구</td>
+        </tr>
+        <tr>
+            <td>박준범</td>
+            <td>A</td>
+            <td>강서구</td>
+        </tr>
+        <tr>
+            <td>한소희</td>
+            <td>B</td>
+            <td>구리시</td>
+        </tr>
+        <tr>
+            <td>이승연</td>
+            <td>B</td>
+            <td>관악구</td>
+        </tr>
+        <tr>
+            <td>정온유</td>
+            <td>A</td>
+            <td>부천시</td>
+        </tr>
+        <tr>
+            <td>박현욱</td>
+            <td>O</td>
+            <td>용인시</td>
+        </tr>
+    </table>
+    <script>
+        $(()=>{
+            //n번 인덱스에 위치한 요소 선택
+            $("tr:eq(0)").css("backgroundColor","red").css("color","white");
+
+            //n번째에 이후에 위치한 요소 선택
+            $("tr:nth-child(2)").css("backgroundColor","yellow");
+
+            //수열 n번째 위치하는 요소
+            $("tr:nth-child(3n)").css("backgroundColor","pink");
+
+            //n번 인덱스 이후에 위치한 요소 선택
+            $("tr:gt(5)").css("backgroundColor","gray");
+
+            //n번째에 이전에 위치한 요소 선택
+            $("tr:lt(2)").css("color","blue");
+
+            //특정 태그를 포함하고 있는 요소 
+            //특정 문자열을 포함하고 있는 요소 
+            //선택자와 일치하지 않는 요소 
+        })
+    </script>
+</body>
+</html>

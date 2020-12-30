@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>b_Jquery</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>기본 선택자</h1>
+    <h2>1. 전체 선택자 : *</h2>
+    <pre>
+        HTML 페이지에 있는 모든 문서 객체를 선택하는 선택자
+    </pre>
+    <script>
+        $(()=>{ //document.ready메서드
+            $("*").css("color","blue");
+        })
+    </script>
+
+    <h2>2. 태그선택자, 아이디선택자, 클래스 선택자</h2>
+    <h3>안녕? 난 뽀로로야</h3>
+    <p id="pororo-song">노는게 제일 좋아</p>
+    <div class="pororo">친구들 모여라 언제나 즐거원 개구쟁이 뽀로로</div>
+    <script>
+        $(()=>{
+            $("h3").css("color","orange");
+            $("#pororo-song").css("background-color","yellow");
+            $(".pororo").css("transform","skew(540deg,540deg)").css("transitionDuration","1s");
+        })
+    </script>
+    <hr>
+    <h2>속성 선택자</h2>
+    <pre>
+        선택자[속성명 = 값]
+        선택자[속성명 ~= 값] : 속성 의 값이 지정한 값을 단어로 포함하는 요소
+        선택자[속성명 $= 값] : 속성 의 값이 지정한 값을 끝나는 요소
+        선택자[속성명 ^= 값] : 속성 의 값이 지정한 값을 시작하는 요소
+        선택자[속성명 *= 값] : 속성 의 값이 지정한 값을 포함하는 요소
+    </pre>
+    <input type="text">
+    <input type="password" class="test">
+    <input type="radio">
+    <input type="checkbox">
+    <input type="file">
+    <script>
+        $(()=>{
+            $('input[type=text]').val('change value');
+            $('input[class ~= test]').val('12345');
+            $('input[type ^= ra]').attr("checked",true);
+            $('input[type $= box]').attr("checked",true);
+            $('input[type *= il]').css("width","100px").css("height","100px");
+        })
+    </script>
+</body>
+</html>
