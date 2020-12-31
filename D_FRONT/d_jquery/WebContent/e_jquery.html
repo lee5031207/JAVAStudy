@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>e_jquery</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<style type="text/css">
+	div{
+		background-color: skyblue;
+		color:red;
+		font-size:1.5vw;
+		font-weight:bold;
+	}
+	span{
+		background-color :pink;
+		color:purple;
+		font-size:2vw;
+	}
+	p{
+		background-color: lightyellow;
+		font-size:2.5vw;
+	}
+
+</style>
+</head>
+<body>
+	<h1>객체 생성 및 제거</h1>
+	<h2>삽입 메서드 part1</h2>
+	<pre>
+		$(selector).append(B) : B를 선택된 요소의 자식요소 뒷부분에 추가 
+		$(selector).prepend(B): B를 선택된 요소의 자식요소 앞부분에 추가
+		$(selector).after(B) : B를 선택된 요소의 뒤에 추가
+		$(selector).before(B): B를 선택된 요소의 앞에 추가
+	</pre>
+	<hr>
+	<div id='test1'>가즈아~</div>
+	<div id='test2'>쑤아리 질러~</div>
+	<div id='test3'>가즈아~</div>
+	<div id='test4'>쑤아리 질러~</div>
+	
+	<script type="text/javascript">
+	/* 
+		setInterval : 매개변수로 지정한 시간마다 반복적으로 콜백함수를 호출
+		clearInterval : 매개변수로 setInterval 함수를 전달해 해당 함수의 반복을 종료
+	*/
+	let interval = setInterval(()=>{
+		$('#test1').append('<span>집으로~!!</span>');
+		$('#test2').prepend('<p>마이크 첵원 첵투!!</p>');
+		$('#test3').after('<span>집으로~!!</span>');
+		$('#test4').before('<p>마이크 첵원 첵투!!</p>');
+	},1000)
+	
+	setTimeout(()=>{
+		clearInterval(interval);
+	},0);
+	
+	</script>
+
+	<h2>삽입 메서드 part2</h2>
+	<pre>
+		$(B).appendTo(selector) : B를 선택된 요소의 자식요소 뒷부분에 추가 
+		$(B).prependTo(selector) : B를 선택된 요소의 자식요소 앞부분에 추가
+		$(B).insertAfter(selector) : B를 선택된 요소의 뒤에 추가
+		$(B).insertBefore(selector) : B를 선택된 요소의 앞에 추가
+	</pre>
+	<script type="text/javascript">
+	/* 
+		setInterval : 매개변수로 지정한 시간마다 반복적으로 콜백함수를 호출
+		clearInterval : 매개변수로 setInterval 함수를 전달해 해당 함수의 반복을 종료
+	*/
+	let interval2 = setInterval(()=>{
+		$('<span>집으로~!!</span>').appendTo('#test1');
+		$('<p>마이크 첵원 첵투!!</p>').prependTo('#test2');
+		$('<span>집으로~!!</span>').insertAfter('#test3');
+		$('<p>마이크 첵원 첵투!!</p>').insertBefore('#test4');
+	},1000)
+	
+	setTimeout(()=>{
+		clearInterval(interval2);
+	},0);
+	
+	</script>
+
+	<h2>객체 복사, 제거 메서드</h2>
+	<pre>
+		clone() : 요소를 복사하는 메서드
+					**** 깊은 복사
+	</pre>
+	<div id='clone' style="border:1px solid; margin:5px 0 5px 0">
+		<div id='item1' class='item'>복사하기1</div>
+		<div id='item2' class='item'>복사하기2</div>
+		<div id='item3' class='delete'>삭제하기</div>
+	</div>
+	<hr>
+	<h2>결과</h2>
+	<div id='result'></div>
+	<script type="text/javascript">
+		$(()=>{
+			$('.item').on('click',(e)=>{
+				//자바스크립트 객체인 e.target을 제이쿼리객체로 감싸, 제이쿼리 객체로 만들어준다.
+				$(e.target).parent().clone(true).appendTo('#result');
+			})
+			
+			$('.delete').click((e)=>{
+				//부모요소 자체를 삭제
+				//$(e.target).parent().remove();
+				//해당요소의 content
+				//$(e.target).parent().empty();		
+				$(e.target).parent().detach();		
+			})
+		})
+	
+	
+	
+	
+	
+	
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

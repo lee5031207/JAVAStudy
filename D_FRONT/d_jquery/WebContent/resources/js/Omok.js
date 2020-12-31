@@ -1,3 +1,4 @@
+//===================바둑판 그리기===================
 let board = new Array(19);
 for (let i = 0; i < board.length; i++) {
     board[i] = new Array(19);
@@ -8,6 +9,7 @@ for(let i=0; i<19; i++){
     line.className = "line";
     for(let j=0; j<19; j++){
         let img = document.createElement("img");
+        img.className = "none";
         if(i==0 && j==0){ //좌상단
             img.src = "resources/image/board/leftTop.JPG";
             board[i][j] = img;
@@ -49,22 +51,32 @@ for(let i=0; i<19; i++){
     }
 }
 
-document.querySelectorAll("img").forEach((e)=>{
-    let originalSrc = e.src;
-    e.addEventListener("mouseenter",(e)=>{
-        console.log(originalSrc.slice(0,-4));
-        e.target.src = originalSrc.slice(0,-4)+"Mouse.JPG";
-    })
-    
-    e.addEventListener("mouseleave",(e)=>{
-        e.target.src = originalSrc;
+// ===================돌 놓기===================
+let turn = "black";
+document.querySelectorAll("img").forEach((img)=>{
+    img.addEventListener("click",(e)=>{
+        if(img.src.slice(-9,-4) == "Black" || img.src.slice(-9,-4) == "White"){
+            alert("잘못클릭하셨습니다");
+        }else{
+            if(turn == "black"){
+                e.target.src = e.target.src.slice(0,-4)+"Black.JPG";
+                e.target.className = "Black";
+                turn = "white";
+            }else if(turn == "white"){
+                e.target.src = e.target.src.slice(0,-4)+"White.JPG";
+                e.target.className = "White";
+                turn = "black";
+            }
+        }
+        console.log(turn + "차례 입니다");
     })
 })
 
-document.querySelectorAll("img").forEach((img)=>{
-    img.addEventListener("click",(e)=>{
-        e.target.src = "resources/image/board/boardBlack.JPG";
-    })
-})
-//돌 놓는거 문제 해결해야함
+
+
+
+
+
+
+
 

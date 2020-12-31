@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>d_jquery</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<style type="text/css">
+	.wrap * {
+		border:1px solid;
+		display:block;
+		padding:5px;
+		margin:15px;
+		color:pink
+	}
+</style>
+</head>
+<body>
+	<h1>DOM Tree 탐색 메서드</h1>
+	<h2>선택한 요소의 상위 요소들을 탐색하는 메서드</h2>
+	<div class='wrap'>
+		<div>great-grandparent
+			<section>grand parent
+				<article>direct parent
+					<span>span</span>
+				</article>
+			</section>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(()=>{
+			//선택된 요소의 바로 상위 요소
+			$('span').parent().css('color','red').css('border','2px solid red');
+			
+			//선택된 요소의 모든 상위 요소
+			//$('span').parents().css('color','blue').css('border','2px solid blue');
+			//선택된 요소의 모든 상위 요소들 중에서 원하는 요소만 선택
+			$('span').parents('section').css('color','blue').css('border','2px solid blue');
+			
+			//선택된 요소부터 인자요소 전 까지 범위의 요소 
+			$('span').parentsUntil('div').css('border','dotted');
+		})
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

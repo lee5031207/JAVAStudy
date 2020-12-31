@@ -9,6 +9,6 @@ public class Run {
 		DateTest dt = new DateTest();
 		//dt.date();
 		
-		dt.calendarTest();
+		dt.date();
 	}
 }

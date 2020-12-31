@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>f_jquery</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<style type="text/css">
+    .note{
+        width: 300px;
+        height: 300px;
+        background-color: orange;
+    }
+</style>
+</head>
+<body>
+    <h1>이벤트</h1>
+    <h2>이벤트 연결</h2>
+    <pre>
+        on : 현재 존재하는 문서 객체에 이벤트 연결
+        off : 이벤트 삭제
+    </pre>
+    <div id="event-note" class="note"></div>
+    <script>
+        $(()=>{
+            // $("#event-note").on("mouseenter",(e)=>{
+            //     $(e.target).css("background-color", "blue");
+            // }).on("mouseleave",(e)=>{
+            //     $(e.target).css("background-color", "orange");
+            // })
+
+            let eventObj = {
+                "mouseenter":(e) =>{ $(e.target).css("background-color", "blue");},
+                "mouseleave":(e) =>{ $(e.target).css("background-color", "orange");},
+                "click":(e)=>{ $(e.target).html("<span>제이쿼리 이벤트 클릭 발생</span>")},
+                "dbclick" :(e)=>{$(e.target).off("mouseenter").off("mouseleave")}
+            }
+
+            $("#event-note").on(eventObj);
+            // $("#event-note").hover((e)=>{$(e.target).css("background-color","blue")}
+            //                        ,(e)=>{$(e.target).css("background-color","orange")})
+        })
+    </script>
+
+    <h2>one 메서드</h2>
+    <pre>
+        이벤트를 한 번만 연결할 때 사용한다.
+    </pre>
+    <h1 id="one-test">여기를 클릭하시오</h1>
+    <script>
+        $(()=>{
+            $("#one-test").one("click",()=>{
+                alert("one 메서드 호출");
+            })
+        })
+    </script>
+</body>
+</html>

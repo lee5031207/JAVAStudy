@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_object</title>
+    <style type="text/css">
+        .note{
+            width:50%;
+            min-height:100px;
+            background-color:white;
+            border:1px solid;
+        }
+    </style>
+    <script type="text/javascript">
+        function $(selector,text){
+            if(text){
+                document.querySelector(selector).innerHTML += `${text}<br>`;
+            }
+            
+            return document.querySelector(selector);
+        }
+        </script>
+</head>
+<body>
+    <h1>객체</h1>
+    <h2>객체 선언 및 호출</h2>
+    <pre>
+        자바 스크립트의 객체를 생성 때 {} 사용해 리터럴 방식으로 선언하거나
+        Object 생성자 함수를 사용해 객체를 생성 할 수 있다
+        객체의 속성에는 모든 자료형이 올 수 있다.(함수포함);
+    </pre>
+    <div class="note" id="object-note"></div>
+    <script>
+        //객체를 리터럴 방식으로 생성
+        let book = {
+            title : "달콤한 나의 도시",
+            type : "종이 책",
+            category : ["문학","소설"],
+            'cate-count' : 2
+        }
+
+        //Object 생성자 함수를 사용해 객체 생성
+        let foo = new Object();
+        //빈 객체에 속성 추가
+        foo.name = "foo";
+        foo.family = ["아버지","어머니","동생"];
+        console.dir(foo);
+
+        //객체의 속성에 접근
+        $("#object-note").addEventListener("click",(e)=>{
+            $("#object-note", `book:${book}`)
+            $("#object-note", `foo:${foo}`)
+            $("#object-note", `<hr>객체명.속성명으로 접근하기`);
+            $("#object-note", `book:${book.title}`);
+            $("#object-note", `book:${book.type}`);
+            $("#object-note", `book:${book.category}`);
+            
+            $("#object-note", `foo:${foo.name}`);
+            $("#object-note", `foo.family:${foo.family}`);
+            $("#object-note", `<hr>객체명[속성명]으로 접근하기`);
+            $("#object-note", `book:${book['title']}`);
+            $("#object-note", `book:${book['type']}`);
+            $("#object-note", `book:${book['category']}`);
+            $("#object-note", `book:${book['cate-count']}`);
+            $("#object-note", `foo:${foo['name']}`);
+            $("#object-note", `foo.family:${foo['family']}`);
+        })
+    </script>
+
+    <h2>객체의 메서드</h2>
+    <pre>
+        객체의 속성 중 함수 자료형인 속성을 메서드라 부른다
+    </pre>
+    <div class="note" id="method-note"></div>
+    <script>
+
+        var name = "야용이";
+
+        let dog ={
+            name : '복실이',
+            // 화살표 함수는 this와 arguments 받아오지 않기 때문에 메서드를 만들 때는 부적절하다.
+            eat : function(food){
+                $("#method-note", `${this.name}가 ${food}를 먹고 있네요. 멍멍멍`);
+            }
+        }
+
+        dog.eat("강아지");
+    </script>
+
+    <h2>객체와 반복문</h2>
+    <pre>
+        for-in문을 사용해 객체의 속성명을 String타입의 값으로 모두 가져올 수 있다.
+    </pre>
+    <div class="note" id="for-in-note"></div>
+    <script>
+        let game ={
+            title : "Diablo",
+            price : 10000,
+            language : "한글",
+            producer : "Blizard"
+        }
+        //Map()의 KeySet() 메서드 용도로 사용
+        for(key in game){
+            $("#for-in-note", `${key}:${game[key]}`);
+        }
+    </script>
+</body>
+</html>
