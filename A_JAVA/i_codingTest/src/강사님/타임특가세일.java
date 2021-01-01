@@ -35,13 +35,16 @@ public class 타임특가세일 {
 			ampm = "오전";
 			hours = ((int)now.getHours());
 		}
-
-		if(now.getYear()+1900 != 2021) {
+		
+		if(now.getYear()+1900 == 2021 && (now.getMonth()+1)==1 && 
+				now.getDate()>1 && now.getDate()<=3 && ampm=="오후" && hours>1 && hours<4) {
 			System.out.println("현재 시간 : "+ ((int)now.getYear()+1900)+"년 "+
-		(now.getMonth()+1)+"월 "+ now.getDate()+"일 " +ampm+" "+ hours+"시"
-				+ " "+now.getMinutes()+"분 환영합니다");
-		}else if((now.getMonth()+1)==1 ){
-			
+					(now.getMonth()+1)+"월 "+ now.getDate()+"일 " +ampm+" "+ hours+"시"
+							+ " "+now.getMinutes()+"분 초특가 이벤트");
+		}else {
+			System.out.println("현재 시간 : "+ ((int)now.getYear()+1900)+"년 "+
+					(now.getMonth()+1)+"월 "+ now.getDate()+"일 " +ampm+" "+ hours+"시"
+							+ " "+now.getMinutes()+"분 환영합니다");
 		}
 	}
 }
