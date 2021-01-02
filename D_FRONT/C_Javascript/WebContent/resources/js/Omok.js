@@ -131,13 +131,16 @@ let check = function(img){
     
     if(imgClass == board[row-1][col-1].className || imgClass == board[row+1][col+1].className){
         //console.log("좌상단 대각선 같은돌 발생");
+        leftDownDiagonal(img);
     }
     
     if(imgClass == board[row+1][col-1].className || imgClass == board[row-1][col+1].className){
         //console.log("우상단 대각선 같은돌 발생");
+        leftUpDiagonal(img);
     }
 }
 
+// 양옆으로 연속된 돌을  확인하는 함수
 let sideCheck = function(img){
     //dataset에서 꺼내오는 숫자는 String이다
     //정수로 쓰고 싶으면 반드시 파싱해주자
@@ -176,12 +179,13 @@ let sideCheck = function(img){
             alert("흑 돌의 승리입니다. 축하합니다!");
             location.reload();
         }else{
-            alert("흑 돌의 승리입니다. 축하합니다!");
+            alert("백 돌의 승리입니다. 축하합니다!");
             location.reload();
         }
     }
 }
 
+// 위아래로 연속된 돌의 수를 확인하는 함수
 let topBottomCheck = function(img){
     let row = Number(img.dataset.row);
     let col = Number(img.dataset.col);
@@ -213,10 +217,139 @@ let topBottomCheck = function(img){
         }
     }
     if(count==5){
-        alert(img.className+"승리 !! 축하합니다");
-        //location.reload();
+        if(img.className == "Black"){
+            alert("흑 돌의 승리입니다. 축하합니다!");
+            location.reload();
+        }else{
+            alert("백 돌의 승리입니다. 축하합니다!");
+            location.reload();
+        }
     }
 }
+
+//좌상단->우하단 연속된 돌을 확인하는 함수
+let leftDownDiagonal = function(img){
+    let row = Number(img.dataset.row);
+    let col = Number(img.dataset.col);
+    let leftTop = null; let rightBottom = null;
+    let flag = true;
+    let i = row; let j = col;
+    while(flag){
+        if(i>=1 && j>=1){
+            if(board[i][j].className == img.className){
+                leftTop = board[i][j];
+            }else{
+                flag = false;
+            }
+            i--;j--;
+        }else{
+            flag = false;
+        }
+    }
+    flag=true;
+    i=row; j=col;
+    while(flag){
+        if(i<=19 && j<=19){
+            if(board[i][j].className == img.className){
+                rightBottom = board[i][j];
+            }else{
+                flag = false;
+            }
+            i++;j++;
+        }else{
+            flag = false;
+        }
+    }
+
+    let count = 0;
+    flag = true;
+    i = Number(leftTop.dataset.row);
+    j = Number(leftTop.dataset.col);
+    while(flag){
+        if(i <= Number(rightBottom.dataset.row) && j <= Number(rightBottom.dataset.col)){
+            if(board[i][j].className == img.className){
+                count++;
+            }else if(board[i][j].className != img.className){
+                count = 0;
+            }
+            i++; j++;
+        }else{
+            flag = false;
+        }
+    }
+    if(count==5){
+        if(img.className == "Black"){
+            alert("흑 돌의 승리입니다. 축하합니다!");
+            location.reload();
+        }else{
+            alert("백 돌의 승리입니다. 축하합니다!");
+            location.reload();
+        }
+    }
+}
+
+//좌하단->우상단 연속된 돌을 확인하는 함수
+let leftUpDiagonal = function(img){
+    let row = Number(img.dataset.row);
+    let col = Number(img.dataset.col);
+    let leftBottom = null; let righTop = null;
+    let flag = true;
+    let i = row; let j = col;
+    while(flag){
+        if(i <= 19 && j >= 1){
+            if(board[i][j].className == img.className){
+                leftBottom = board[i][j];
+            }else{
+                flag = false;
+            }
+            i++; j--;
+        }else{
+            flag = false;
+        }
+    }
+    flag = true;
+    i=row; j=col;
+    while(flag){
+        if(i >= 1 && j <= 19){
+            if(board[i][j].className == img.className){
+                righTop = board[i][j];
+            }else{
+                flag = false;
+            }
+            i--; j++;
+        }else{
+            flag = false;
+        }
+    }
+
+    let count = 0;
+    flag = true;
+    i = Number(leftBottom.dataset.row);
+    j = Number(leftBottom.dataset.col);
+    while(flag){
+        if(i >= Number(righTop.dataset.row) && j <= Number(righTop.dataset.col)){
+            if(board[i][j].className == img.className){
+                count++;
+            }else if(board[i][j].className != img.className){
+                count = 0;
+            }
+            i--; j++;
+        }else{
+            flag = false;
+        }
+    }
+    if(count==5){
+        if(img.className == "Black"){
+            alert("흑 돌의 승리입니다. 축하합니다!");
+            location.reload();
+            
+        }else{
+            alert("백 돌의 승리입니다. 축하합니다!");
+            location.reload();
+        }
+    }    
+}
+
 
 
 
