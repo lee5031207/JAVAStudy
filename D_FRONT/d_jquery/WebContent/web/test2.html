@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test2</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<style type="text/css">
+</style>
+<script>
+    $(document).ready(()=>{
+        $(".test").on("click",(event)=>{            
+            $("span").each((i,e)=>{
+                e.textContent = $(event.target).parent().children()[i].textContent
+            })
+        })        
+    })
+</script>
+</head>
+<body>
+    <table border=1>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+        </tr>
+        <tr class="test">
+            <td>1</td>
+            <td>첫 번째 게시물 입니다</td>
+            <td>홍길동</td>
+        </tr>
+        <tr class="test">
+            <td>2</td>
+            <td>두 번째 게시물 입니다</td>
+            <td>홍길동</td>
+        </tr>
+        <tr class="test">
+            <td>3</td>
+            <td>세 번째 게시물 입니다</td>
+            <td>홍길동</td>
+        </tr>
+    </table>
+    <div>
+        선택한 게시물 : <span class="span1"></span>/<span class="span2"></span>/<span class="span3"></span>
+    </div>
+</body>
+</html>

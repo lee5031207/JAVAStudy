@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+<script src="../resources/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<style type="text/css">
+</style>
+<script>
+    $(document).ready(()=>{
+        let testclick = function(){
+            window.alert("클릭");
+        }
+        document.querySelector("#btn1").addEventListener("click",(e)=>{
+            testclick();
+        })
+    })
+</script>
+</head>
+<body>
+	<button id="btn1">확인</button>
+</body>
+</html>

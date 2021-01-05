@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<style type="text/css">
+    div{
+        width: 200px;
+        height: 200px;
+        background-color: orangered;
+    }
+</style>
+<script>
+     $(document).ready(()=>{
+        $(".copy").on('click',(e)=>{
+            //복사 클릭
+            $(e.target).parent().clone(true).appendTo("body");
+        })
+
+        $(".delete").on('click',(e)=>{
+            //삭제 클릭
+            $(e.target).parent().remove();
+        })
+    })
+</script>
+</head>
+<body>
+    <div>
+        <button class="copy">복사하기</button>
+        <button class="delete">삭제하기</button>
+    </div>
+</body>
+</html>
