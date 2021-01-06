@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>13_Inheritance</title>
 <style type="text/css">
 	.note{
-		width:50%;
+		width:80%;
 		min-height:100px;
 		background-color: lightgreen;
 		border:1px solid;
@@ -46,18 +46,17 @@ let person = {
 	//toString을 호출했을 때
 	//후손객체들의 속성이 정상적으로 출력이 되는 toString으로 만들어주세요.
 	toString:function(){
-		let arr = [];
+		let arr =[];
 		for(key in this){
-			if(typeof(this[key]) != 'function'){
-				let res = `${key} : ${this[key]}`;
-				arr.push(res);
+			if(typeof(this[key])!='function'){
+				arr.push(key + "=" + this[key]); 
 			}
 		}
-		
 		arr.sort();
 		return arr.join(' / ');
 	}
 }
+
 
 //person을 상속받을 teacher와 studuent 생성
 let student = {

@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17_Date</title>
+    <style type="text/css">
+        .note{
+            width:100%;
+            min-height:100px;
+            background-color: lightgreen;
+            border:1px solid;
+        }
+        #clock{
+            text-align: center;
+            font-size: 70px;
+            color : white;
+        }
+    </style>
+    <script type="text/javascript">
+        function $(selector,text){
+            if(text){
+                document.querySelector(selector).innerHTML += `${text}<br>`;
+            }
+            return document.querySelector(selector);
+        }
+    </script>
+</head>
+<body>
+    <h1>Date객체</h1>
+    <pre>
+        날짜와 시간을 관리하는 객체
+    </pre>
+    <div class="note", id="date-note"></div>
+    <script>
+        //현재 시간
+        let date1 = new Date();
+        let date2 = new Date('2021-1-6');
+        let date3 = new Date(2021,0,6,20,21,10);
+
+        $("#date-note", date1);
+        $("#date-note", date2);
+        $("#date-note", date3);
+
+        $("#date-note", "연 :"+ date1.getFullYear());
+        $("#date-note", "월 :"+ date1.getMonth()+1);
+        $("#date-note", "일 :"+ date1.getDate());
+        $("#date-note", "시 :"+ date1.getHours());
+        $("#date-note", "분 :"+ date1.getMinutes());
+        $("#date-note", "초 :"+ date1.getSeconds());
+        $("#date-note", "밀리세컨드 :"+ date1.getMilliseconds());
+    </script>
+
+    <br>
+    <div class="note" id="clock"></div>
+    <script>
+        let clock = function(){
+            let date = new Date();
+            let res = `${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()}`; 
+            document.querySelector("#clock").innerHTML = res;
+        }
+        setInterval(clock,1000);
+
+    </script>
+</body>
+</html>
