@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>21_XHR</title>
+<style type="text/css">
+    .wrap>div{
+       display:flex;
+       justify-content:space-between;
+       height:10vw;
+       width:80vw;
+       text-align:center;
+       font-size:1vw;
+    }
+    
+    .wrap>div>div{
+       width:20%;
+       height:90%;
+       border:1px solid black;
+       background-repeat: no-repeat;
+       background-position: center;
+       background-size: contain;
+    }
+    
+    .wrap>div:first-child{
+       height:20%;
+    }
+    
+    img{
+       width:30%;
+       height:90%;
+    }
+ </style>
+ <script>
+     function $(selector,text){
+            if(text){
+                document.querySelector(selector).innerHTML += `${text}<br>`;
+            }   
+            return document.querySelector(selector);
+        }
+ </script>
+</head>
+<body>
+    <!-- Ajax : Asynchronous JavaScript ans XML
+    비동기 통신을 위해 제공된다. 또는 fetchAPI를 통해 비동기 통신을 할 수 도 있다 -->
+
+    <input type="text" id="keyword">
+    <button id="btn_search">검색</button>
+    <hr>
+    <div class="wrap">
+        <div class="wrap_book">
+            <div class="title">제목</div>
+            <div class="price">가격</div>
+            <div class="title">출판사</div>
+            <div class="title">이미지</div>
+        </div>
+    </div>
+    <script>
+        $("#btn_search").addEventListener("click",()=>{
+            let keyword = $("#keyword").value;
+
+            let xhr = new XMLHttpRequest(); //Ajax를 사용하기 위해 XMLHttpRequest() 객체를 만든다
+
+            //HTTP 요청 -> 시작줄 작성 
+            xhr.open('GET','https://dapi.kakao.com/v3/search/book?query='+keyword);
+
+            //URL뒤에 쿼리스트링 작성 
+            //ex) https://dapi.kakao.com/v3/search/book?query=미움받을 용기&size=1
+
+            //헤더 작성
+            xhr.setRequestHeader('Authorization','KakaoAK ec9acb621278ce4a1dfd7f08ebc6dc69');
+
+            // send 할때 GET방식이라 Body가 없다.  POST 방식은 Body에 넣어줄 데이터를 매개변수로 넘겨준다
+            xhr.send();
+
+            //비동기 통신이 성공적으로 끝나면 톨백함수 호츌
+            xhr.addEventListener("load",()=>{
+                //console.log(xhr.response);
+                let obj = JSON.parse(xhr.response);
+                console.log(obj);
+                let copy = $(".wrap_book").outerHTML;
+                obj.documents.forEach((e) => { 
+                    $('.wrap').innerHTML += copy;
+                    let bookInfo = $('.wrap').lastElementChild;
+                    bookInfo.children[0].innerHTML = e.title;
+                    bookInfo.children[1].innerHTML = e.price;
+                    bookInfo.children[2].innerHTML = e.publisher;
+                    bookInfo.children[3].innerHTML = "";
+                    bookInfo.children[3].style.backgroundImage = `url(${e.thumbnail}`;
+                });
+            })
+        })
+    </script>
+</body>
+</html>

@@ -10,6 +10,9 @@
             background-color: lightgreen;
             border:1px solid;
         }
+        body{
+            min-height : 100vh;
+        }
     </style>
     <script type="text/javascript">
         function $(selector,text){
@@ -21,7 +24,7 @@
     </script>
 </head>
 <body>
-    <h1>window 객체</h1>
+    <h1>window 객체</h1> 
     <pre>
         window 객체는 자바스크립트의 최상위 객체이다
         window 객체는 DOM, BOM, JavaScript 객체를 속성으로 가지고 있다.
@@ -41,10 +44,39 @@
         let openDaum = function(){
             let positionX = window.screen.availWidth/2-300;
             let positionY = window.screen.availHeight/2-150;
+            console.log(positionX);
+            console.log(positionY);
             window.open("https://www.daum.net","다음", `height=300,width=600,top=${positionX},left=${positionY}`);
         }
     </script>
+    <h2>screen 객체</h2>
+    <div id="screen-note", class="note"></div>
+    <script>
+        $("#screen-note", 'Screen.height :' + screen.height);
+        $("#screen-note", 'Screen.width :' + screen.width);
+        $("#screen-note", 'Screen.availHeight :' + screen.availHeight);
+        $("#screen-note", 'Screen.availWidth :' + screen.availWidth);
+        $("#screen-note", 'body.height :' + $("body").clientHeight);
+    </script>
+
+    <h2>location 객체</h2>
+    <pre>
+        브라우저의 주소 표시줄과 관련괸 객체
+    </pre>
+    <span onclick="location.href='https://www.naver.com'">네이버로 이동</span><br>
+    <span onclick="location.assign('https://www.google.com')">구글로 이동</span><br>
+    <span onclock="location.replace('https://www.daum.net')">다음로 이동</span><br>
+    <span onclock="location.reload()">현재 페이지 새로고침</span><br>
+    <span onclick="location.href = location.href">현재 페이지 새로고침</span><br>
 
 
+    <h2>navigator객체</h2>
+    <pre>
+        브라우저에 대한 정보를 가지고 있는 객체
+    </pre>
+    <div class="note", id="navi-note"></div>
+    <script>
+        $("#navi-note", navigator.href);
+    </script>
 </body>
 </html>
