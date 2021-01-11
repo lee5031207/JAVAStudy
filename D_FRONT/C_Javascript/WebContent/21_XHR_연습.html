@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>21_XHR_연습</title>
+<style type="text/css">
+    .wrap>div{
+       display:flex;
+       justify-content:space-between;
+       height:10vw;
+       width:80vw;
+       text-align:center;
+       font-size:1vw;
+    }
+    
+    .wrap>div>div{
+       width:20%;
+       height:90%;
+       border:1px solid black;
+       background-repeat: no-repeat;
+       background-position: center;
+       background-size: contain;
+    }
+    
+    .wrap>div:first-child{
+       height:20%;
+    }
+    
+    img{
+       width:30%;
+       height:90%;
+    }
+ </style>
+ <script>
+     function $(selector,text){
+            if(text){
+                document.querySelector(selector).innerHTML += `${text}<br>`;
+            }   
+            return document.querySelector(selector);
+        }
+ </script>
+</head>
+<body>
+    <!-- Ajax : Asynchronous JavaScript ans XML
+    비동기 통신을 위해 제공된다. 또는 fetchAPI를 통해 비동기 통신을 할 수 도 있다 -->
+
+    <input type="text" id="keyword">
+    <button id="btn_search">검색</button>
+    <hr>
+    <div class="wrap">
+        <div class="wrap_book">
+            <div class="title">제목</div>
+            <div class="price">가격</div>
+            <div class="title">출판사</div>
+            <div class="title">이미지</div>
+        </div>
+        <br>
+    </div>
+    <script>
+        let count = 0;
+        $("#btn_search").addEventListener("click",(e)=>{
+            count++;
+            if(count>1){
+                console.log("재 검색 keyword비교O")
+            }else{
+                console.log("첫 검색 keyword비교X")
+            }
+        })
+
+        let Search = new Promise((resolve,reject)=>{
+            
+        })
+
+        let KeywordCheck = new Promise((resolve,reject)=>{
+            let keyword = $("#keyword").value;
+            
+        })
+ 
+
+
+
+    </script>
+</body>
+</html>

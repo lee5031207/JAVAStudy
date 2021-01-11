@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>24_reg</title>
+<style type="text/css">
+    .note{
+		width:50%;
+		min-height:100px;
+		background-color: lightgreen;
+		border:1px solid;
+	}
+</style>
+<script type="text/javascript">
+    function $(selector,text){
+        if(text){
+            document.querySelector(selector).innerHTML += `${text}<br>`;
+        }
+        return document.querySelector(selector);
+    }
+</script>
+</head>
+<body>
+   <h1>정규표현식</h1> 
+   <pre>
+       특정한 패턴을 가진 문자열을 나타내기 위해 사용되는 형식언어
+       주로 웹에서 validator 용도로 많이 사용된다.
+   </pre>
+   <h2>정규표현식 객체 생성</h2>
+   <div id="regExp-note" class="note"></div>
+   <script>
+
+        $("#regExp-note").addEventListener("click",(e)=>{
+            //정규 표현식 객체 생성
+            let regExp = /script/; //리터럴로 생성
+            let regExp2 = new RegExp('script'); //생성자로 생성
+            let str = "javascript jquery ajax";
+            // test() : 객체를 생성할 때 넘겨준 패턴이 존재하면 true, 존재하지 않으면 false
+            $("#regExp-note",`test() : ${regExp.test(str)}`);
+
+            // exec() : 패턴이 존재하면 패턴을 넘겨줌
+            $("#regExp-note",`exec() : ${regExp.exec(str)}`);
+            
+
+
+            // 정규표현식 객체를 매개변수로 받아 사용하는 String 메서드
+            // match() : 일치하는 패턴이 있다면 패턴 반환
+            $("#regExp-note",`match() : ${str.match(regExp)}`);
+
+            // replace() : 일치하는 패턴이 있다면 두번 째 전달인자로 변환
+            $("#regExp-note",`replace() : ${str.replace(regExp, "Script")}`);
+
+            // search() : 패턴이 시작되는 인덱스를 반환
+            $("#regExp-note",`search() : ${str.search(regExp)}`);
+
+            // split() : 패턴의 일치하는 부분을 기준으로 문자열 분리 배열로 반환
+            $("#regExp-note",`exec() :  ${str.split(regExp)}`);
+        })
+   </script>
+
+   <h3>앵커문자</h3>
+   <p>문자열의 앞과 뒤를 구분해주는 정규 표현식 기호</p>
+   <pre>
+       ^ : 문자열의 시작을 나타낸다
+       $ : 문자열의 끝을 나타낸다
+
+   </pre>
+   <div id="regExp-note1" class="note"></div>
+   <script>
+       $("#regExp-note1").addEventListener("click",(e)=>{
+
+            let str = "javascript jquery ajax";
+            let str2 = "ajax jquery javascript ";
+
+           //문자열의 시작이 j인패턴
+           e.target.innerHTML += `${/^j/.test(str)}<br>`;
+           
+           //문자열의 끝이 x인패턴
+           e.target.innerHTML += `${/x$/.test(str)}<br>`;
+
+       })
+   </script>
+
+   <h3>플래그 문자</h3>
+   <pre>
+       g : 하나 이상의 패턴을 검색
+       i : 대소문자를 구분하지 않고 패턴을 검색
+       m : 각 행에 대한 패턴을 검색 
+   </pre>
+   <div id="regExp-note2" class="note"></div>
+   <script>
+        $("#regExp-note2").addEventListener("click",(e)=>{
+            let str = "JavaScript \njquery \nAjax";
+
+            e.target.innerHTML += str + "<br>";
+            e.target.innerHTML += str.replace(/^j/gim,'($&)'); + "<br>";
+        })
+   </script>
+
+
+   <h3>문자셋</h3>
+   <pre>
+       []로 표현. ex) [abcd]
+       문자셋 안의 문자들을 or 개념으로 접근할 수 있다.
+       정규표현식의 특수 문자(이스케이프)들도 문자셋 안에서는 그냥 문자로 취급한다.
+       ^는 문자셋 안에서 not의 이미를 지니게 된다.
+
+       1. 0~9 까지의 숫자 : [0-9]
+       2. 소문자 알파벳 : [a-z]
+       3. 대문자 알파벳 : [A-Z]
+       4. 알파벳 모두 : [a-zA-Z]
+       5. 한글 모두 : [가-힣]
+
+
+   </pre>
+   <div id="regExp-note3" class="note"></div>
+   <script>
+    $("#regExp-note3").addEventListener("click",(e)=>{
+        let str = "JavaScript \njquery \nAjax \nHTML \nalpha";
+        let str2 = '1234JavaScript*jquery/Ajax34';
+        let str3 = '1234567890';
+        let str4 = 'JavaScript*jquery/Ajax';
+
+        /* ^[aj] : 시작한다 a또는 j로*/
+        //e.target.innerHTML  += str.replace(/^[aj]/gim, '($&)') + '<br>';
+        //e.target.innerHTML  += str.replace(/^[^aj]/gim, '($&)') + '<br>';
+
+
+        e.target.innerHTML  += str2.replace(/[!@#$%^&*/0-9]/g, '') + '<br>';
+        e.target.innerHTML  += str3.replace(/[!@#$%^&*/0-9]/g, '') + '<br>';
+    })
+    </script>
+
+
+    <h2>정규 표현식을 사용한 주민번호 양식 확인</h2>
+    <pre>
+        숫자 6자리 - 숫자 7자리
+        주민번호 뒷부분 첫자리에는 1~4사이의 숫자
+    </pre>
+</body>
+</html>

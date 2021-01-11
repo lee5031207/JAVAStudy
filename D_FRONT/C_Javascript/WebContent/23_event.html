@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>23_event</title>
+<style type="text/css">
+    .bubble{
+        border : 1px solid;
+        padding : 20px;
+    }
+    .capture{
+        border : 1px solid;
+        padding : 20px;
+    }
+    .div1{
+        background-color: red;
+    }
+    .div2{
+        background-color: orange;
+    }
+    .div3{
+        background-color: yellow;
+    }
+    .div4{
+        background-color: green;
+    }
+ </style>
+ <script>
+     function $(selector,text){
+            if(text){
+                document.querySelector(selector).innerHTML += `${text}<br>`;
+            }   
+            return document.querySelector(selector);
+    }
+ </script>
+</head>
+<body>
+    <!--
+    이벤트 전파
+
+    event capture : 이벤트가 발생하면 브라우저는 이벤트가 발생한 요소를 찾기 위해 
+                    루트요소부터 이벤트를 아래로 전파한다 .
+
+    target 단계 : 이벤트가 발생한 요소에 까지 이벤트가 전파되면 target의 이벤트핸들러를 동작 시킨다.
+
+    event bubbling : target의 이벤트 핸들러가 동작하고 나면 다시 루트 요소 이벤트를 전파한다.
+
+    target 단계 이후부터 이벤트 핸들러를 동작 시키게 된다
+    -->
+
+    <h1>이벤트 전파</h1>
+    <h2>이벤트 버블링</h2>
+    <p>Target의 이벤트 핸들러를 동작시킨 이후 부모요소로 이벤트가 전파되며 올라간다</p>
+    <div class="div1 bubble">
+        <div class="div2 bubble">
+            <div class="div3 bubble">
+                <div class="div4 bubble">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const colorArr = ['lightblue','blue','lightyellow','yellow'];
+        document.querySelectorAll(".bubble").forEach((e,i)=>{
+            e.addEventListener("click",(event)=>{
+                setTimeout(()=>{
+                    //이벤트가 발생한 요소의 class를 확인할 수 있다.
+                    window.alert(e.className);
+                    e.style.backgroundColor = colorArr[i];
+                }, 300);
+            })
+        })
+    </script>
+
+    <h2>이벤트 캡쳐링</h2>
+    <p>Target에게 이벤트를 전파라기 위해 루트요소에서 아래로 이벤트를 전파할 때 이벤트 핸들러를 동작 시킨다</p>
+    <div class="div1 capture">
+        <div class="div2 capture">
+            <div class="div3 capture">
+                <div class="div4 capture">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll(".capture").forEach((e,i)=>{
+            e.addEventListener("click",(event)=>{
+                setTimeout(()=>{
+                    //이벤트가 발생한 요소의 class를 확인할 수 있다.
+                    window.alert(e.className);
+                    e.style.backgroundColor = colorArr[i];
+                }, 300);
+            },true) //capturing옵션을 true로 잡아준것
+        })
+    </script>
+
+    <!-- 문제가되는 상황이 뭐가 있을까 ? -->
+
+    <h2>이벤트 캡쳐링</h2>
+    <p>Target에게 이벤트를 전파라기 위해 루트요소에서 아래로 이벤트를 전파할 때 이벤트 핸들러를 동작 시킨다</p>
+    <div class="div1 capture">
+        <div class="div2 capture">
+            <div class="div3 capture">
+                <div class="div4 capture">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll(".capture").forEach((e,i)=>{
+            e.addEventListener("click",(event)=>{
+                setTimeout(()=>{
+                    //이벤트가 발생한 요소의 class를 확인할 수 있다.
+                    window.alert(e.className);
+                    e.style.backgroundColor = colorArr[i];
+                }, 1000);
+                event.stopPropagation();
+            })
+        })
+    </script>
+
+</body>
+</html>

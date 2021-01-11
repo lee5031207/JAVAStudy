@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>21_XHR</title>
+<style type="text/css">
+    .wrap>div{
+       display:flex;
+       justify-content:space-between;
+       height:10vw;
+       width:80vw;
+       text-align:center;
+       font-size:1vw;
+    }
+    
+    .wrap>div>div{
+       width:20%;
+       height:90%;
+       border:1px solid black;
+       background-repeat: no-repeat;
+       background-position: center;
+       background-size: contain;
+    }
+    
+    .wrap>div:first-child{
+       height:20%;
+    }
+    
+    img{
+       width:30%;
+       height:90%;
+    }
+ </style>
+ <script>
+     function $(selector,text){
+            if(text){
+                document.querySelector(selector).innerHTML += `${text}<br>`;
+            }   
+            return document.querySelector(selector);
+        }
+ </script>
+</head>
+<body>
+    <!-- Ajax : Asynchronous JavaScript ans XML
+    비동기 통신을 위해 제공된다. 또는 fetchAPI를 통해 비동기 통신을 할 수 도 있다 -->
+
+    <input type="text" id="keyword">
+    <button id="btn_search">검색</button>
+    <hr>
+    <div class="wrap">
+        <div class="wrap_book">
+            <div class="title">제목</div>
+            <div class="price">가격</div>
+            <div class="title">출판사</div>
+            <div class="title">이미지</div>
+        </div>
+        <br>
+    </div>
+    <script>
+        let firstclick = true;
+        $("#btn_search").addEventListener("click",()=>{
+
+            //키워드의 값이 바뀌었다면 div를 비워주면 된다 저거만 빼고 그런데 어떡하지
+            //키워드 값 비교를 어찌합니까?
+            
+            let keyword = $("#keyword").value;    
+            let firstprint = false;
+            let walert = false;
+
+            let xhr = new XMLHttpRequest(); //Ajax를 사용하기 위해 XMLHttpRequest() 객체를 만든다
+
+            let page = 1;
+
+            // HTTP 요청 -> 시작줄 작성 
+            xhr.open('GET','https://dapi.kakao.com/v3/search/book?query='+keyword+'&size=10&page='+page);
+            
+            // GET방식은 Body가 없으므로 파라미터는 URL 뒤에 쿼리스트링 작성 
+            // ex) https://dapi.kakao.com/v3/search/book?query=검색값&size=1
+
+            // 헤더 작성(API문서에서 요구하는 요청 헤더를 넣어준다)
+            xhr.setRequestHeader('Authorization','KakaoAK ec9acb621278ce4a1dfd7f08ebc6dc69');
+
+            // send 할때 GET방식이라 Body가 없다.  POST 방식은 Body에 넣어줄 데이터를 매개변수로 넘겨준다
+            xhr.send();
+
+            let copy = $(".wrap_book").outerHTML;
+
+            // 비동기 통신이 성공적으로 끝나면 콜백함수 호츌
+            xhr.addEventListener("load",()=>{
+                let obj = JSON.parse(xhr.response);
+                let copy = $(".wrap_book").outerHTML;
+                if(obj.meta.is_end == false){
+                    obj.documents.forEach((e) => { 
+                        $('.wrap').innerHTML += copy;
+                        let bookInfo = $('.wrap').lastElementChild;
+                        bookInfo.children[0].innerHTML = e.title;
+                        bookInfo.children[1].innerHTML = e.price;
+                        bookInfo.children[2].innerHTML = e.publisher;
+                        bookInfo.children[3].innerHTM = "";
+                        bookInfo.children[3].style.backgroundImage = `url(${e.thumbnail}`;
+                    });
+                    firstprint = true; //처음 출력한번 했다
+                }else if(obj.meta.is_end == true){ //이제 더이상 데이터가 없다는 뜻
+                    if(walert == false){ //alert한번도 안띄었으면
+                        window.alert("더이상 검색 결과가 없습니다.");  
+                        walert = true;  // alert한번띄어줌
+                    }
+                    if(firstprint == false){
+                        obj.documents.forEach((e) => { 
+                            $('.wrap').innerHTML += copy;
+                            let bookInfo = $('.wrap').lastElementChild;
+                            bookInfo.children[0].innerHTML = e.title;
+                            bookInfo.children[1].innerHTML = e.price;
+                            bookInfo.children[2].innerHTML = e.publisher;
+                            bookInfo.children[3].innerHTML = "";
+                            bookInfo.children[3].style.backgroundImage = `url(${e.thumbnail}`;
+                        });
+                        firstprint = true;
+                    }
+                }
+                
+            })
+
+            document.addEventListener("wheel",()=>{
+                if(scrollY > document.querySelector("body").clientHeight - screen.availHeight){
+                    //console.dir(`scrollY : ${scrollY} / clientHeight : ${document.querySelector("body").clientHeight} / screen.availHeight : ${screen.availHeight}`);
+                    page++;
+                    xhr.open('GET','https://dapi.kakao.com/v3/search/book?query='+keyword+'&page='+page+'&size=10');
+                    xhr.setRequestHeader('Authorization','KakaoAK ec9acb621278ce4a1dfd7f08ebc6dc69');
+                    xhr.send();
+                }
+            })
+        })
+
+
+    </script>
+</body>
+</html>

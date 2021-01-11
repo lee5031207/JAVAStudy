@@ -199,32 +199,36 @@ function $(selector,text){
 			const colorArr = ['green','pink','blue','yellow'];
 			
 			function asyncChangeColor(prevIdx){
+				
 				let idx = Math.floor(Math.random()*4);
+				console.log(`asyncChangeColor함수 실행 : ${prevIdx} / ${idx}`);
 				return new Promise((resolve,reject)=>{
 					setTimeout(()=>{
 						if(prevIdx == idx){
-							console.log('reject');
+							//console.log('reject');
 							reject('같은 색이 선택되었습니다.');
 							//return; //return을 사용해서 함수를 끝내야 아래쪽 코드가 실행되지 않는다.
 						}
 						
-						console.log('resolve');
+						//console.log('resolve');
 						e.target.style.backgroundColor = colorArr[idx];	
 						resolve(idx);
 						//return;
-					},1000)				
+					},0)				
 				})
 			}
 			
 			asyncChangeColor()
 			.then( prevIdx => asyncChangeColor(prevIdx))
-			.then( prevIdx => asyncChangeColor(prevIdx))
-			.then( prevIdx => asyncChangeColor(prevIdx))
-			.then( prevIdx => asyncChangeColor(prevIdx))
-			.catch(error =>{console.log('에러가 발생')})
-			.finally(()=>{
-				e.target.style.backgroundColor = 'red';	
-			})
+			// .then( prevIdx => asyncChangeColor(prevIdx))
+			// .then( prevIdx => asyncChangeColor(prevIdx))
+			// .then( prevIdx => asyncChangeColor(prevIdx))
+			// .catch(error =>{console.log('에러가 발생')})
+			// .finally(()=>{
+			// 	e.target.style.backgroundColor = 'red';	
+			// })
+			
+			//.then( prevIdx => asyncChangeColor(prevIdx))
 		})
 	</script>
 	
