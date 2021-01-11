@@ -137,5 +137,98 @@
         숫자 6자리 - 숫자 7자리
         주민번호 뒷부분 첫자리에는 1~4사이의 숫자
     </pre>
+    <input type="text" placeholder="XXXXXX-XXXXXXX" id="code" style="width:120px;">
+    <button id="btn_code">조회</button>
+    <script>
+        /* 사용자가 입력한 양식이 주민번호 양식이라면 성공 alert 아니면 실패 alert*/
+        $("#btn_code").addEventListener("click",()=>{
+            let code = $("#code").value;
+
+            let regExp = /^[0-9][0-9][0-9][0-9][0-9][0-9]-[1-4][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+            if(regExp.test(code)){
+                alert("성공!");
+            }else{
+                alert("실패!");
+            }
+        })
+    </script>
+
+
+    <h2>특수문자</h2>
+    <pre>
+        . : 개행문자를 제외한 모든 단일 문자 => 숫자, 특수문자, 단어 어떤 것이든 가능
+        \d: 숫자 == [0-9]
+        \D: 숫자가 아닌 문자 == [^0-9]
+        \w: 밑줄문자(_)를 포함한 영수문자(단어문자) == [A-Za-z0-9] 
+        \W: 단어문자가 아닌 문자 == [^A-Za-z0-9]
+    </pre>
+
+    <h2>수량 문자</h2>
+    <pre>
+        + : 앞의 문자가 적어도 1개 이상 반복 .+ : 개행문자를 제외한 모든 단일 문자가 1개 이상
+        * : 앞의 문자가 0개 이상
+        ? : 앞의 문자가 0개 또는 1개
+        {n} : 앞의 문자가 n개
+
+    </pre>
+
+    <input type="text" placeholder="XXXXXX-XXXXXXX" id="code2" style="width:120px;">
+    <button id="btn_code2">조회</button>
+    <script>
+        /* 사용자가 입력한 양식이 주민번호 양식이라면 성공 alert 아니면 실패 alert*/
+        $("#btn_code2").addEventListener("click",()=>{
+            let code = $("#code2").value;
+
+            let regExp = /^\d{6}-[1-4]\d{6}$/;
+            if(regExp.test(code)){
+                alert("성공!");
+            }else{
+                alert("실패!");
+            }
+        })
+    </script>
+    <h2>group</h2>
+    <pre>
+        () : 그룹, 패턴을 괄호로 묶어 그룹화 할 수 있다.
+        ?= : 전위탐색자, 그룹 안에서만 사용되는 메타문자로, 매칭되어야 하는 문자를 필터링 하기 위해 사용
+        ?! : 전위 부정 탐색자, 그룹 안에서만 사용되는 메타문자로, 매칭되어서는 안되는 문자를 필터링
+        |  : 그룹핑 안에서 or 역할을 수행, 매칭될 수 있는 패턴이 두개 이상 허용될 때 사용
+    </pre>
+
+    <input type="text" style="width:400px" id="code3" placeholder="주민번호">
+    <button id="btn_code3"></button>
+    <script>
+        $("#btn_code3").addEventListener("click",()=>{
+            // 연 : 숫자2자리
+            // 월 : 01~12 => 0[1-9]|1[0-2]
+            // 일 : 01~31 => 0[1-9]|1[0-9]|2[0-9]|3[0-1]
+
+            let regExp = /^\d{2}(0[1-9]|1[0-2])/
+        })
+    </script>
+
+    <h2>숫자,영어,특수문자를 조합해야하는 8자리 이상의 패스워드</h2>
+    <input type="text" style="width:200px" id="password" placeholder="비밀번호">
+    <button id="btn_pw">확인</button>
+    <script>
+        $("#btn_pw").addEventListener("click",()=>{
+            /*
+                문자 중에 숫자가 하나라고 있는가
+                문자 중에 영어가 하나라도 있는가
+                문자 중에 특수문자가 하나라도 있는가
+                문자는 8자리 이상의 길이를 가지고 있는가
+
+            */
+           let password = $("#password").value;
+           
+            let regExp = /(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)(?!.*[ㄱ-힣])(?=.{8,})/;
+            if(regExp.test(password)){
+                alert("로그인");
+            }else{
+                alert("로그아웃");
+            }
+            
+        })
+    </script>
 </body>
 </html>

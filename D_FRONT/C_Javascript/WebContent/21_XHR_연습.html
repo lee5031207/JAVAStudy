@@ -41,9 +41,6 @@
  </script>
 </head>
 <body>
-    <!-- Ajax : Asynchronous JavaScript ans XML
-    비동기 통신을 위해 제공된다. 또는 fetchAPI를 통해 비동기 통신을 할 수 도 있다 -->
-
     <input type="text" id="keyword">
     <button id="btn_search">검색</button>
     <hr>
@@ -57,28 +54,75 @@
         <br>
     </div>
     <script>
-        let count = 0;
-        $("#btn_search").addEventListener("click",(e)=>{
-            count++;
-            if(count>1){
-                console.log("재 검색 keyword비교O")
-            }else{
-                console.log("첫 검색 keyword비교X")
+        let keyword;
+        let page;
+        let lastPrint;
+        let alertPrint;
+        $("#btn_search").addEventListener("click",()=>{
+            page = 1; //검색 버튼을 누르면 page는 1로 초기화 
+            lastPrint = false; //검색 버튼을 누르면 lastPrint 는 false로 초기화 
+            alertPrint = false; //검색 버튼을 누르면 alertPrint 는 false로 초기화 
+            keyword = $("#keyword").value;
+            $('.wrap').innerHTML = $('.wrap_book').outerHTML;
+            SearchBook();
+        })
+        
+        document.addEventListener("wheel",()=>{
+            if(scrollY > document.querySelector("body").clientHeight - screen.availHeight){
+                page++
+                SearchBook();
             }
         })
 
-        let Search = new Promise((resolve,reject)=>{
-            
-        })
+        function SearchBook() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','https://dapi.kakao.com/v3/search/book?query='+keyword+'&size=10&page='+page);
+            xhr.setRequestHeader('Authorization','KakaoAK ec9acb621278ce4a1dfd7f08ebc6dc69');
+            xhr.send();
+            xhr.addEventListener("load",()=>{
 
-        let KeywordCheck = new Promise((resolve,reject)=>{
-            let keyword = $("#keyword").value;
-            
-        })
- 
+                let copy = $(".wrap_book").outerHTML;
+                let obj = JSON.parse(xhr.response);
+                
+                if(obj.meta.is_end){ //마지막 페이지
+                    if(alertPrint == false){
+                        alert("더이상 검색 결과가 없습니다");
+                        alertPrint = true;
+                    }
+                    if(lastPrint){
+                        return;
+                    }
+                    obj.documents.forEach((e)=>{
+                        $('.wrap').innerHTML += copy;
+                        let bookInfo = $('.wrap').lastElementChild;
+                        bookInfo.children[0].innerHTML = e.title;
+                        bookInfo.children[1].innerHTML = e.price;
+                        bookInfo.children[2].innerHTML = e.publisher;
+                        bookInfo.children[3].innerHTML = "";
+                        bookInfo.children[3].style.backgroundImage = `url(${e.thumbnail}`;    
+                    })
+                    lastPrint = true;
+                }else{
+                    obj.documents.forEach((e)=>{
+                        $('.wrap').innerHTML += copy;
+                        let bookInfo = $('.wrap').lastElementChild;
+                        bookInfo.children[0].innerHTML = e.title;
+                        bookInfo.children[1].innerHTML = e.price;
+                        bookInfo.children[2].innerHTML = e.publisher;
+                        bookInfo.children[3].innerHTML = "";
+                        bookInfo.children[3].style.backgroundImage = `url(${e.thumbnail}`;    
+                    })
+                }
+            })
+        }
 
+        // 1. 사용자가 검색한 내용의 도서정보를 10건 받아와서 화면에 출력한다.(o)
 
+        // 2. 사용자가 스크롤을 가장 밑까지 내리면 다시 비동기통신을 사용해 카카오로부터 다음 도서 정보를 10건 받아와 화면에 이어서 출력해준다.
 
+        // 3. 만약 더이상 받아올 정보가 없다면 사용자에게 '검색결과가 더 이상 없습니다.' 를 alert로 알려준다.
+
+        // 4. 만약 사용자가 새로운 도서를 검색한다면, 기존 화면의 검색결과를 모두 초기화하고 새로운 검색결과를 화면에 출력한다.
     </script>
 </body>
 </html>
