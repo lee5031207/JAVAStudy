@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover; 
+    background-position: center;
+    color: white;
+    min-height: 100vh;
+}
+
+.clock *{
+    font-size: 2vw;
+    text-align: center;
+}
+input{
+    font-size: 2vw;
+    border: 0 none;
+    border-radius: 1vw;
+    width:40vw;
+    padding : 1vw  1vw;
+    outline: none;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding : 2vw 5vw;
+    background-color:  rgba(0,0,0,0.3);;
+}
+
+.center .inp_name{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 4vw;
+    border-bottom: 3px solid rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+}
+
+.inp_name::placeholder{
+    color : white;
+}
+
+.name{
+    font-size: 5vw;
+    margin-bottom: 30px;
+}
+
+.name-text{
+    font-size: 3vw;
+}
+
+.to-do{
+    margin-top: 10px;
+    font-size: 1.5vw;
+    line-height: 1.5;
+}
+
+.to-do>i{
+    cursor: pointer;
+}
+
+.location{
+    opacity: 0.7;
+    font-style: italic;
+    font-size: 2vw;
+    position : absolute;
+    left : 2vw;
+    bottom : 2vw;
+}
+.location:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.weather{
+    position : absolute;
+    font-style: italic;
+    font-size: 2vw;
+    right: 2vw;
+    top: 2vw;
+}
+
+
+
+
