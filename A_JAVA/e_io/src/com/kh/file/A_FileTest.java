@@ -6,7 +6,7 @@ import java.io.IOException;
 public class A_FileTest {
 	
 	//1. IO
-	// 입출력 : 외부자원(키보드, 파일, DB서버, API서버 등등)f로 부터
+	// 입출력 : 외부자원(키보드, 파일, DB서버, API서버 등등)로 부터
 	//		자바 프로그램으로(메모리로) 데이터를 읽어오거나 반대로 외부자원에 출력하는 것.
 	
 	//2. Stream

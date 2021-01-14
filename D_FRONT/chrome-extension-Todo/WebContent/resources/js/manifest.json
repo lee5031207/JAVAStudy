@@ -1,0 +1,14 @@
+{
+    "name": "ToDoList",
+    "version": "1.0",
+    "description": "2021 Todo List",
+    "manifest_version": 3,
+    "background" : {
+        "scripts" : ["background.js"],
+        "persistent" : false 
+    },
+    "permission":["storage"],
+    "browser_action" : {
+        "default_popup" : "todolist.html"
+    }
+  }
