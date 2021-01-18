@@ -29,7 +29,6 @@ public class JDBCTemplate {
 		if(instance == null) {
 			instance = new JDBCTemplate();
 		}
-		
 		return instance;
 	}
 	
@@ -43,14 +42,12 @@ public class JDBCTemplate {
 		
 		try {
 			conn = DriverManager.getConnection(url,user,password);
-			
 			//Transaction 관리를 개발자가 하기 위해 AutoCommit 설정 끄기
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return conn;
 	}
 	

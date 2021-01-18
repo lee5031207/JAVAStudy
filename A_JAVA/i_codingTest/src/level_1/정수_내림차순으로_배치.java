@@ -7,7 +7,7 @@ public class 정수_내림차순으로_배치 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(solution(97135));
+		System.out.println(solution(118372));
 	}
 	
 	//Collection 사용한 방법 
@@ -36,7 +36,6 @@ public class 정수_내림차순으로_배치 {
         while(flag) {
         	
         }
-        
         
         return answer;
     }

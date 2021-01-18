@@ -24,7 +24,6 @@ public class MemberController {
 	
 	public Member login(String userId, String password) {
 		Member member = memberService.memberAuthenticate(userId, password);
-		
 		return member;
 	}
 	

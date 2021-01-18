@@ -60,7 +60,6 @@ public class MemberService {
 		//Service의 메서드에서 생성
 		Connection conn = jdt.getConnection();
 		int res = 0;
-		
 		try {
 			//DAO 메서드로 생성한 Connection 주입
 			res = memberDao.insertMember(conn, member);
