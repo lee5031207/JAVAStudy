@@ -49,6 +49,11 @@
 	 <!-- scope없이 속성명만 작성하면 가까운 스코프부터 해당 속성명을 가진 값을 탐색 -->
 	 <span>평균 : ${avg}</span>
 	 
+	<h2>EL에서 pageContext 객체 꺼내쓰기</h2>
+	<span>pageContext : ${pageContext}</span>
+	
+
+
 	 <h2>EL에서 객체 데이터 꺼내 쓰기</h2>
 	 <!-- 1. vo에서 데이터 꺼내쓰기 -->
 	 <h3>vo에서 꺼내쓰기</h3>
@@ -71,7 +76,7 @@
 	 <span>이름 : ${requestScope.studentMap.name}</span>
 	 <span>국어 : ${studentMap.kor}</span>
 	 <span>영어 : ${requestScope.studentMap.eng}</span>
-	 <span>수학 : ${studentMap.math}</span>
+	 <span>수학 : ${studetontMap.math}</span>
 	 <span>코딩 : ${requestScope.studentMap.coding}</span>
 	 <span>합계 : ${studentMap.sum}</span>
 	 <span>평균 : ${requestScope.studentMap.avg}</span>
@@ -96,22 +101,62 @@
 	 <span>${sessionScope.name}님 반갑습니다</span>
 
 
-	 <h3>EL 리터럴 표현식</h3>
-	 <span>문자열 : ${"문자열 테스트"}</span>
-	 <span>문자열 : ${"문자열 테스트"}</span>
-	 <span>정수 : ${20}</span>
-	 <span>실수 : ${20.5}</span>
-	 <span>boolean : ${true}</span>
-	 <!-- null이 담길 경우 공백으로 출력-->
-	 <span>null : ${null}</span>
-
-	 <h3>EL 연산자</h3>
-	 <pre>산술연산자, 논리연산자, 비교연산자, 삼항연산자, empty 연산자</pre>
-	 <h4>산술 연산자(+,-,*,/,%)</h4>
-	 <span>1+1 = ${1+1}</span>
-	 <span>1-1 = ${1-1}</span>
-	 <span>1*3 = ${1*3}</span>
-	 <span>3/1 = ${3/1}</span>
-	 <span>2%3 = ${2 mod 3}</span> <!-- %, mod  -->
+	 <h1>EL 리터럴 표현식</h1>
+	<span>문자열 : ${"문자열 테스트"}</span>
+	<span>문자열 : ${'문자열 테스트'}</span>
+	<span>정수 : ${20}</span>
+	<span>실수 : ${20.5}</span>
+	<span>boolean : ${true}</span>
+	<%-- null이 담길 경우 공백으로 출력 --%>
+	<span>null : ${null}</span>
+	
+	<h1>EL 연산자</h1>
+	<pre>산술연산자, 논리연산자, 비교연산자, 삼항연산자, empty 연산자</pre>
+	<h2>산술연산자 (+ - * / %)</h2>
+	<span> 1 + 1 : ${1 + 1}</span>
+	<span> 1 - 1 : ${1 - 1}</span>
+	<span> 2 * 3 : ${2 * 3}</span>
+	<span> 2 / 3 : ${2 / 3}</span>
+	<span> 2 % 3 : ${2 mod 3}</span>
+	
+	<h2>논리연산자</h2>
+	<span> true && false : ${true && false}</span>
+	<span> true || false : ${true || false}</span>
+	<span> !false : ${!false}</span>
+	<span> true and false : ${true and false}</span>
+	<span> true or false : ${true or false}</span>
+	<span> not false : ${not false}</span>
+	
+	<h2>비교연산자</h2>
+	<pre>
+		크다 : > gt
+		작다 : &lt  lt
+		크거나 같다 : >= ge
+		작거나 같다 : &lt= le
+	</pre>
+	<span> 1 == 2 : ${1 == 2}</span>
+	<span> 1 != 2 : ${1 != 2}</span>
+	<span> 1 > 2 : ${1 gt 2}</span>
+	<span> 1 lt 2 : ${1 < 2}</span>
+	<span> 1 >= 2 : ${1 ge 2}</span>
+	<span> 1 le 2 : ${1 <= 2}</span>
+	
+	
+	<h2>삼항연산자</h2>
+	<span>1>2? "크다" : "작다"  >>>  결과:  ${1>2?"크다":"작다"}</span>
+	
+	<h2>empty 연산자</h2>
+	<pre>
+		값이 null 이면 true
+		문자, 배열, collection의 length가 0이면 true
+		이외에는 false
+	</pre>
+	<span>
+		empty null : ${empty null}
+	</span>
+	<span>
+		empty sessionScope.name : ${empty sessionScope.name}
+	</span>
+	
 </body>
 </html>
