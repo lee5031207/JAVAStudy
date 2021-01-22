@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.kh.toy.common.exception.DataAccessException;
+import com.kh.toy.common.exception.ToAlertException;
 import com.kh.toy.common.template.JDBCTemplate;
 import com.kh.toy.member.model.dao.MemberDao;
 import com.kh.toy.member.model.vo.Member;
@@ -68,7 +69,7 @@ public class MemberService {
 		}catch(DataAccessException e) {
 			//DAO에서 SQLException이 발생할 경우 rollback처리
 			jdt.rollback(conn);
-			System.out.println("SQLException이 발생해 ROLLBACK처리 되었습니다");			
+			throw new ToAlertException(e.error);			
 		}finally {
 			jdt.close(conn);
 		}		
@@ -83,7 +84,7 @@ public class MemberService {
 			jdt.commit(conn);
 		}catch(DataAccessException e) {
 			jdt.rollback(conn);
-			System.out.println("SQLException이 발생해 ROLLBACK처리 되었습니다");			
+			throw new ToAlertException(e.error);			
 		}finally {
 			jdt.close(conn);
 		}		
@@ -98,7 +99,7 @@ public class MemberService {
 			jdt.commit(conn);
 		}catch(DataAccessException e) {
 			jdt.rollback(conn);
-			System.out.println("SQLException이 발생해 ROLLBACK처리 되었습니다");			
+			throw new ToAlertException(e.error);			
 		}finally {
 			jdt.close(conn);
 		}

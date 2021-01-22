@@ -82,12 +82,10 @@ public class MemberDao {
 				member.setRentableDate(rset.getDate("RENTABLE_DATE"));
 				member.setIsLeave(rset.getInt("IS_LEAVE"));
 			}
-			
-			System.out.println("DB로부터 받아온 데이터 확인 : " +member);
+
 		} catch (SQLException e) {
 			// SQLException : DB와 통신중에 발생하는 모든 예외를 담당하는 exception
-			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(), ErrorCode.SM01.errMsg());
+			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
 			jdt.close(rset, pstm);
 		}
@@ -120,8 +118,7 @@ public class MemberDao {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(),ErrorCode.SM01.errMsg());
+			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
 			jdt.close(rset, pstm);
 		}		
@@ -152,8 +149,7 @@ public class MemberDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(),ErrorCode.SM01.errMsg());
+			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
 			jdt.close(rset, pstm);
 		}		
@@ -175,7 +171,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(),ErrorCode.IM01.errMsg());
+			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
 			jdt.close(pstm);
 		}	
@@ -194,7 +190,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(),ErrorCode.UM01.errMsg());
+			throw new DataAccessException(ErrorCode.UM01,e);
 		} finally {
 			jdt.close(pstm);
 		}	
@@ -211,8 +207,7 @@ public class MemberDao {
 			res = pstm.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(),ErrorCode.DM01.errMsg());
+			throw new DataAccessException(ErrorCode.DM01,e);
 		} finally {
 			jdt.close(pstm);
 		}	
@@ -248,7 +243,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(),ErrorCode.SM01.errMsg());
+			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
 			jdt.close(rset, pstm);
 		}
@@ -268,7 +263,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new DataAccessException(e.getMessage(),ErrorCode.UM01.errMsg());
+			throw new DataAccessException(ErrorCode.UM01,e);
 		} finally {
 			jdt.close(pstm);
 		}	

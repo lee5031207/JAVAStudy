@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.toy.common.code.ErrorCode;
+import com.kh.toy.common.exception.ToAlertException;
 import com.kh.toy.member.model.service.MemberService;
 import com.kh.toy.member.model.vo.Member;
 
@@ -24,6 +26,9 @@ public class memberController extends HttpServlet {
 		switch (uriArr[uriArr.length-1]) {
 		case "join":
 			join(request, response);
+			break;
+		case "idcheck" :
+			confirmId(request,response);
 			break;
 		case "joinimpl":
 			joinImpl(request, response);
@@ -66,16 +71,13 @@ public class memberController extends HttpServlet {
 		member.setEmail(email);
 		
 		
-		int res = memberService.insertMember(member);
-		if(res > 0) {
-			//성공
-			request.getRequestDispatcher("/WEB-INF/view/member/join_complete.jsp")
-			.forward(request, response);
-		}else {
-			request.getRequestDispatcher("/WEB-INF/view/member/join_fail.jsp")
-			.forward(request, response);
-			//실패
-		}		
+		memberService.insertMember(member);
+		
+		request.setAttribute("msg", "회원 가입을 축하드립니다");
+		request.setAttribute("url", "/member/login");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
+		
 	}
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -84,18 +86,26 @@ public class memberController extends HttpServlet {
 	}
 	
 	private void loginImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String userId = request.getParameter("id");
 		String password = request.getParameter("pw");
+		String jsonData = request.getParameter("data"); 
 		
-		Member member = memberService.memberAuthenticate(userId, password);
-		if(member != null) {
-			//session에 회원 정보를 저장
-			request.getSession().setAttribute("user", member);
-			response.sendRedirect("/index");
-		}else {
-			request.getRequestDispatcher("/WEB-INF/view/member/login_fail.jsp")
-			.forward(request, response);
-		}
+		System.out.println(userId);
+		System.out.println(password);
+		System.out.println("json형식으로 넘어온 데이터 : " + jsonData);
+		
+		
+//		Member member = memberService.memberAuthenticate(userId, password);
+//		
+//		if(member != null) {
+//			//request.getSession().setAttribute("user", member);
+//			response.getWriter().print("success");
+//		}else {
+//			//throw new ToAlertException(ErrorCode.SM02);
+//			response.getWriter().print("fail");
+//		}
+		
 	}
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -106,5 +116,20 @@ public class memberController extends HttpServlet {
 	private void mypage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/view/member/mypage.jsp")
 		.forward(request, response);
+	}
+	
+	private void confirmId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String userId = request.getParameter("userId");
+		Member member = memberService.selectMemberById(userId);
+		
+		if(member != null) {
+			//아이디가 있다 -> 응답 바디에 fail작성
+			response.getWriter().print("fail");
+		}else if(member == null){
+			//아이디가 없다 -> 응답 바디에 success작성
+			response.getWriter().print("success");
+		}
+		
 	}
 }
