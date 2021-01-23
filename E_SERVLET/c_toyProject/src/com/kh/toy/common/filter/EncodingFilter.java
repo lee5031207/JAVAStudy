@@ -37,7 +37,7 @@ public class EncodingFilter implements Filter {
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpServletResponse res = (HttpServletResponse) response;
-		res.setHeader("content-type", "text/html; charset=UTF-8");
+		// res.setHeader("content-type", "text/html; charset=UTF-8");
 		
 		// pass the request along the filter chain
 		// 다음 filter chain에게 request, response 객체를 전달

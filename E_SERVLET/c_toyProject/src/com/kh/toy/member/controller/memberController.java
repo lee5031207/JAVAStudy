@@ -1,14 +1,19 @@
 package com.kh.toy.member.controller;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.toy.common.code.Code;
 import com.kh.toy.common.code.ErrorCode;
 import com.kh.toy.common.exception.ToAlertException;
+import com.kh.toy.common.mail.MailSender;
 import com.kh.toy.member.model.service.MemberService;
 import com.kh.toy.member.model.vo.Member;
 
@@ -29,6 +34,9 @@ public class memberController extends HttpServlet {
 			break;
 		case "idcheck" :
 			confirmId(request,response);
+			break;
+		case "mailauth" :
+			authenticateEmail(request,response);
 			break;
 		case "joinimpl":
 			joinImpl(request, response);
@@ -54,67 +62,9 @@ public class memberController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
 	private void join(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/view/member/join.jsp")
-		.forward(request, response);
-	}
-	private void joinImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("id");
-		String password = request.getParameter("pw");
-		String tell = request.getParameter("tell");
-		String email = request.getParameter("email");
-		
-		Member member = new Member();
-		member.setUserId(userId);
-		member.setPassword(password);
-		member.setTell(tell);
-		member.setEmail(email);
-		
-		
-		memberService.insertMember(member);
-		
-		request.setAttribute("msg", "회원 가입을 축하드립니다");
-		request.setAttribute("url", "/member/login");
-		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
-		.forward(request, response);
-		
-	}
-	
-	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/member/login.jsp")
-		.forward(request, response);
-	}
-	
-	private void loginImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String userId = request.getParameter("id");
-		String password = request.getParameter("pw");
-		String jsonData = request.getParameter("data"); 
-		
-		System.out.println(userId);
-		System.out.println(password);
-		System.out.println("json형식으로 넘어온 데이터 : " + jsonData);
-		
-		
-//		Member member = memberService.memberAuthenticate(userId, password);
-//		
-//		if(member != null) {
-//			//request.getSession().setAttribute("user", member);
-//			response.getWriter().print("success");
-//		}else {
-//			//throw new ToAlertException(ErrorCode.SM02);
-//			response.getWriter().print("fail");
-//		}
-		
-	}
-	
-	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute("user");
-		response.sendRedirect("/index");
-	}
-	
-	private void mypage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/member/mypage.jsp")
 		.forward(request, response);
 	}
 	
@@ -130,6 +80,83 @@ public class memberController extends HttpServlet {
 			//아이디가 없다 -> 응답 바디에 success작성
 			response.getWriter().print("success");
 		}
+	}
+	
+	private void authenticateEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("id");
+		String password = request.getParameter("pw");
+		String tell = request.getParameter("tell");
+		String email = request.getParameter("email");
+		
+		Member member = new Member();
+		member.setUserId(userId);
+		member.setPassword(password);
+		member.setTell(tell);
+		member.setEmail(email);
+		
+		memberService.authenticateEmail(member);
+		
+		//사용자가 이메일을 확인할 동안 Session에 저장해주어야 한다, 사용자가 입력한 값을
+		request.getSession().setAttribute("persistUser", member);
+		
+		request.setAttribute("msg", "회원가입 완료를 위한 이메일이 발송되었습니다");
+		request.setAttribute("url", "/index");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
 		
 	}
+	
+	private void joinImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Member member = (Member) request.getSession().getAttribute("persistUser");
+		memberService.insertMember(member);
+		
+		//Session에서 삭제
+		request.getSession().removeAttribute("persistUser");
+		
+		request.setAttribute("msg", "회원 가입을 축하드립니다");
+		request.setAttribute("url", "/member/login");
+		request.getRequestDispatcher("/WEB-INF/view/common/result.jsp")
+		.forward(request, response);
+		
+	}
+	
+	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/view/member/login.jsp")
+		.forward(request, response);
+	}
+	
+	private void loginImpl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String jsonData = request.getParameter("data"); 
+		
+		Gson gson = new Gson();
+		//Map형식으로 받음 
+		Map<String,Object> jsonMap = gson.fromJson(jsonData, Map.class);
+		String userId = (String)jsonMap.get("id");
+		String password = (String)jsonMap.get("pw");
+		
+		Member member = memberService.memberAuthenticate(userId, password);
+		
+		if(member != null) {
+			request.getSession().setAttribute("user", member);
+			response.getWriter().print("success");
+		}else {
+			response.getWriter().print("fail");
+			//throw new ToAlertException(ErrorCode.SM02);
+		}
+		
+	}
+	
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().removeAttribute("user");
+		response.sendRedirect("/index");
+	}
+	
+	private void mypage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/view/member/mypage.jsp")
+		.forward(request, response);
+	}
+	
+
 }

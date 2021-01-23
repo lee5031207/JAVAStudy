@@ -12,7 +12,7 @@
 </head>
 <body>
  <h1>회원 가입 양식</h1>
-    <form action="${context}/member/joinimpl" method="post" id="frm_join">
+    <form action="${context}/member/mailauth" method="post" id="frm_join">
      <table>
         <tr>
            <td>ID : </td>
@@ -97,17 +97,6 @@
    });
    
    </script>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    
 </body>
 </html>

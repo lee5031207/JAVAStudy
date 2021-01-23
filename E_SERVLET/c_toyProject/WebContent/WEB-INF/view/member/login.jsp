@@ -33,7 +33,6 @@
 		params.id = id.value;
 		params.pw = pw.value;
 
-
 		//post방식으로 진행
 		//헤더 설정
 		let headerObj = new Headers();
