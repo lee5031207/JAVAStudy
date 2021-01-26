@@ -25,4 +25,11 @@
     <!--
     <Manager pathname="" />
     -->
+    <Resources>
+    	<PreResources
+    		className = "org.apache.catalina.webresources.DirResourceSet"
+    		webAppMount = "/upload"
+    		base = "C:\\Users\\20151\\git\\JAVAStudy\\E_SERVLET\\resources\\upload"
+    	/>
+    </Resources>
 </Context>

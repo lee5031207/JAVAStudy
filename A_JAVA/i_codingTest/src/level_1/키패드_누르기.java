@@ -1,20 +1,17 @@
 package level_1;
 
-import java.util.ArrayList;
-
 public class 키패드_누르기 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int[] numbers = {1,3,4,5,8,2,1,4,5,9,5};
 		int[] numbers2 = {7,0,8,2,8,3,1,5,7,6,2};
 		int[] numbers3 = {1,2,3,4,5,6,7,8,9,0};
-		String hand = "left";
-		System.out.println(solution(numbers2, hand));
-		System.out.println("LRLLRRLLLRR");
-		
+		String hand = "right";
+		System.out.println(solution(numbers, hand));
+		System.out.println("LRLLLRLLRRL");
 	}
-    public static String solution(int[] numbers, String hand) {
+	
+	public static String solution(int[] numbers, String hand) {
         String answer = "";
         
         // char[4][3] 형태의 keyPad 배열 선언 
@@ -26,12 +23,18 @@ public class 키패드_누르기 {
         		num++;
         	}
         }
-        keyPad[3][0] = '*'; 
+        keyPad[3][0] = 30; 
         keyPad[3][1] = 0;
-        keyPad[3][2] = '#';
+        keyPad[3][2] = 32;
+        // 1 2 3
+        // 4 5 6
+        // 7 8 9
+       // 30 0 32
+        
+
         
         // 왼손, 오른손 시작 위치 초기화
-        int left = 0, right = 0;
+        int left = 30, right = 32;
      
         int[] leftLoc = new int[2];
         int[] rightLoc = new int[2];
@@ -39,8 +42,8 @@ public class 키패드_누르기 {
         
         //숫자 누르기 시작
         for(int i=0; i<numbers.length; i++) {
-    		System.out.println("========number["+i+"]========");
-    		System.out.println("left : "+left+" / right : "+right+" / 눌러야 하는 숫자 : "+numbers[i]);
+    		//System.out.println("========number["+i+"]========");
+    		//System.out.println("left : "+left+" / right : "+right+" / 눌러야 하는 숫자 : "+numbers[i]);
         	if(numbers[i] == 1 || numbers[i] == 4 || numbers[i] == 7) {
         		//숫자가 1,4,7 이면 answer에 L넣고, 왼손 위치 변경
         		answer += 'L';
@@ -74,9 +77,10 @@ public class 키패드_누르기 {
         				}
         			}
         		}
-        		System.out.println("leftLoc : ["+leftLoc[0]+","+leftLoc[1]+"] / rightLoc : ["+rightLoc[0]+","+rightLoc[1]+"] / numLoc : ["+numLoc[0]+","+numLoc[1]+"]");
-        		System.out.println("");
+        		//System.out.println("leftLoc : ["+leftLoc[0]+","+leftLoc[1]+"] / rightLoc : ["+rightLoc[0]+","+rightLoc[1]+"] / numLoc : ["+numLoc[0]+","+numLoc[1]+"]");
+        		//System.out.println("");
         		//이제 왼손 위치 , 오른손 위치, 눌러여할 숫자 위치를 다구함
+        		//Math.abs(leftLoc[0]-numLoc[0])+Math.abs(leftLoc[1]-numLoc[1])
         		if(distance(leftLoc, numLoc) < distance(rightLoc, numLoc)) {
         			//오른손이 더 멀다면 왼손
         			left = numbers[i];
@@ -86,9 +90,11 @@ public class 키패드_누르기 {
         			right = numbers[i];
         			answer += 'R';
         		}else if(distance(leftLoc, numLoc) == distance(rightLoc, numLoc)) {
-        			if(hand == "left") {
+        			if(hand.equals("left")) {
+        				left = numbers[i];
         				answer += 'L';
-        			}else if(hand == "right") {
+        			}else if(hand.equals("right")) {
+        				right = numbers[i];
         				answer += 'R';
         			}
         		}
@@ -101,5 +107,4 @@ public class 키패드_누르기 {
     public static int distance(int[] handLoc, int[] numLoc) {
     	return Math.abs(handLoc[0]-numLoc[0])+Math.abs(handLoc[1]-numLoc[1]);
     }
-
 }

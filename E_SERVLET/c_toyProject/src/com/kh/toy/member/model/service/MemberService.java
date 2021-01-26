@@ -3,7 +3,9 @@ package com.kh.toy.member.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.kh.toy.common.code.Code;
@@ -11,6 +13,7 @@ import com.kh.toy.common.exception.DataAccessException;
 import com.kh.toy.common.exception.ToAlertException;
 import com.kh.toy.common.mail.MailSender;
 import com.kh.toy.common.template.JDBCTemplate;
+import com.kh.toy.common.util.http.HttpUtil;
 import com.kh.toy.member.model.dao.MemberDao;
 import com.kh.toy.member.model.vo.Member;
 
@@ -61,14 +64,25 @@ public class MemberService {
 	}
 	
 	public void authenticateEmail(Member member) {
-	
-		String subject = "환영합니다!!"+ member.getUserId() + "님" ;
-		String htmlText = "<h1>Hi</h1>";
-        htmlText += "<h2>ToyProject에 오신것을 환영합니다</h2>";
-        htmlText += "<h2>아래의 링크를 눌러 회원가입을 마무리 하세요</h2>";
-        UUID uid = UUID.randomUUID();
-        htmlText += "<a href='"+Code.DOMAIN+"/member/joinimpl'>확인</a>";
-        
+		
+		//POST 방식으로 통신해보기
+		String subject = "환영합니다!!" ;
+		String htmlText = "";
+		
+		HttpUtil http = new HttpUtil();
+		String url = Code.DOMAIN+"/mail";
+		
+		//header 저장
+		Map<String, String> headers = new HashMap<>();
+		headers.put("content-type", "application/x-www-form-urlencoded; charset=utf-8");
+		
+		//parameter 저장
+		Map<String, String> params = new HashMap<>();
+		params.put("mailTemplate", "temp_join");
+		params.put("userId", member.getUserId());
+		
+		htmlText = http.post(url, headers, http.urlEncodedForm(params));
+		
 		new MailSender().sendEmail(member.getEmail(), subject, htmlText);
 		
 	}

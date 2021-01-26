@@ -19,7 +19,10 @@ public class MailHandler extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/common/mail-template/temp_join.jsp")
+		
+		String template = request.getParameter("mailTemplate");
+		
+		request.getRequestDispatcher("/WEB-INF/view/mail-template/"+template+".jsp")
 		.forward(request, response);
 	}
 
