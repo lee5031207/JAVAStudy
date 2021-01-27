@@ -6,7 +6,7 @@ public class FileVo {
 
 	private int fIdx;
 	private String typeIdx;
-	private String originalFileName;
+	private String originFileName;
 	private String renameFileName;
 	private String savePath;
 	private Date regDate;
@@ -24,11 +24,11 @@ public class FileVo {
 	public void setTypeIdx(String typeIdx) {
 		this.typeIdx = typeIdx;
 	}
-	public String getOriginalFileName() {
-		return originalFileName;
+	public String getOriginFileName() {
+		return originFileName;
 	}
-	public void setOriginalFileName(String originalFileName) {
-		this.originalFileName = originalFileName;
+	public void setOriginFileName(String originalFileName) {
+		this.originFileName = originalFileName;
 	}
 	public String getRenameFileName() {
 		return renameFileName;
@@ -57,7 +57,7 @@ public class FileVo {
 	
 	@Override
 	public String toString() {
-		return "FileVo [fIdx=" + fIdx + ", typeIdx=" + typeIdx + ", originalFileName=" + originalFileName
+		return "FileVo [fIdx=" + fIdx + ", typeIdx=" + typeIdx + ", originalFileName=" + originFileName
 				+ ", renameFileName=" + renameFileName + ", savePath=" + savePath + ", regDate=" + regDate + ", isDel="
 				+ isDel + "]";
 	}

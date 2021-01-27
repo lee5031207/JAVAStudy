@@ -16,23 +16,14 @@ import com.kh.toy.common.exception.ToAlertException;
 
 public class AuthFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
     public AuthFilter() {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see Filter#destroy()
-	 */
 	public void destroy() {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		//비로그인 사용자 권한 관리
@@ -59,15 +50,23 @@ public class AuthFilter implements Filter {
 					}
 					break;
 				}
+			case "board" :
+				switch(uriArr[2]) {
+				case "form" :
+					if(session.getAttribute("user") == null) {
+						throw new ToAlertException(ErrorCode.AUTH01);
+					}
+				case "upload" :
+					if(session.getAttribute("user") == null) {
+						throw new ToAlertException(ErrorCode.AUTH01);
+					}
+				}
 			}
 		}
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}
