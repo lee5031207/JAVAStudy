@@ -57,7 +57,6 @@
 	   //요소의 아이디속성이 있을 경우 해당 엘리먼트를 가져다가 사용할 수 있다.
 	   let userId = id.value;
 	   if(userId){
-		  
 		   fetch("/member/idcheck?userId=" + userId,{
 			   method:"GET"
 		   })
@@ -72,7 +71,6 @@
 				   id.value="";
 			   }
 		   })
-		   
 	   }else{
 		   alert("아이디를 입력하지 않으셨습니다.");
 	   }

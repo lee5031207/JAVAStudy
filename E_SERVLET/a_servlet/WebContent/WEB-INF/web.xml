@@ -39,4 +39,14 @@
     <servlet-name>listener</servlet-name>
     <url-pattern>/usercount</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.kh.test.controller.TestController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/test.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>

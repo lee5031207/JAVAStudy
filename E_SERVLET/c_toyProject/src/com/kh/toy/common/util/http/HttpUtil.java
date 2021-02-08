@@ -28,11 +28,8 @@ public class HttpUtil {
 		String res = "";
 		try {
 			conn = getConnection(url, "GET"); //시작줄 작성
-			
 			setHeaders(headers); //헤더 작성
-			
 			res = getResponse(); //응답 반환
-			
 		} catch (IOException e) {
 			throw new ToAlertException(ErrorCode.HTTP01);
 		} finally {
@@ -125,7 +122,7 @@ public class HttpUtil {
 		String res = "";
 		int status = conn.getResponseCode();
 		BufferedReader br = null;
-		//System.out.println(status);
+		System.out.println(status);
 		if(status >= 200 && status <= 300) {
 			try {
 				br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
