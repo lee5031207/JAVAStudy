@@ -11,6 +11,7 @@ import java.util.List;
 import com.kh.toy.common.code.ErrorCode;
 import com.kh.toy.common.exception.DataAccessException;
 import com.kh.toy.common.template.JDBCTemplate;
+import com.kh.toy.common.template.LocalJDBCTemplate;
 import com.kh.toy.member.model.vo.Member;
 
 //DAO :DBMS에 접근해 데이터 조회, 수정, 삽입 ,삭제 요청을 보내는 클래스
@@ -21,6 +22,7 @@ public class MemberDao {
 
 	
 	JDBCTemplate jdt = JDBCTemplate.getInstance();
+	LocalJDBCTemplate ljdt = LocalJDBCTemplate.getInstance();
 	
 	public MemberDao() {}
 	
@@ -87,7 +89,7 @@ public class MemberDao {
 			// SQLException : DB와 통신중에 발생하는 모든 예외를 담당하는 exception
 			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
-			jdt.close(rset, pstm);
+			ljdt.close(rset, pstm);
 		}
 		return member;
 	}
@@ -120,7 +122,7 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
-			jdt.close(rset, pstm);
+			ljdt.close(rset, pstm);
 		}		
 		return member;
 	}
@@ -151,7 +153,7 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
-			jdt.close(rset, pstm);
+			ljdt.close(rset, pstm);
 		}		
 		return memberList;
 	}
@@ -173,7 +175,7 @@ public class MemberDao {
 			e.printStackTrace();
 			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
-			jdt.close(pstm);
+			ljdt.close(pstm);
 		}	
 		return res;
 	}
@@ -192,7 +194,7 @@ public class MemberDao {
 			e.printStackTrace();
 			throw new DataAccessException(ErrorCode.UM01,e);
 		} finally {
-			jdt.close(pstm);
+			ljdt.close(pstm);
 		}	
 		return res;
 	}
@@ -209,7 +211,7 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			throw new DataAccessException(ErrorCode.DM01,e);
 		} finally {
-			jdt.close(pstm);
+			ljdt.close(pstm);
 		}	
 		return res;
 	}
@@ -245,7 +247,7 @@ public class MemberDao {
 			e.printStackTrace();
 			throw new DataAccessException(ErrorCode.SM01,e);
 		} finally {
-			jdt.close(rset, pstm);
+			ljdt.close(rset, pstm);
 		}
 		
 		return memberList;
@@ -265,7 +267,7 @@ public class MemberDao {
 			e.printStackTrace();
 			throw new DataAccessException(ErrorCode.UM01,e);
 		} finally {
-			jdt.close(pstm);
+			ljdt.close(pstm);
 		}	
 		return res;
 	}

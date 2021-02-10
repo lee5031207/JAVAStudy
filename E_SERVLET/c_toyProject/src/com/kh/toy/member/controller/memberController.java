@@ -1,7 +1,10 @@
 package com.kh.toy.member.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.http.HttpRequest;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,7 @@ import com.kh.toy.common.mail.MailSender;
 import com.kh.toy.common.util.http.HttpUtil;
 import com.kh.toy.member.model.service.MemberService;
 import com.kh.toy.member.model.vo.Member;
+import com.kh.toy.test.controller.SMS;
 
 @WebServlet("/member/*")
 public class memberController extends HttpServlet {
@@ -59,6 +63,12 @@ public class memberController extends HttpServlet {
 			break;
 		case "mypage" :
 			mypage(request, response);
+			break;
+		case "getAuthNum" :
+			getAuthNum(request, response);
+			break;
+		case "confirmAuthNum" :
+			confirmAuthNum(request, response);
 			break;
 		default:
 			response.setStatus(404);
@@ -165,5 +175,47 @@ public class memberController extends HttpServlet {
 		.forward(request, response);
 	}
 	
+	protected void getAuthNum(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String url = "https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:263561292248:lets_share/messages";
+		String phoneNum = request.getParameter("phoneNum");
+		int authNum= (int) Math.round(Math.random()*1000000);
+		String authCode = Integer.toString(authNum);
+		
+		
+		String content = "Let's share입니다.\n인증 번호["+authCode+"]";
+		
+		HttpUtil httpUtil = new HttpUtil();
+		SMS sms = new SMS();
+
+		
+		try {
+			// 1. 문자 보내주자
+			Map<String, String> headers = sms.getSMSHeaders();
+			String body = sms.getSMSBody(phoneNum, content);
+			//httpUtil.post(url, headers, body);
+			
+			// 2. 세션에 인증코드 넣어주자
+			request.getSession().setAttribute("authCode", authCode);
+			System.out.println("세션에 넣어준 값 : "+authCode);
+			response.getWriter().print("success");
+			
+		} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			response.getWriter().print("fail");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	protected void confirmAuthNum(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String receiveCode = request.getParameter("authCode");
+		String sessionCode = (String) request.getSession().getAttribute("authCode");
+		
+		if(receiveCode.equals(sessionCode)) {
+			response.getWriter().print("success");
+		}else {
+			response.getWriter().print("fail");
+		}
+	}
 
 }

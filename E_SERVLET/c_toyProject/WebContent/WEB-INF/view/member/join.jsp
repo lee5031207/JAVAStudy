@@ -32,7 +32,17 @@
         <tr>
            <td>휴대폰번호 : </td>
            <td>
-           	  <input type="tel" name="tell" required/>
+           	  <input type="tel" name="tell" id="tell" required/>
+           	  <button type="button" onclick="getAuthNum()">인증 번호 받기</button>
+			  <span class="valid_info" id="phone_check"></span>
+           </td>
+        </tr>
+        <tr>
+           <td>인증 번호 : </td>
+           <td>
+           	  <input type="text" name="authCode" id="authCode" required/>
+           	  <button type="button" onclick="confirmAuthNum()">확인</button>
+			  <span class="valid_info" id="confirmAuthNum"></span>
            </td>
         </tr>
         <tr>
@@ -75,6 +85,58 @@
 		   alert("아이디를 입력하지 않으셨습니다.");
 	   }
    }
+
+   let getAuthNum = () => {
+	   let phoneNum = tell.value;
+	   let phoneRegExp = /^[0-9]{11,11}$/;
+
+		if(tell){
+			if(!(phoneRegExp.test(phoneNum))){
+				alert("정확한 휴대전화 번호를 입력해주세요");
+			}else{
+				fetch("/member/getAuthNum?phoneNum=" + phoneNum,{
+			   		method:"GET"
+		  		})
+				.then(response => response.text())
+				.then(text => {
+					if(text == 'success'){
+						phone_check.innerHTML = '인증 문자를 보냈습니다.';
+					}else{
+						phone_check.innerHTML = '잘못된 휴대전화 번호입니다.';
+						id.value="";
+					}
+				})
+			}
+		}else{
+			alert("휴대폰 번호를 입력하지 않으셨습니다.");
+		}
+   }
+   
+   
+   
+   
+   let confirmAuthNum = () => {
+	   let phoneCheck = false;
+	   let authCode = document.querySelector("#authCode").value;
+	   if(authCode){
+		   fetch("/member/confirmAuthNum?authCode=" + authCode,{
+			   method:"GET"
+		   })
+		   .then(response => response.text())
+		   .then(text =>{
+			   if(text == 'success'){
+				    phoneCheck = true;
+				    alert("인증이 완료 되었습니다.");
+			   }else{
+				    phoneCheck = false;
+				    alert("잘못된 인증번호를 입력 하였습니다.");
+				    document.querySelector("#authCode").value.value="";
+			   }
+		   })
+	   }else{
+		   alert("인증번호를 입력하세요");
+	   }
+   }
    
    document.querySelector('#frm_join').addEventListener('submit',(e)=>{
 	   let password = pw.value;
@@ -93,6 +155,9 @@
 		   pw.value='';
 	   }
    });
+   
+   
+   
    
    </script>
    

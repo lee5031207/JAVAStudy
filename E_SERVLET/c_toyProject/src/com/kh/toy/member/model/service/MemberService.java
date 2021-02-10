@@ -13,6 +13,7 @@ import com.kh.toy.common.exception.DataAccessException;
 import com.kh.toy.common.exception.ToAlertException;
 import com.kh.toy.common.mail.MailSender;
 import com.kh.toy.common.template.JDBCTemplate;
+import com.kh.toy.common.template.LocalJDBCTemplate;
 import com.kh.toy.common.util.http.HttpUtil;
 import com.kh.toy.member.model.dao.MemberDao;
 import com.kh.toy.member.model.vo.Member;
@@ -29,37 +30,38 @@ public class MemberService {
 
 	MemberDao memberDao = new MemberDao();
 	JDBCTemplate jdt = JDBCTemplate.getInstance();
+	LocalJDBCTemplate ljdt = LocalJDBCTemplate.getInstance();
 	
 	public MemberService() {
 		
 	}
 	
 	public Member memberAuthenticate(String userId, String password) {
-		Connection conn = jdt.getConnection();
+		Connection conn = ljdt.getConnection();
 		//Dao에게 userId와 password로 식별할 수 있는 회원 정보를,DB에서 조회할 것을 요청
 		Member member = memberDao.memberAuthenticate(conn, userId, password);
-		jdt.close(conn);
+		ljdt.close(conn);
 		return member;
 	}
 	
 	public Member selectMemberById(String userId) {
-		Connection conn = jdt.getConnection();
+		Connection conn = ljdt.getConnection();
 		Member member = memberDao.selectMemberById(conn, userId);
-		jdt.close(conn);
+		ljdt.close(conn);
 		return member;
 	}
 	
 	public List<Member> selectMemberByRegdate(Date beginDate, Date endDate){
-		Connection conn = jdt.getConnection();
+		Connection conn = ljdt.getConnection();
 		List<Member> memberList = memberDao.selectMemberByRegdate(conn, beginDate, endDate);
-		jdt.close(conn);
+		ljdt.close(conn);
 		return memberList;
 	}
 	
 	public ArrayList<Member> selectMemberList(){
-		Connection conn = jdt.getConnection();
+		Connection conn = ljdt.getConnection();
 		ArrayList<Member> memberList = memberDao.selectMemberList(conn);
-		jdt.close(conn);
+		ljdt.close(conn);
 		return memberList;
 	}
 	
@@ -89,48 +91,48 @@ public class MemberService {
 	public int insertMember(Member member) {
 		//Transaction관리를 Service단에서 처리하기 위해 Connection을 
 		//Service의 메서드에서 생성
-		Connection conn = jdt.getConnection();
+		Connection conn = ljdt.getConnection();
 		int res = 0;
 		try {
 			//DAO 메서드로 생성한 Connection 주입
 			res = memberDao.insertMember(conn, member);
-			jdt.commit(conn);
+			ljdt.commit(conn);
 		}catch(DataAccessException e) {
 			//DAO에서 SQLException이 발생할 경우 rollback처리
-			jdt.rollback(conn);
+			ljdt.rollback(conn);
 			throw new ToAlertException(e.error);			
 		}finally {
-			jdt.close(conn);
+			ljdt.close(conn);
 		}		
 		return res;
 	}
 	
 	public int updateMember(Member member) {
-		Connection conn = jdt.getConnection();
+		Connection conn = ljdt.getConnection();
 		int res = 0;
 		try {
 			res = memberDao.updateMember(conn, member);
-			jdt.commit(conn);
+			ljdt.commit(conn);
 		}catch(DataAccessException e) {
-			jdt.rollback(conn);
+			ljdt.rollback(conn);
 			throw new ToAlertException(e.error);			
 		}finally {
-			jdt.close(conn);
+			ljdt.close(conn);
 		}		
 		return res;
 	}
 	
 	public int deleteMember(String userId) {
-		Connection conn = jdt.getConnection();
+		Connection conn = ljdt.getConnection();
 		int res = 0;
 		try {
 			res = memberDao.UpdateMemberToLeave(conn, userId);
-			jdt.commit(conn);
+			ljdt.commit(conn);
 		}catch(DataAccessException e) {
-			jdt.rollback(conn);
+			ljdt.rollback(conn);
 			throw new ToAlertException(e.error);			
 		}finally {
-			jdt.close(conn);
+			ljdt.close(conn);
 		}
 		return res;
 	}
