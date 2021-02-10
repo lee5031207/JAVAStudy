@@ -22,6 +22,9 @@
 		<span class="tit">PW :</span><input type="password" name="pw" id="pw">
 		<span class="valid_info"></span>
 		<button onclick="login()">로그인</button>
+		<a href="https://kauth.kakao.com/oauth/authorize?client_id=8a92e5d7d3324acd050fd30b648b921b&redirect_uri=http://localhost:9090/Kakao/oauth&response_type=code">
+			<img src="../../../resources/image/kakao_login_medium_narrow.png" />
+		</a>
 		
 	<script type="text/javascript">
 	let login = () => {
