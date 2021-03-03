@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="보너스"/>
+		<item key="selection" value="5"/>
 		<list key="findhistory">
+			<item value="5"/>
 			<item value="보너스"/>
 			<item value="QRbtnCLick"/>
 			<item value="QRbtn"/>
@@ -22,7 +23,6 @@
 			<item value="마신"/>
 			<item value="간장 마신"/>
 			<item value="간장"/>
-			<item value="Serial"/>
 		</list>
 		<list key="replacehistory">
 		</list>

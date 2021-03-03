@@ -68,7 +68,7 @@
             let walert = false;
 
             let xhr = new XMLHttpRequest(); //Ajax를 사용하기 위해 XMLHttpRequest() 객체를 만든다
-
+            console.log(xhr);
             let page = 1;
 
             // HTTP 요청 -> 시작줄 작성 
@@ -84,6 +84,7 @@
             xhr.send();
 
             let copy = $(".wrap_book").outerHTML;
+            console.log(copy);
 
             // 비동기 통신이 성공적으로 끝나면 콜백함수 호츌
             xhr.addEventListener("load",()=>{
