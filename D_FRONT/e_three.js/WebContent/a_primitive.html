@@ -142,41 +142,65 @@
 		bottom
 	</footer>
 	<script type="text/javascript">
-		//씬을 렌더링 할 요소
-		const middle = document.querySelector(".middle");
+	//씬을 랜더링 할 요소
+	const middle = document.querySelector('.middle');
+	
+	const scene = new THREE.Scene();
+	const camera = new THREE.PerspectiveCamera( 75, middle.clientWidth / middle.clientHeight, 0.1, 1000 );
+	const renderer = new THREE.WebGLRenderer();
+	renderer.setSize( middle.clientWidth, middle.clientHeight );
+	
+	//renderer.domElement : 씬을 보여주는 canvas Element
+	middle.appendChild( renderer.domElement );
+	scene.background = new THREE.Color('skyblue');
+	
+	const geometry = new THREE.BoxGeometry();
+	const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+	const cube = new THREE.Mesh( geometry, material );
+	scene.add( cube );
 
-		const scene = new THREE.Scene();
-		// PerspectiveCamera(시야각, 해상도, near, far)
-		const camera = new THREE.PerspectiveCamera(75, middle.clientWidth / middle.clientHeight, 0.1, 1000 );
-		const renderer = new THREE.WebGLRenderer();
-		renderer.setSize( middle.clientWidth, middle.clientHeight );
+	camera.position.z = 5;
+	
+	//꾸며진 씬을 카메라로 비추는 화면을 랜더링
+	renderer.render(scene,camera);
+	
+	function animate() {
+		requestAnimationFrame( animate );
+		cube.rotation.x += 0.01;
+		cube.rotation.y += 0.01;
+		renderer.render( scene, camera );
+	}
+	animate();
+	
+	
+	
+	
 
-		//rederer.domElement : 씬을 보여주는 canvas Element
-		middle.appendChild( renderer.domElement );
-
-		//scene 배경색 변경
-		scene.background = new THREE.Color("skyblue");
 
 
-		const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-		const cube = new THREE.Mesh( geometry, material );
-		scene.add( cube );
 
-		camera.position.set(0,0,5);
 
-		//꾸며진 씬을 카메라로 비추는 화면을 렌더링
-		renderer.render(scene, camera);
-		
-		
-		function animate() {
-			requestAnimationFrame( animate );
-			cube.rotation.x += 0.01;
-			cube.rotation.y += 0.01;
-			renderer.render( scene, camera );
-		}
-		animate();
+
+
 	</script>	
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </html>

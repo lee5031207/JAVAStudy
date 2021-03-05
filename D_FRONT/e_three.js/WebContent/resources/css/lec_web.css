@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.middle canvas{
+	width:100vw !important;
+	height:35vw !important;
+}
+
 @media(min-aspect-ratio:5/4){
 	.wrap_snb{
 		position:fixed;
