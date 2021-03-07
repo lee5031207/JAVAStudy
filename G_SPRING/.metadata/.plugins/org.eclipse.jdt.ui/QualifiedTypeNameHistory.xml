@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="builder.Book.BookBuilder"/>
+    <fullyQualifiedTypeName name="builder.Book"/>
+    <fullyQualifiedTypeName name="builder.Calculator.CalculatorBuilder"/>
+    <fullyQualifiedTypeName name="builder.Calculator"/>
+    <fullyQualifiedTypeName name="factory.GoogleMail"/>
+    <fullyQualifiedTypeName name="factory.NaverMail"/>
+    <fullyQualifiedTypeName name="factory.DaumMail"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="factory.ConnectorFactory.ConnectFactoryBuilder"/>
+    <fullyQualifiedTypeName name="factory.ConnectorFactory"/>
+    <fullyQualifiedTypeName name="factory.SMTPConnector"/>
+</qualifiedTypeNameHistroy>
