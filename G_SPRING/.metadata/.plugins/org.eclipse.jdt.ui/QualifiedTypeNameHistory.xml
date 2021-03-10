@@ -11,4 +11,24 @@
     <fullyQualifiedTypeName name="factory.ConnectorFactory.ConnectFactoryBuilder"/>
     <fullyQualifiedTypeName name="factory.ConnectorFactory"/>
     <fullyQualifiedTypeName name="factory.SMTPConnector"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="templateMethod.framework.dao.MemberDao"/>
+    <fullyQualifiedTypeName name="templateMethod.framework.jdbc.JDBCTemplate"/>
+    <fullyQualifiedTypeName name="templateMethod.client.MyTemplate"/>
+    <fullyQualifiedTypeName name="strategy.framework.jdbc.ConnectionMaker"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="strategy.framework.jdbc.JDBCTemplate"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="proxy.ManProxy"/>
+    <fullyQualifiedTypeName name="proxy.Man"/>
+    <fullyQualifiedTypeName name="proxy.Woman"/>
+    <fullyQualifiedTypeName name="proxy.Aspect"/>
+    <fullyQualifiedTypeName name="proxy.Developer"/>
+    <fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
+    <fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+    <fullyQualifiedTypeName name="bean.Book"/>
+    <fullyQualifiedTypeName name="bean.Address"/>
 </qualifiedTypeNameHistroy>
