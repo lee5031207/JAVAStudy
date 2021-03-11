@@ -3,11 +3,18 @@ package builder;
 public class Run {
 	
 	public static void main(String[] args) {
-
-		Book book = Book.builder().title("홍길동").author("김애란").publisher("신사임당").page(1000).build();
-		int result = new Calculator().add(5).add(3).subtract(3).out();
+		Book book = Book.builder()
+					.title("홍길동")
+					.author("김애란")
+					.publisher("신사임당")
+					.page(1000)
+					.build();
 		
-		System.out.println(result);
+		System.out.println(book);
+		
+		System.out.println("///////////////////////////////////");
+		
+		Calculator cal = new Calculator();
+		System.out.println(cal.add(4).add(5).substract(3).out());
 	}
-	
 }

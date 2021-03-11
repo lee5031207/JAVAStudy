@@ -9,7 +9,6 @@ public abstract class SMTPConnector {
 	protected String password;
 	protected Date connectTime;
 	
-	
 	public SMTPConnector(String url, String id, String password, Date connectTime) {
 		super();
 		this.url = url;
@@ -27,6 +26,5 @@ public abstract class SMTPConnector {
 	}
 	
 	
-	
-	
+
 }

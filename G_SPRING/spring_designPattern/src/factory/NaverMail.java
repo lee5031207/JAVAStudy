@@ -11,8 +11,6 @@ public class NaverMail extends SMTPConnector{
 
 	@Override
 	public void connect() {
-		System.out.println("네이버 SMTP 서버에 연결되었습니다");
-		
+		System.out.println("네이버 SMTP 서버에 연결되었습니다.");
 	}
-
 }

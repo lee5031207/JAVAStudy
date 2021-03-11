@@ -11,8 +11,8 @@ public class MyTemplate extends JDBCTemplate{
 	@Override
 	public Connection getConnection() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "bookmanager";
-		String password = "user11";
+		String user = "bm";
+		String password = "USER11";
 		
 		Connection conn = null;
 		
@@ -24,7 +24,7 @@ public class MyTemplate extends JDBCTemplate{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return conn;
 	}
-
 }

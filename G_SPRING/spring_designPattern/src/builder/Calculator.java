@@ -1,21 +1,20 @@
 package builder;
 
 public class Calculator {
-
-	private int val = 0;
+	
+	private int res;
 	
 	public Calculator add(int val) {
-		this.val += val;
+		res += val;
 		return this;
 	}
 	
-	public Calculator subtract(int val) {
-		this.val -= val;
+	public Calculator substract(int val) {
+		res -= val;
 		return this;
 	}
 	
 	public int out() {
-		return this.val;
+		return res;
 	}
-	
 }

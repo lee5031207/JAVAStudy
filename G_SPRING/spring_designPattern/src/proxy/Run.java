@@ -1,15 +1,21 @@
 package proxy;
 
+import java.util.Scanner;
+
 public class Run {
+
 	public static void main(String[] args) {
-		Developer manProxy = new Aspect("proxy.Man");
-		Developer womanProxy = new Aspect("proxy.Woman");
-		Developer childProxy = new Aspect("proxy.Child");
 		
-		manProxy.develop();
-		System.out.println("=============");
-		womanProxy.develop();
-		System.out.println("=============");
-		childProxy.develop();
+		Scanner sc = new Scanner(System.in);
+		
+		Developer man = new Aspect(sc.nextLine());
+		Developer woman = new Aspect(sc.nextLine());
+		Developer child = new Aspect(sc.nextLine());
+		
+		man.develop();
+		System.out.println("=============================");
+		woman.develop();
+		System.out.println("=============================");
+		child.develop();
 	}
 }
