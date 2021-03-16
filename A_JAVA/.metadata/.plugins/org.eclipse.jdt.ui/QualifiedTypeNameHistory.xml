@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.kh.c_collection.silsub2.view.BookMenu"/>
-    <fullyQualifiedTypeName name="com.kh.c_collection.silsub2.controller.BookManager"/>
     <fullyQualifiedTypeName name="com.kh.c_collection.silsub2.model.dao.BookDao"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.basic.BasicScrollPaneUI.HSBChangeListener"/>
     <fullyQualifiedTypeName name="java.security.KeyStore.Entry"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.lang.Character"/>
+    <fullyQualifiedTypeName name="com.kh.classDiagram.BestDriver"/>
+    <fullyQualifiedTypeName name="com.kh.classDiagram.Vehicle"/>
 </qualifiedTypeNameHistroy>

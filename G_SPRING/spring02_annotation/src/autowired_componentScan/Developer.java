@@ -23,3 +23,4 @@ public class Developer {
 		return "Developer [lecture=" + lecture + "]";
 	}
 }
+

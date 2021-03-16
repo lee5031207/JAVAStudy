@@ -4,7 +4,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.stereotype.Component;
 
-//공통관심사를 구현할 클래스는 MethodInterceptor
+//공통관심사를 구현할 클래스는 MethodInterceptor(Advice Interface 상속)
 @Component
 public class MyAdvice implements MethodInterceptor{
 
