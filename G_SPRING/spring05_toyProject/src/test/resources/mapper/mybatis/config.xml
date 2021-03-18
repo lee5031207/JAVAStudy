@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 스네이크 표기법 카멜 표기법 호환성 추가 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<!-- member라는 VO 추가 -->
+	<typeAliases>
+		<typeAlias type="com.kh.toy.member.model.vo.Member" alias="member"/>
+	</typeAliases>
+	<!-- mapper추가  -->
+	<mappers>
+		<mapper resource="mybatis/mapper/mybatisMapper.xml"/>
+	</mappers>
+</configuration>
