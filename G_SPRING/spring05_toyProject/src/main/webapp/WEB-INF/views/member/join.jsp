@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <head>
    <style type="text/css">
       .valid_info{
-         display:block; 
+         /* display:block; */ 
          color:red;
          font-size: 0.5vw;
       }
@@ -12,14 +11,16 @@
 </head>
 <body>
  <h1>회원 가입 양식</h1>
-    <form action="${context}/member/mailauth" method="post" id="frm_join">
+    <form:form modelAttribute="member" action="${context}/member/mailauth" method="post" id="frm_join">
      <table>
         <tr>
            <td>ID : </td>
            <td>
-                <input type="text" name="userId" id="id" size="10" required/>
+              <input type="text" name="userId" id="id" size="10" required/>
               <button type="button" onclick="idCheck()">check</button>
               <span class="valid_info" id="id_check"></span>
+              <!-- path : 필드명 -->
+              <form:errors path="userId" cssClass="valid_info"/>
            </td>
         </tr>
         <tr>
@@ -27,18 +28,21 @@
            <td>
                 <input type="password" name="password" id="pw" required/>
                 <span id="pw_confirm" class="valid_info"></span>
+                <form:errors path="password" cssClass="valid_info"/>
            </td>
         </tr>
         <tr>
            <td>휴대폰번호 : </td>
            <td>
                 <input type="tel" name="tell" required/>
+                <form:errors path="tell" cssClass="valid_info"/>
            </td>
         </tr>
         <tr>
            <td>email : </td>
            <td>
                 <input type="email" name="email" required/>
+                <form:errors path="email" cssClass="valid_info"/>
            </td>
         </tr>
         <tr>
@@ -48,7 +52,7 @@
            </td>
        </tr>
    </table>
-   </form>
+   </form:form>
    
    <script type="text/javascript">
    let idCheckFlg = false;
@@ -94,7 +98,7 @@
          pw_confirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다.';
          pw.value='';
       }
-   });
+   }); 
    
    </script>
 </body>

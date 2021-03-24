@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.kh.toy.board.model.repository.BoardRepository">
+	
+	<select id="selectBoardList" resultType="board">
+		SELECT BD_IDX, USER_ID, TITLE, REG_DATE 
+		FROM (
+			SELECT ROWNUM RNUM, B.*
+			FROM(
+				SELECT BD_IDX, USER_ID, TITLE, REG_DATE FROM TB_BOARD ORDER BY ${sort} ${direction}
+			) B
+		) WHERE RNUM BETWEEN #{queryStart} and #{queryEnd}
+	</select>
+	
+	<!-- 1. 게시글 등록
+		 2. 게시글 수정  -->
+	<insert id="insertFile">
+		INSERT INTO TB_FILE
+			(F_IDX, TYPE_IDX, ORIGIN_FILE_NAME, RENAME_FILENAME, SAVE_PATH)
+		VALUES(SC_FILE_IDX.NEXTVAL, 
+			<choose>
+				<when test="typeIdx != null">
+					#{typeIdx}, 
+				</when>
+				<otherwise>
+					'B'||SC_BOARD_IDX.CURRVAL, 
+				</otherwise>
+			</choose>
+			#{originFileName}, #{renameFileName}, #{savePath} )
+	</insert>
+	
+	
+</mapper>

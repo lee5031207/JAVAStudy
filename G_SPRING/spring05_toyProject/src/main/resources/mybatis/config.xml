@@ -9,4 +9,10 @@
     	<settings>
     		<setting name="mapUnderscoreToCamelCase" value="true" />
     	</settings>
+    	<typeAliases>
+    		<typeAlias type="com.kh.toy.board.model.vo.Board" alias="board"/>
+    	</typeAliases>
+    	<mappers>
+    		<mapper resource="mybatis/mapper/boardMapper.xml"/>
+    	</mappers>
     </configuration>
