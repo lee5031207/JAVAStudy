@@ -1,6 +1,7 @@
 package com.kh.qrcode.maker;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -32,7 +33,7 @@ public class QRCodeMaker {
 			}
 			
 			MatrixToImageWriter.writeToStream(bm, "png", new FileOutputStream(filePath+fileName+".png"));
-			
+
 		} catch (WriterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

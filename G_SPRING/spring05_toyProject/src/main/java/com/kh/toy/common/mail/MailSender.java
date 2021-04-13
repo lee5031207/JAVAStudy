@@ -21,7 +21,9 @@ public class MailSender {
 	
 	@Async //말그대로 비동기로 동작
 	public void send(String to, String subject, String htmlText) {
+
 	    try {
+	    	System.out.println("메일센더 동작");
 			MimeMessage msg = mailSender.createMimeMessage();
 		    msg.setFrom(Code.EMAIL.desc);
 		    msg.setRecipients(Message.RecipientType.TO, to);

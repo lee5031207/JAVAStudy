@@ -77,7 +77,7 @@ public class MemberController {
 	
 	//InitBinder : WebDataBinder를 초기화하는 메서드를 식별하는 주석
 	//value      : webDataBinder가 적용될 파라미터 명 또는 Model의 attribute 이름
-	@InitBinder
+	@InitBinder(value = "member") //equals(com.kh.toy.member.model.vo.Member)이다.
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(memberValidator); //컨트롤러 메서드의 파라미터에 데이터를 bind해주는 역할 수행
 	}
@@ -100,7 +100,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("mailauth") //Error 객체는 valid어노테이션 객체 뒤에 꼭 작성해야함 이유는 몰라유
-	public String authEmail(@Valid Member persistInfo, Errors error, HttpSession session, Model model) {
+	public String authEmail(Member persistInfo, Errors error, HttpSession session, Model model) {
 		
 		if(error.hasErrors()) {
 			return "member/join";

@@ -15,5 +15,9 @@
 		</c:otherwise>
 	</c:choose>
 	
+	<button onclick="sendMsg()">보내보자</button>
+	
 </body>
+<script type="text/javascript">
+</script>
 </html>

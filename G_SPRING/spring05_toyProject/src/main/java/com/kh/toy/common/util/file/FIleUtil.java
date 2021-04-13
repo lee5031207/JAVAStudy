@@ -21,14 +21,17 @@ public class FIleUtil {
 		//파일 저장 경로
 		String savePath = getSavePath();
 		
-		for(MultipartFile multipartFile : files) {
-			FileVo fileVo = new FileVo();
-			fileVo.setOriginFileName(multipartFile.getOriginalFilename());
-			fileVo.setRenameFileName(UUID.randomUUID().toString());
-			fileVo.setSavePath(savePath);
-			fileList.add(fileVo);
-			saveFile(fileVo, multipartFile);
+		if(files.size() >= 1 && !files.get(0).getOriginalFilename().equals("")) {
+			for(MultipartFile multipartFile : files) {
+				FileVo fileVo = new FileVo();
+				fileVo.setOriginFileName(multipartFile.getOriginalFilename());
+				fileVo.setRenameFileName(UUID.randomUUID().toString());
+				fileVo.setSavePath(savePath);
+				fileList.add(fileVo);
+				saveFile(fileVo, multipartFile);
+			}
 		}
+
 		return fileList;
 	}
 	

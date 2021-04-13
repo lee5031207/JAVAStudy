@@ -32,12 +32,12 @@
     }
  </style>
  <script>
-     function $(selector,text){
-            if(text){
-                document.querySelector(selector).innerHTML += `${text}<br>`;
-            }   
-            return document.querySelector(selector);
-        }
+    function $(selector,text){
+        if(text){
+            document.querySelector(selector).innerHTML += `${text}<br>`;
+        }   
+        return document.querySelector(selector);
+    }
  </script>
 </head>
 <body>
@@ -124,7 +124,7 @@
 
             document.addEventListener("wheel",()=>{
                 if(scrollY > document.querySelector("body").clientHeight - screen.availHeight){
-                    //console.dir(`scrollY : ${scrollY} / clientHeight : ${document.querySelector("body").clientHeight} / screen.availHeight : ${screen.availHeight}`);
+                    console.dir(`scrollY : ${scrollY} / clientHeight : ${document.querySelector("body").clientHeight} / screen.availHeight : ${screen.availHeight}`);
                     page++;
                     xhr.open('GET','https://dapi.kakao.com/v3/search/book?query='+keyword+'&page='+page+'&size=10');
                     xhr.setRequestHeader('Authorization','KakaoAK ec9acb621278ce4a1dfd7f08ebc6dc69');

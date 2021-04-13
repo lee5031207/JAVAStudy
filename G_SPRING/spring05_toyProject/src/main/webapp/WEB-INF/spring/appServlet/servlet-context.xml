@@ -4,10 +4,16 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd">
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -16,6 +22,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/file/**" location="file:///C:\Users\20151\git\JAVAStudy\E_SERVLET\resources\upload\" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -45,8 +52,52 @@
 			<beans:bean class="com.kh.toy.common.interceptor.AuthInterceptor" />
 		</interceptor>
 	</interceptors>
+	
+	
+	<!-- 트랜잭션 관리를 위한 설정 -> 1. service에 어노테이션만 쓰면댐 -->
+	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:constructor-arg name="dataSource" ref="dataSource" />
+	</beans:bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 2. SI업계에서 많이 사용하는 방법? 이라는데 국룰 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 트랜잭션 처리를 할 메서드 네임패턴 및 트랜잭션 정책-->
+			<tx:method name="select*" read-only="true"/> <!-- select로 시작하는 모든 메서드, read-only true해주면 성능상 이점이 있다함 -->
+			<tx:method name="insert*" rollback-for="Exception"/> <!-- insert*로 시작하는 모든 메서드, java.lang.Exception 예외가 발생할때 rollback 시킨다 -->
+			<tx:method name="update*" rollback-for="Exception"/> <!-- update*로 시작하는 모든 메서드, java.lang.Exception 예외가 발생할때 rollback 시킨다 -->
+			<tx:method name="delete*" rollback-for="Exception"/> <!-- delete*로 시작하는 모든 메서드, java.lang.Exception 예외가 발생할때 rollback 시킨다 -->
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 
+		. 패키지 아래 모든 패키지(1depth)
+		.. 패키지 아래 모든 패키지(depth상관없이 모든
+	 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.kh.toy..*.*ServiceImpl.*(..))" id="txPointCut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+	</aop:config>
+	
 
 	<context:component-scan base-package="com.kh.toy" />
+	
+	
+	
+	
+	<!-- webSocket Handler -->	
+	<beans:bean id="echoHandler" class="com.kh.toy.common.socket.EchoHandler" />
+	
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler" path="/echo"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
+	
+	
 	
 	
 </beans:beans>

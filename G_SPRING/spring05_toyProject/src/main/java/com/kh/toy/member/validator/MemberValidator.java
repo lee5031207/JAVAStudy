@@ -7,7 +7,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.kh.toy.member.model.repository.MemberRepository;
-import com.kh.toy.member.model.service.MemberService;
 import com.kh.toy.member.model.vo.Member;
 
 @Component

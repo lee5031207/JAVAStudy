@@ -59,7 +59,7 @@
 			info like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 'author'" >
-			author like '%'||#{keyword}||'%'
+			and author like '%'||#{keyword}||'%'
 		</if>
 	</select>
 
@@ -166,5 +166,37 @@
 			inner join tb_book using(b_idx)
 		where rm.user_id = #{userId}
 	</select>
+	
+	
+	
+	
+	
+<!-- 	<select id="findActiveBlogLike" resultType="Blog">
+		SELECT * FROM BLOG WHERE	
+		<if test="state != null">	
+			state = #{state}
+		</if>
+		<if test="title != null">
+			AND title like #{title}
+		</if>
+		<if test="author != null and author.name != null">
+			AND author_name like '%'||#{author.name}||'%'
+		</if>
+	</select> -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

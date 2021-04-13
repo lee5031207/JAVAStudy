@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.toy.board.model.repository.BoardRepository;
@@ -13,6 +14,7 @@ import com.kh.toy.board.model.vo.Board;
 import com.kh.toy.common.code.ErrorCode;
 import com.kh.toy.common.exception.ToAlertException;
 import com.kh.toy.common.util.file.FIleUtil;
+import com.kh.toy.common.util.file.FileVo;
 import com.kh.toy.common.util.paging.Paging;
 
 @Service
@@ -45,11 +47,17 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
+	//@Transactional
 	public void insertBoard(Board board, List<MultipartFile> files) {
 		
 		FIleUtil fileUtil = new FIleUtil();
+
 		try {
-			fileUtil.fileUpload(files);
+			List<FileVo> fileInfo = fileUtil.fileUpload(files);
+			boardRepository.insertBoard(board);
+			for (FileVo fileVo : fileInfo) {
+				boardRepository.insertFile(fileVo);
+			}
 		} catch (IllegalStateException | IOException e) {
 			throw new ToAlertException(ErrorCode.IB01, e);
 		}

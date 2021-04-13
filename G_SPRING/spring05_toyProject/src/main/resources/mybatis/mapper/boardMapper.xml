@@ -18,8 +18,8 @@
 	<!-- 1. 게시글 등록
 		 2. 게시글 수정  -->
 	<insert id="insertFile">
-		INSERT INTO TB_FILE
-			(F_IDX, TYPE_IDX, ORIGIN_FILE_NAME, RENAME_FILENAME, SAVE_PATH)
+		INSERT INTO XX_FILE
+			(F_IDX, TYPE_IDX, ORIGIN_FILE_NAME, RENAME_FILE_NAME, SAVE_PATH)
 		VALUES(SC_FILE_IDX.NEXTVAL, 
 			<choose>
 				<when test="typeIdx != null">
